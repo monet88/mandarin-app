@@ -6,30 +6,40 @@
  */
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ReviewQuality } from "@/lib/hsk-review";
 import { supabase } from "@/utils/supabase";
 
 // ── Types ─────────────────────────────────────────────────────────────────
 
-export type HskEventType = "word_reviewed" | "word_mastered";
+export type HskEventType = "word_reviewed";
+
+interface HskReviewPayload {
+  word_id: string;
+  word_simplified: string;
+  mastery_delta: -1 | 0 | 1 | 2;
+  quality: ReviewQuality;
+  interval: number;
+}
 
 export interface HskQueueEvent {
   /** UUID — dedup key on server */
   event_id: string;
-  type: HskEventType;
-  word_id: string;
+  event_type: HskEventType;
   hsk_level: number;
-  /** SM-2 quality rating (0-3) for word_reviewed events */
-  quality?: number;
-  /** New interval in days after review */
-  interval?: number;
   occurred_at: string;
+  payload: HskReviewPayload;
   /** Retry count — removed from payload before sending */
   _retries: number;
+}
+
+interface SyncResponse {
+  errors?: Array<{ index: number; error: string }>;
 }
 
 // ── Storage ───────────────────────────────────────────────────────────────
 
 const QUEUE_KEY = "hsk_event_queue_v1";
+const MAX_BATCH_SIZE = 50;
 
 async function readQueue(): Promise<HskQueueEvent[]> {
   try {
@@ -54,24 +64,43 @@ function uuid(): string {
   });
 }
 
+function qualityToMasteryDelta(quality: ReviewQuality): -1 | 0 | 1 | 2 {
+  switch (quality) {
+    case 0:
+      return -1;
+    case 1:
+      return 0;
+    case 2:
+      return 1;
+    case 3:
+    default:
+      return 2;
+  }
+}
+
 // ── Public API ────────────────────────────────────────────────────────────
 
 /** Enqueues a review event. Returns immediately — no network call. */
 export async function enqueueReviewEvent(
   word_id: string,
+  word_simplified: string,
   hsk_level: number,
-  quality: number,
+  quality: ReviewQuality,
   interval: number,
 ): Promise<void> {
   const queue = await readQueue();
   queue.push({
     event_id: uuid(),
-    type: "word_reviewed",
-    word_id,
+    event_type: "word_reviewed",
     hsk_level,
-    quality,
-    interval,
     occurred_at: new Date().toISOString(),
+    payload: {
+      word_id,
+      word_simplified,
+      mastery_delta: qualityToMasteryDelta(quality),
+      quality,
+      interval,
+    },
     _retries: 0,
   });
   await writeQueue(queue);
@@ -84,7 +113,7 @@ export async function getPendingCount(): Promise<number> {
 }
 
 /**
- * Flushes pending events to Supabase hsk_review_events table.
+ * Flushes pending events through the supported hsk-sync-events ingest path.
  * Removes successfully sent events; increments retry counter on failure.
  * Max 3 retries before an event is dropped to prevent indefinite growth.
  */
@@ -94,20 +123,33 @@ export async function flushEventQueue(): Promise<void> {
 
   const failed: HskQueueEvent[] = [];
 
-  for (const event of queue) {
-    const { _retries, ...payload } = event;
+  for (let offset = 0; offset < queue.length; offset += MAX_BATCH_SIZE) {
+    const batch = queue.slice(offset, offset + MAX_BATCH_SIZE);
     try {
-      const { error } = await supabase
-        .from("hsk_review_events")
-        .upsert(payload, { onConflict: "event_id", ignoreDuplicates: true });
+      const payload = batch.map(({ _retries, ...event }) => event);
+      const { data, error } = await supabase.functions.invoke("hsk-sync-events", {
+        body: { events: payload },
+      });
 
       if (error) throw error;
-      // Successfully sent — drop from queue (do not push to failed)
-    } catch {
-      if (_retries < 3) {
-        failed.push({ ...event, _retries: _retries + 1 });
+      const response = data as SyncResponse | null;
+      const invalidIndexes = new Set(
+        (response?.errors ?? []).map((entry) => entry.index),
+      );
+
+      for (const [index, event] of batch.entries()) {
+        if (!invalidIndexes.has(index)) continue;
+        if (event._retries < 3) {
+          failed.push({ ...event, _retries: event._retries + 1 });
+        }
       }
-      // else: silently drop after 3 retries
+    } catch (error) {
+      console.warn("[hsk-event-queue] Flush failed:", error);
+      for (const event of batch) {
+        if (event._retries < 3) {
+          failed.push({ ...event, _retries: event._retries + 1 });
+        }
+      }
     }
   }
 

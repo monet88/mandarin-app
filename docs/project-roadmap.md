@@ -61,7 +61,7 @@
 **Acceptance Criteria:**
 - User can purchase subscription in-app
 - Premium access persists across sessions
-- Cancelled subscriptions revoke access immediately
+- Cancelled subscriptions keep access until expiry; expiration/revocation removes access
 - Receipts validated server-side (prevent tampering)
 - Conversion rate > 10% of trial users
 

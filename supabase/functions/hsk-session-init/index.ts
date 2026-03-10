@@ -3,13 +3,11 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 import {
   corsPreflightResponse,
   errorResponse,
+  FREE_DAILY_EXAM_QUOTA,
   isPremiumActive,
   jsonResponse,
   unauthorizedResponse,
 } from "../_shared/hsk-events.ts";
-
-// Free tier daily exam quota
-const FREE_DAILY_EXAM_QUOTA = 1;
 
 // Returns quota state, premium state, and reset timestamps — all server-authoritative
 Deno.serve(async (req) => {

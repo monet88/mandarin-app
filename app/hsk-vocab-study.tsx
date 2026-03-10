@@ -34,7 +34,7 @@ export default function HskVocabStudyScreen() {
   const [progressMap, setProgressMap] = useState<Record<string, WordReviewState>>({});
   const [loadingWords, setLoadingWords] = useState(true);
 
-  const { dueStates, loading: reviewLoading, submitReview, refresh } = useHskReviewQueue(levelNum);
+  const { dueStates, loading: reviewLoading, submitReview } = useHskReviewQueue(levelNum);
 
   // Load level bundle lazily (bundled JSON, not a network call)
   useEffect(() => {
@@ -57,7 +57,10 @@ export default function HskVocabStudyScreen() {
   }, [levelNum]);
 
   const handleRate = async (word_id: string, quality: ReviewQuality) => {
-    await submitReview(word_id, quality, levelNum);
+    const word = words.find((entry) => entry.word_id === word_id);
+    if (!word) return;
+
+    await submitReview(word.word_id, word.hanzi, quality, levelNum);
     // Refresh local progress map so badges update
     setProgressMap(await getLevelProgress(levelNum));
   };

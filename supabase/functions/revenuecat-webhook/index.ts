@@ -13,6 +13,7 @@ import {
   corsPreflightResponse,
   jsonResponse,
   errorResponse,
+  isPremiumActive,
 } from "../_shared/hsk-events.ts";
 
 // ---------------------------------------------------------------------------
@@ -46,12 +47,10 @@ const ACTIVE_EVENT_TYPES = new Set([
   "SUBSCRIBER_ALIAS",
 ]);
 
-// Event types that revoke entitlement
-const REVOKE_EVENT_TYPES = new Set([
+// Event types that do not revoke access immediately, but should be recorded.
+const DEFERRED_REVOKE_EVENT_TYPES = new Set([
   "CANCELLATION",
-  "EXPIRATION",
   "BILLING_ISSUE",
-  "REFUND",
 ]);
 
 // ---------------------------------------------------------------------------
@@ -119,21 +118,24 @@ Deno.serve(async (req) => {
   }
 
   // ── 5. Map event to subscription status ──────────────────────────────────
-  const isActive = ACTIVE_EVENT_TYPES.has(event.type);
-  const isRevoke = REVOKE_EVENT_TYPES.has(event.type);
+  const now = new Date();
+  const profileWasPremium = isPremiumActive(profile);
+  const expirationDate = event.expiration_at_ms
+    ? new Date(event.expiration_at_ms).toISOString()
+    : null;
+  const entitlementStillActive =
+    ACTIVE_EVENT_TYPES.has(event.type) ||
+    (DEFERRED_REVOKE_EVENT_TYPES.has(event.type) &&
+      (expirationDate ? new Date(expirationDate) > now : profileWasPremium));
 
   let status: string;
-  if (isActive) status = "active";
-  else if (event.type === "REFUND") status = "refunded";
-  else if (event.type === "CANCELLATION") status = "cancelled";
-  else status = "expired";
+  if (event.type === "REFUND") status = "refunded";
+  else if (event.type === "CANCELLATION" && !entitlementStillActive) status = "cancelled";
+  else status = entitlementStillActive ? "active" : "expired";
 
   const entitlementId = event.entitlement_ids?.[0] ?? "premium";
   const purchaseDate = event.purchase_date_ms
     ? new Date(event.purchase_date_ms).toISOString()
-    : null;
-  const expirationDate = event.expiration_at_ms
-    ? new Date(event.expiration_at_ms).toISOString()
     : null;
   const cancelledAt = event.cancelled_at_ms
     ? new Date(event.cancelled_at_ms).toISOString()
@@ -162,11 +164,14 @@ Deno.serve(async (req) => {
 
   // ── 7. Mirror to profiles.is_premium (summary field) ─────────────────────
   // Precedence: RevenueCat entitlement overrides legacy trial flag.
-  // Only update when the new event changes premium status.
-  const shouldBePremium = isActive;
+  // Keep expiration in sync even when the user stays premium.
+  const shouldBePremium = entitlementStillActive;
   const profileNeedsUpdate =
     shouldBePremium !== !!profile.is_premium ||
-    (isRevoke && profile.is_premium);
+    (shouldBePremium &&
+      !!expirationDate &&
+      expirationDate !== (profile.premium_expires_at ?? null)) ||
+    (!shouldBePremium && profile.premium_expires_at !== null);
 
   if (profileNeedsUpdate) {
     const profilePatch: Record<string, unknown> = {

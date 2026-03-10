@@ -547,19 +547,19 @@ HSK 7-9 ships as metadata only (v1). Full content deferred.
 ### HSK Backend Tables
 
 ```sql
--- Core progress tables (hsk_core_tables.sql)
-hsk_session_quota   -- free quota tracking per user per day
+-- Core progress tables (20260310_hsk_core_tables.sql)
 hsk_progress        -- per-user, per-level aggregates (words_learned, mastered)
-hsk_word_events     -- raw event log (seen, learned, mastered) for sync
-
--- Content tables (hsk_content_tables.sql)
-hsk_question_bank   -- pre-generated questions (section, question_data, audio_url)
-hsk_exam_sessions   -- server-timed exam sessions (expires_at, section_deadlines)
+hsk_word_mastery    -- per-word SRS state per user
+hsk_event_ledger    -- idempotent client event log for offline review sync
 hsk_exam_results    -- final scores per session
+
+-- Content tables (20260310_hsk_content_tables.sql)
+hsk_question_bank   -- pre-generated questions (section, question_data, audio_url)
+hsk_exam_sessions   -- server-timed exam sessions (expires_at, status, answers)
 hsk_audio_manifests -- listening section audio asset registry
 
--- Billing tables (*_subscriptions.sql)
-revenuecat_purchases -- receipt validation events from RevenueCat webhook
+-- Billing tables (20260310_subscriptions.sql)
+subscriptions       -- RevenueCat webhook event log + entitlement lifecycle
 ```
 
 All tables use RLS. Quota and premium checks are enforced server-side.
@@ -571,7 +571,7 @@ All tables use RLS. Quota and premium checks are enforced server-side.
 | `hsk-session-init` | Initialize user HSK session (quota check, progress hydration) |
 | `hsk-sync-events` | Batch-sync local word events to server aggregates |
 | `hsk-refresh-question-bank` | Regenerate questions for a level (admin/pipeline) |
-| `hsk-mock-exam-start` | Create server-timed exam session with section deadlines |
+| `hsk-mock-exam-start` | Create server-timed exam session after premium/quota checks and stale-session cleanup |
 | `hsk-mock-exam-submit-section` | Score a section, advance or finalize exam |
 | `hsk-writing-evaluate` | AI writing rubric via Gemini (content, structure, vocab) |
 | `revenuecat-webhook` | Validate RevenueCat receipt events, sync entitlements to profiles |
@@ -606,7 +606,7 @@ hsk-sync-events Edge Function (batch upsert, returns server aggregates)
 lib/hsk-progress.ts           (merge local + server state)
 ```
 
-Events are idempotent (UUID per event). Offline reviews sync transparently on reconnect.
+Events are idempotent (UUID per event). Offline reviews sync transparently on reconnect through `hsk-sync-events`, which writes `hsk_event_ledger` and recomputes mastery/progress on the server.
 
 ### Billing: RevenueCat Integration
 
@@ -616,14 +616,19 @@ User taps Subscribe (Paywall.tsx)
 lib/billing.ts                (RevenueCat SDK: Purchases.purchasePackage)
     ↓ purchase confirmed
 RevenueCat servers → revenuecat-webhook Edge Function
-    ↓ service-role upsert
-profiles.is_premium = true, premium_expires_at updated
+    ↓ insert idempotent billing event
+subscriptions.status / expiration_date updated
+    ↓ mirror active entitlement summary
+profiles.is_premium + premium_expires_at updated
     ↓
 AuthProvider.tsx              (refetchProfile on entitlement_updated event)
 ```
 
 Client-side trust removed: entitlement now comes from RevenueCat event, not
-client assertion. `start-trial` Edge Function still active for free 7-day trials.
+client assertion. `CANCELLATION` and `BILLING_ISSUE` events are recorded
+immediately, but premium stays active until the paid period actually expires or
+another revoke event lands. `start-trial` Edge Function still active for free
+7-day trials.
 
 ---
 

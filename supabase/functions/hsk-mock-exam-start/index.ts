@@ -5,6 +5,8 @@ import {
   jsonResponse,
   unauthorizedResponse,
   errorResponse,
+  FREE_DAILY_EXAM_QUOTA,
+  isPremiumActive,
   validateHskLevel,
 } from "../_shared/hsk-events.ts";
 
@@ -41,17 +43,93 @@ Deno.serve(async (req) => {
     }
 
     const serviceClient = createClient(supabaseUrl, serviceKey);
+    const now = new Date();
+    const todayUtc = new Date(now);
+    todayUtc.setUTCHours(0, 0, 0, 0);
 
-    // Check for already-active session
-    const { data: existing } = await serviceClient
+    const { data: profile, error: profileErr } = await serviceClient
+      .from("profiles")
+      .select("is_premium, premium_expires_at")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    if (profileErr) {
+      throw new Error(`Failed to load profile: ${profileErr.message}`);
+    }
+
+    const premium = isPremiumActive(profile);
+    if (!premium && hskLevel > 1) {
+      return jsonResponse(
+        {
+          error: "Premium required for HSK 2-6 mock exams",
+          code: "premium_required",
+        },
+        403,
+      );
+    }
+
+    // Expire stale active sessions before blocking a new start.
+    const { data: activeSessions, error: activeErr } = await serviceClient
       .from("hsk_exam_sessions")
       .select("id, expires_at")
       .eq("user_id", user.id)
       .eq("status", "active")
-      .maybeSingle();
+      .order("started_at", { ascending: false });
 
-    if (existing) {
-      return jsonResponse({ error: "Active exam session already exists", session_id: existing.id }, 409);
+    if (activeErr) {
+      throw new Error(`Failed to check active sessions: ${activeErr.message}`);
+    }
+
+    const staleSessionIds = (activeSessions ?? [])
+      .filter((session) => new Date(session.expires_at) <= now)
+      .map((session) => session.id);
+
+    if (staleSessionIds.length > 0) {
+      const { error: expireErr } = await serviceClient
+        .from("hsk_exam_sessions")
+        .update({ status: "expired" })
+        .eq("user_id", user.id)
+        .in("id", staleSessionIds);
+
+      if (expireErr) {
+        throw new Error(`Failed to expire stale sessions: ${expireErr.message}`);
+      }
+    }
+
+    const liveSession = (activeSessions ?? []).find(
+      (session) => new Date(session.expires_at) > now,
+    );
+
+    if (liveSession) {
+      return jsonResponse(
+        {
+          error: "Active exam session already exists",
+          session_id: liveSession.id,
+        },
+        409,
+      );
+    }
+
+    if (!premium) {
+      const { count: examsToday, error: quotaErr } = await serviceClient
+        .from("hsk_exam_results")
+        .select("id", { count: "exact", head: true })
+        .eq("user_id", user.id)
+        .gte("completed_at", todayUtc.toISOString());
+
+      if (quotaErr) {
+        throw new Error(`Failed to check daily exam quota: ${quotaErr.message}`);
+      }
+
+      if ((examsToday ?? 0) >= FREE_DAILY_EXAM_QUOTA) {
+        return jsonResponse(
+          {
+            error: "Free daily exam quota reached",
+            code: "daily_quota_reached",
+          },
+          403,
+        );
+      }
     }
 
     // Select questions from bank: QUESTIONS_PER_SECTION per section

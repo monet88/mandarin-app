@@ -2,6 +2,7 @@
 
 export const HSK_LEVELS = [1, 2, 3, 4, 5, 6] as const;
 export type HskLevel = (typeof HSK_LEVELS)[number];
+export const FREE_DAILY_EXAM_QUOTA = 1;
 
 export const HSK_EVENT_TYPES = [
   "word_reviewed",

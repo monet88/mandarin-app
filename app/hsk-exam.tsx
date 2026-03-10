@@ -11,16 +11,16 @@ import {
   QuestionBankRow,
   SectionAnswers,
   SECTIONS,
+  WritingRubric,
   evaluateWriting,
   fetchQuestions,
   questionsForSection,
   startExamSession,
   submitSection,
 } from "@/lib/hsk-exam";
-import { WritingRubric } from "@/lib/hsk-exam";
 import { Audio } from "expo-av";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   AppState,
@@ -60,27 +60,34 @@ export default function HskExamScreen() {
   // AppState interruption tracking
   const backgroundedAt = useRef<number | null>(null);
   const appStateRef = useRef<AppStateStatus>(AppState.currentState);
+  const screenRef = useRef<ScreenState>("loading");
   const sessionRef = useRef<ExamSession | null>(null);
+  const questionsRef = useRef<QuestionBankRow[]>([]);
   const answersRef = useRef<SectionAnswers>({});
   const sectionIdxRef = useRef(0);
 
   // Keep refs in sync
+  useEffect(() => { screenRef.current = screen; }, [screen]);
   useEffect(() => { sessionRef.current = session; }, [session]);
+  useEffect(() => { questionsRef.current = questions; }, [questions]);
   useEffect(() => { answersRef.current = answers; }, [answers]);
   useEffect(() => { sectionIdxRef.current = sectionIdx; }, [sectionIdx]);
 
-  // Start exam on mount
-  useEffect(() => {
-    initExam();
+  const preloadAudio = useCallback(async (manifests: AudioManifest[]) => {
+    let loaded = 0;
+    for (const m of manifests) {
+      try {
+        const { sound } = await Audio.Sound.createAsync({ uri: m.storage_path }, { shouldPlay: false });
+        await sound.unloadAsync(); // just verify it loads; don't hold in memory
+      } catch {
+        // Non-fatal — continue
+      }
+      loaded++;
+      setPreloadProgress(Math.round((loaded / manifests.length) * 100));
+    }
   }, []);
 
-  // AppState listener for background interruption
-  useEffect(() => {
-    const sub = AppState.addEventListener("change", handleAppStateChange);
-    return () => sub.remove();
-  }, []);
-
-  async function initExam() {
+  const initExam = useCallback(async () => {
     try {
       setScreen("loading");
       const sess = await startExamSession(hskLevel);
@@ -101,21 +108,7 @@ export default function HskExamScreen() {
       setErrorMsg(msg);
       setScreen("error");
     }
-  }
-
-  async function preloadAudio(manifests: AudioManifest[]) {
-    let loaded = 0;
-    for (const m of manifests) {
-      try {
-        const { sound } = await Audio.Sound.createAsync({ uri: m.storage_path }, { shouldPlay: false });
-        await sound.unloadAsync(); // just verify it loads; don't hold in memory
-      } catch {
-        // Non-fatal — continue
-      }
-      loaded++;
-      setPreloadProgress(Math.round((loaded / manifests.length) * 100));
-    }
-  }
+  }, [hskLevel, preloadAudio]);
 
   function handleAppStateChange(nextState: AppStateStatus) {
     const prev = appStateRef.current;
@@ -126,11 +119,26 @@ export default function HskExamScreen() {
     } else if (nextState === "active" && backgroundedAt.current !== null) {
       const elapsed = Date.now() - backgroundedAt.current;
       backgroundedAt.current = null;
-      if (elapsed > BACKGROUND_INTERRUPT_MS && sessionRef.current && screen === "exam") {
+      if (
+        elapsed > BACKGROUND_INTERRUPT_MS &&
+        sessionRef.current &&
+        screenRef.current === "exam"
+      ) {
         handleAutoSubmit();
       }
     }
   }
+
+  // Start exam on mount
+  useEffect(() => {
+    void initExam();
+  }, [initExam]);
+
+  // AppState listener for background interruption
+  useEffect(() => {
+    const sub = AppState.addEventListener("change", handleAppStateChange);
+    return () => sub.remove();
+  }, []);
 
   async function handleAutoSubmit() {
     const sess = sessionRef.current;
@@ -159,8 +167,11 @@ export default function HskExamScreen() {
     isInterruption: boolean,
   ) {
     try {
+      const activeSession = sessionRef.current;
       const sectionAnswers: SectionAnswers = {};
-      const sectionQIds = session ? questionsForSection(session.question_ids, section) : [];
+      const sectionQIds = activeSession
+        ? questionsForSection(activeSession.question_ids, section)
+        : [];
       for (const qid of sectionQIds) {
         if (currentAnswers[qid] !== undefined) sectionAnswers[qid] = currentAnswers[qid];
       }
@@ -185,9 +196,14 @@ export default function HskExamScreen() {
   }
 
   async function triggerWritingEval(currentAnswers: SectionAnswers) {
-    if (!session) return;
-    const writingQIds = questionsForSection(session.question_ids, "writing");
-    const writingQ = questions.find((q) => writingQIds.includes(q.id) && q.section === "writing");
+    const activeSession = sessionRef.current;
+    const activeQuestions = questionsRef.current;
+    if (!activeSession) return;
+
+    const writingQIds = questionsForSection(activeSession.question_ids, "writing");
+    const writingQ = activeQuestions.find(
+      (q) => writingQIds.includes(q.id) && q.section === "writing",
+    );
     if (!writingQ) return;
 
     const writingText = writingQIds

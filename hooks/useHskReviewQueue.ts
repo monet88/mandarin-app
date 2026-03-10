@@ -14,7 +14,12 @@ interface UseHskReviewQueueResult {
   dueStates: WordReviewState[];
   loading: boolean;
   /** Call after user rates a card. Updates local state + enqueues sync event. */
-  submitReview: (word_id: string, quality: ReviewQuality, level: number) => Promise<void>;
+  submitReview: (
+    word_id: string,
+    word_simplified: string,
+    quality: ReviewQuality,
+    level: number,
+  ) => Promise<void>;
   /** Reload due list (e.g. after finishing a session). */
   refresh: (level: number) => Promise<void>;
 }
@@ -47,7 +52,12 @@ export function useHskReviewQueue(level: number): UseHskReviewQueueResult {
   );
 
   const submitReview = useCallback(
-    async (word_id: string, quality: ReviewQuality, lvl: number) => {
+    async (
+      word_id: string,
+      word_simplified: string,
+      quality: ReviewQuality,
+      lvl: number,
+    ) => {
       const map = await getLevelProgress(lvl);
       const currentState = map[word_id] ?? newReviewState(word_id);
       const nextState = applyReview(currentState, quality);
@@ -55,7 +65,13 @@ export function useHskReviewQueue(level: number): UseHskReviewQueueResult {
       // Persist locally first (offline-safe)
       await saveWordState(lvl, nextState);
       // Enqueue sync event (flushed in background on next focus)
-      await enqueueReviewEvent(word_id, lvl, quality, nextState.interval);
+      await enqueueReviewEvent(
+        word_id,
+        word_simplified,
+        lvl,
+        quality,
+        nextState.interval,
+      );
 
       // Optimistically remove from due list
       setDueStates((prev) => prev.filter((s) => s.word_id !== word_id));

@@ -8,7 +8,7 @@
 | **TypeScript/TSX** | ~70 files (~14,000 LOC) |
 | **JSON/Config** | 10 files |
 | **Assets** | 20+ images, 1 video, HSK JSON data |
-| **Supabase** | 11 Edge Functions, 3 migrations |
+| **Supabase** | 11 Edge Functions, 4 migrations |
 | **Package Dependencies** | 47 production, 8 dev |
 
 **Total LOC (excluding assets & data):** ~14,000 lines
@@ -126,8 +126,9 @@
 │   │   └── revenuecat-webhook/      # RevenueCat receipt validation + entitlement sync
 │   └── migrations/          # Database schema
 │       ├── 20260116134234_profile_migration.sql
-│       ├── hsk_core_tables.sql      # hsk_session_quota, hsk_progress, hsk_word_events
-│       └── hsk_content_tables.sql   # hsk_question_bank, hsk_exam_sessions, hsk_exam_results
+│       ├── 20260310_hsk_core_tables.sql      # hsk_progress, hsk_word_mastery, hsk_event_ledger, hsk_exam_results
+│       ├── 20260310_hsk_content_tables.sql   # hsk_question_bank, hsk_exam_sessions, hsk_audio_manifests
+│       └── 20260310_subscriptions.sql        # subscriptions billing log synced from RevenueCat
 │
 ├── assets/                  # Images, fonts, videos
 │   ├── data/
@@ -253,9 +254,9 @@
 **Responsibility:** Full HSK preparation surface with vocabulary review, spaced repetition, and server-timed mock exams
 
 - HSK 1-6 fully supported; HSK 7-9 shows "Coming Soon" metadata
-- Offline-first word events queue (`lib/hsk-event-queue.ts`) syncs to server in batch
-- SRS scoring in `lib/hsk-review.ts`; progress merged from local + server in `lib/hsk-progress.ts`
-- Mock exam: server-authoritative timer, section-by-section submission, AI writing rubric
+- Offline-first word events queue (`lib/hsk-event-queue.ts`) flushes through `hsk-sync-events`
+- SRS scoring in `lib/hsk-review.ts`; the server records `hsk_event_ledger` and recomputes `hsk_word_mastery` + `hsk_progress`
+- Mock exam start enforces premium/quota server-side, expires stale active sessions, and returns section deadlines
 - Premium gate: HSK 2-6 study/exam requires active RevenueCat subscription
 - Free tier: HSK 1 browse + limited daily exam quota (enforced server-side)
 
@@ -272,7 +273,8 @@
 **Responsibility:** Store-backed subscription management via RevenueCat
 
 - `lib/billing.ts` — RevenueCat SDK init, `purchasePackage`, `restorePurchases`
-- `revenuecat-webhook` Edge Function — validates events, upserts `is_premium` + `premium_expires_at`
+- `revenuecat-webhook` Edge Function — records webhook events in `subscriptions`, then mirrors `is_premium` + `premium_expires_at`
+- `CANCELLATION` / `BILLING_ISSUE` events do not revoke access early; premium stays active until expiration or a revoke event
 - `AuthProvider.tsx` — refetches profile on entitlement change
 - `start-trial` Edge Function — still active for 7-day free trials (unchanged)
 
