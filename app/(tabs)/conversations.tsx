@@ -410,7 +410,7 @@ export default function ConversationsScreen() {
                         color="#F59E0B"
                       />
                       <ThemedText style={styles.guidelineText}>
-                        Don't share sensitive information
+                        {"Don't share sensitive information"}
                       </ThemedText>
                     </View>
                   </View>

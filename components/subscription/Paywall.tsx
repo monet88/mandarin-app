@@ -1,10 +1,17 @@
 import { Colors } from "@/constants/theme";
 import { useAuth } from "@/ctx/AuthContext";
+import {
+  fetchOfferings,
+  purchasePackage,
+  restorePurchases,
+  OfferingPackage,
+} from "@/lib/billing";
 import { supabase } from "@/utils/supabase";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   Dimensions,
   Modal,
   Pressable,
@@ -18,21 +25,16 @@ import { toast } from "sonner-native";
 
 const { width } = Dimensions.get("window");
 
+// ---------------------------------------------------------------------------
+// RC package identifiers — must match RevenueCat dashboard
+// ---------------------------------------------------------------------------
+const PKG_ANNUAL = "$rc_annual";
+const PKG_MONTHLY = "$rc_monthly";
+
 interface Feature {
   icon: keyof typeof Ionicons.glyphMap;
   title: string;
   description: string;
-}
-
-interface Plan {
-  id: string;
-  name: string;
-  price: string;
-  period: string;
-  billingCycle: string;
-  features: string[];
-  recommended?: boolean;
-  savings?: string;
 }
 
 const features: Feature[] = [
@@ -68,25 +70,10 @@ const features: Feature[] = [
   },
 ];
 
-const plans: { annual: Plan; monthly: Plan } = {
-  annual: {
-    id: "premium_annual",
-    name: "Premium",
-    price: "799.00",
-    period: "year",
-    billingCycle: "Billed yearly",
-    features: ["7-day free trial", "Cancel anytime"],
-    recommended: true,
-    savings: "Save 40%",
-  },
-  monthly: {
-    id: "premium_monthly",
-    name: "Premium",
-    price: "199.00",
-    period: "month",
-    billingCycle: "Billed monthly",
-    features: ["7-day free trial", "Cancel anytime"],
-  },
+// Fallback display data when offerings not yet loaded
+const FALLBACK_PRICES: Record<string, { price: string; savings?: string }> = {
+  [PKG_ANNUAL]: { price: "799.00 kr.", savings: "Save 40%" },
+  [PKG_MONTHLY]: { price: "199.00 kr." },
 };
 
 export function Paywall({
@@ -96,34 +83,92 @@ export function Paywall({
   visible: boolean;
   onClose: () => void;
 }) {
-  const [billingCycle, setBillingCycle] = useState<"annual" | "monthly">(
-    "annual",
-  );
-  const [isStartingTrial, setIsStartingTrial] = useState(false);
+  const [billingCycle, setBillingCycle] = useState<"annual" | "monthly">("annual");
+  const [isPurchasing, setIsPurchasing] = useState(false);
+  const [isRestoring, setIsRestoring] = useState(false);
+  const [offerings, setOfferings] = useState<OfferingPackage[]>([]);
 
   const { refreshProfile } = useAuth();
 
-  const selectedPlan = plans[billingCycle];
+  const selectedPkgId = billingCycle === "annual" ? PKG_ANNUAL : PKG_MONTHLY;
 
-  const handleStartTrial = async () => {
+  const rcPkg = offerings.find((o) => o.identifier === selectedPkgId);
+  const displayPrice = rcPkg?.priceString ?? FALLBACK_PRICES[selectedPkgId]?.price;
+  const annualSavings = FALLBACK_PRICES[PKG_ANNUAL]?.savings;
+
+  // Load live prices once modal opens
+  useEffect(() => {
+    if (!visible) return;
+    fetchOfferings().then((pkgs) => {
+      if (pkgs.length > 0) setOfferings(pkgs);
+    });
+  }, [visible]);
+
+  const handlePurchase = async () => {
     try {
-      setIsStartingTrial(true);
+      setIsPurchasing(true);
+      const result = await purchasePackage(selectedPkgId);
 
-      const { error } = await supabase.functions.invoke("start-trial", {
-        body: { planId: selectedPlan.id },
-      });
+      if (result.cancelled) return; // user dismissed store sheet — no error toast
 
-      if (error) throw error;
+      if (!result.success) {
+        toast.error(result.error ?? "Purchase failed. Please try again.");
+        return;
+      }
 
+      // Webhook will update Supabase; refresh profile for optimistic UI
       await refreshProfile();
+      toast.success("Welcome to Premium!");
       onClose();
-    } catch (err) {
-      console.error("Failed to start trial:", err);
-      toast.error("Could not start trial. Please try again.");
+    } catch {
+      toast.error("Something went wrong. Please try again.");
     } finally {
-      setIsStartingTrial(false);
+      setIsPurchasing(false);
     }
   };
+
+  const handleRestore = async () => {
+    try {
+      setIsRestoring(true);
+      const result = await restorePurchases();
+
+      if (result.error) {
+        toast.error(result.error);
+        return;
+      }
+
+      if (result.isPremium) {
+        await refreshProfile();
+        toast.success("Purchases restored!");
+        onClose();
+      } else {
+        toast.info("No active subscription found.");
+      }
+    } catch {
+      toast.error("Restore failed. Please try again.");
+    } finally {
+      setIsRestoring(false);
+    }
+  };
+
+  // Legacy fallback: start trial via Edge Function (non-RC path)
+  const handleStartTrial = async () => {
+    try {
+      setIsPurchasing(true);
+      const { error } = await supabase.functions.invoke("start-trial", {
+        body: { planId: selectedPkgId },
+      });
+      if (error) throw error;
+      await refreshProfile();
+      onClose();
+    } catch {
+      toast.error("Could not start trial. Please try again.");
+    } finally {
+      setIsPurchasing(false);
+    }
+  };
+
+  const busy = isPurchasing || isRestoring;
 
   return (
     <Modal
@@ -142,7 +187,7 @@ export function Paywall({
         />
 
         <View style={styles.header}>
-          <Pressable style={styles.closeButton} onPress={onClose}>
+          <Pressable style={styles.closeButton} onPress={onClose} disabled={busy}>
             <Ionicons name="close" size={24} color={"#fff"} />
           </Pressable>
           <Text style={styles.headerTitle}>Go Premium</Text>
@@ -159,7 +204,7 @@ export function Paywall({
             <Text style={styles.title}>
               Join over <Text style={styles.highlight}>5 million</Text> users
             </Text>
-            <Text style={styles.subtitle}>leaning with Convo!</Text>
+            <Text style={styles.subtitle}>learning with Convo!</Text>
           </View>
 
           {/* Features */}
@@ -198,13 +243,9 @@ export function Paywall({
               >
                 Annual
               </Text>
-              {billingCycle === "annual" && (
+              {billingCycle === "annual" && annualSavings && (
                 <View style={styles.savingsBadge}>
-                  <View style={styles.savingsBadge}>
-                    <Text style={styles.savingsText}>
-                      {plans.annual.savings}
-                    </Text>
-                  </View>
+                  <Text style={styles.savingsText}>{annualSavings}</Text>
                 </View>
               )}
             </Pressable>
@@ -226,56 +267,56 @@ export function Paywall({
             </Pressable>
           </View>
 
-          {/* Plans */}
+          {/* Plan card */}
           <View style={styles.planCard}>
-            {selectedPlan.recommended && (
+            {billingCycle === "annual" && (
               <View style={styles.recommendedBadge}>
                 <Text style={styles.recommendedText}>BEST VALUE</Text>
               </View>
             )}
             <View style={styles.planHeader}>
               <View>
-                <Text style={styles.planName}>{selectedPlan.name}</Text>
+                <Text style={styles.planName}>Premium</Text>
                 <Text style={styles.planBilling}>
-                  {selectedPlan.billingCycle}
+                  {billingCycle === "annual" ? "Billed yearly" : "Billed monthly"}
                 </Text>
               </View>
               <View style={styles.planPriceContainer}>
-                <Text style={styles.planPrice}>{selectedPlan.price} kr.</Text>
-                <Text style={styles.planPeriod}>{selectedPlan.period}</Text>
+                <Text style={styles.planPrice}>{displayPrice}</Text>
+                <Text style={styles.planPeriod}>
+                  {billingCycle === "annual" ? "year" : "month"}
+                </Text>
               </View>
             </View>
             <View style={styles.planFeatures}>
-              {selectedPlan.features.map((feature, index) => (
-                <View key={index} style={styles.planFeatureItem}>
+              {["7-day free trial", "Cancel anytime"].map((f, i) => (
+                <View key={i} style={styles.planFeatureItem}>
                   <Ionicons name="checkmark-circle" size={20} color="#34C759" />
-                  <Text style={styles.planFeatureText}>{feature}</Text>
+                  <Text style={styles.planFeatureText}>{f}</Text>
                 </View>
               ))}
             </View>
           </View>
 
-          {/* CTA button */}
+          {/* Primary CTA: store purchase */}
           <Pressable
-            style={[styles.ctaButton, isStartingTrial && { opacity: 0.7 }]}
-            onPress={handleStartTrial}
-            disabled={isStartingTrial}
+            style={[styles.ctaButton, busy && { opacity: 0.7 }]}
+            onPress={handlePurchase}
+            disabled={busy}
           >
-            <Ionicons
-              name="star"
-              size={20}
-              color="#fff"
-              style={styles.ctaIcon}
-            />
+            {isPurchasing ? (
+              <ActivityIndicator color="#fff" style={styles.ctaIcon} />
+            ) : (
+              <Ionicons name="star" size={20} color="#fff" style={styles.ctaIcon} />
+            )}
             <Text style={styles.ctaText}>
-              {isStartingTrial ? "Starting..." : "Start my free week"}
+              {isPurchasing ? "Processing..." : "Start my free week"}
             </Text>
           </Pressable>
 
-          {/* Footer */}
           <Text style={styles.footer}>Try 7 days free. Cancel anytime.</Text>
           <Text style={styles.footerNote}>
-            We'll send you a reminder before your trial ends.
+            {"We'll send you a reminder before your trial ends."}
           </Text>
 
           {/* Rating */}
@@ -286,16 +327,14 @@ export function Paywall({
               ))}
             </View>
             <Text style={styles.ratingText}>4.8 / 5 STARS</Text>
-            <Text style={styles.ratingSubtext}>
-              10.000+ reviews on App Store
-            </Text>
+            <Text style={styles.ratingSubtext}>10.000+ reviews on App Store</Text>
           </View>
 
           {/* Testimonial */}
           <View style={styles.testimonial}>
             <Text style={styles.testimonialText}>
-              Convo has the best curriculum among all the language
-              learning-related apps I've tried. Higher recommended.
+              {"Convo has the best curriculum among all the language "}
+              {"learning-related apps I've tried. Highly recommended."}
             </Text>
             <Text style={styles.testimonialAuthor}>
               - App Store User from South Korea
@@ -304,8 +343,12 @@ export function Paywall({
 
           {/* Legal links */}
           <View style={styles.legalLinks}>
-            <Pressable>
-              <Text style={styles.legalLink}>Restore Purchase</Text>
+            <Pressable onPress={handleRestore} disabled={busy}>
+              {isRestoring ? (
+                <ActivityIndicator size="small" color="rgba(255,255,255,0.8)" />
+              ) : (
+                <Text style={styles.legalLink}>Restore Purchase</Text>
+              )}
             </Pressable>
             <Text style={styles.legalSeparator}>•</Text>
             <Pressable>
@@ -317,7 +360,7 @@ export function Paywall({
             </Pressable>
           </View>
 
-          <View style={styles.bottomSpacing}></View>
+          <View style={styles.bottomSpacing} />
         </ScrollView>
       </SafeAreaView>
     </Modal>
