@@ -37,6 +37,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="hsk-prep"
+        options={{
+          title: "HSK Prep",
+          tabBarIcon: ({ color }) => (
+            <Ionicons size={28} name="ribbon" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           title: "Profile",

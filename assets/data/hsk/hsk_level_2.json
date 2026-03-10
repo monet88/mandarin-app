@@ -1,0 +1,1357 @@
+{
+  "level": 2,
+  "level_name": "HSK 2",
+  "word_count": 150,
+  "words": [
+    {
+      "word_id": "684c30b1-9bae-4c29-a49e-3f855b05c2ea",
+      "hanzi": "吧",
+      "pinyin": "ba",
+      "english": "particle (suggestion/assumption)",
+      "pos": "part",
+      "frequency": 1,
+      "level": 2
+    },
+    {
+      "word_id": "0ee9e176-d151-460e-9486-ada1580d2ab8",
+      "hanzi": "白",
+      "pinyin": "bái",
+      "english": "white",
+      "pos": "adj",
+      "frequency": 2,
+      "level": 2
+    },
+    {
+      "word_id": "1191f8ef-4fe0-42c7-82fd-250ecf6ec654",
+      "hanzi": "百",
+      "pinyin": "bǎi",
+      "english": "hundred",
+      "pos": "num",
+      "frequency": 3,
+      "level": 2
+    },
+    {
+      "word_id": "384f9d04-05a5-4cb8-ac10-92104af09139",
+      "hanzi": "帮助",
+      "pinyin": "bāngzhù",
+      "english": "to help; help",
+      "pos": "v/n",
+      "frequency": 4,
+      "level": 2
+    },
+    {
+      "word_id": "96cee9e6-f4d7-4c46-8121-e23adb6545fa",
+      "hanzi": "报纸",
+      "pinyin": "bàozhǐ",
+      "english": "newspaper",
+      "pos": "n",
+      "frequency": 5,
+      "level": 2
+    },
+    {
+      "word_id": "6911cc71-8421-491c-81ba-fa90d288b095",
+      "hanzi": "比",
+      "pinyin": "bǐ",
+      "english": "to compare; than",
+      "pos": "prep/v",
+      "frequency": 6,
+      "level": 2
+    },
+    {
+      "word_id": "b3feae4f-fc9a-47d7-9f28-3354f8db5ad9",
+      "hanzi": "别",
+      "pinyin": "bié",
+      "english": "don't; other",
+      "pos": "adv/adj",
+      "frequency": 7,
+      "level": 2
+    },
+    {
+      "word_id": "ab4798c8-986a-4c6a-a85f-88b6168d40c7",
+      "hanzi": "宾馆",
+      "pinyin": "bīnguǎn",
+      "english": "hotel; guesthouse",
+      "pos": "n",
+      "frequency": 8,
+      "level": 2
+    },
+    {
+      "word_id": "7c706b28-8131-499c-b98f-ee217f5ccbd0",
+      "hanzi": "长",
+      "pinyin": "cháng",
+      "english": "long",
+      "pos": "adj",
+      "frequency": 9,
+      "level": 2
+    },
+    {
+      "word_id": "9d321c33-4b24-4428-8b85-e3e8246bfd5b",
+      "hanzi": "唱歌",
+      "pinyin": "chànggē",
+      "english": "to sing (a song)",
+      "pos": "v",
+      "frequency": 10,
+      "level": 2
+    },
+    {
+      "word_id": "5b8f1966-8846-4be5-bb7a-7e5d7ece7034",
+      "hanzi": "出",
+      "pinyin": "chū",
+      "english": "to go out; to exit",
+      "pos": "v",
+      "frequency": 11,
+      "level": 2
+    },
+    {
+      "word_id": "f7b25ef1-c075-414d-966c-9e71e24b6ad7",
+      "hanzi": "穿",
+      "pinyin": "chuān",
+      "english": "to wear; to put on",
+      "pos": "v",
+      "frequency": 12,
+      "level": 2
+    },
+    {
+      "word_id": "ae468d8d-6445-4e3a-98e8-ee4945e56c6d",
+      "hanzi": "次",
+      "pinyin": "cì",
+      "english": "time; occurrence (measure word)",
+      "pos": "m",
+      "frequency": 13,
+      "level": 2
+    },
+    {
+      "word_id": "0a198948-8127-43ea-82f2-6140bb6d7728",
+      "hanzi": "从",
+      "pinyin": "cóng",
+      "english": "from; since",
+      "pos": "prep",
+      "frequency": 14,
+      "level": 2
+    },
+    {
+      "word_id": "cd2b26ab-554a-48be-8955-aca8d01c01c9",
+      "hanzi": "错",
+      "pinyin": "cuò",
+      "english": "wrong; mistake",
+      "pos": "adj/n",
+      "frequency": 15,
+      "level": 2
+    },
+    {
+      "word_id": "1b0b5a4a-b6fd-45a8-9b05-2cbcc323c009",
+      "hanzi": "打篮球",
+      "pinyin": "dǎ lánqiú",
+      "english": "to play basketball",
+      "pos": "v",
+      "frequency": 16,
+      "level": 2
+    },
+    {
+      "word_id": "fb0cbaab-2efb-4976-a658-a3dd01b7645f",
+      "hanzi": "大家",
+      "pinyin": "dàjiā",
+      "english": "everyone; everybody",
+      "pos": "pron",
+      "frequency": 17,
+      "level": 2
+    },
+    {
+      "word_id": "9d931903-a5e3-4d35-ad3e-5e6b9b293a66",
+      "hanzi": "到",
+      "pinyin": "dào",
+      "english": "to arrive; to reach",
+      "pos": "v/prep",
+      "frequency": 18,
+      "level": 2
+    },
+    {
+      "word_id": "18d5a131-0e6f-4154-b11d-a69dd8bbfa99",
+      "hanzi": "地方",
+      "pinyin": "dìfang",
+      "english": "place; area",
+      "pos": "n",
+      "frequency": 19,
+      "level": 2
+    },
+    {
+      "word_id": "15b44522-efa1-4a56-ba87-e9ee2026be95",
+      "hanzi": "弟弟",
+      "pinyin": "dìdi",
+      "english": "younger brother",
+      "pos": "n",
+      "frequency": 20,
+      "level": 2
+    },
+    {
+      "word_id": "ba5938c0-98ed-4630-a6d0-fd8233c20ed9",
+      "hanzi": "第一",
+      "pinyin": "dì yī",
+      "english": "first; number one",
+      "pos": "num",
+      "frequency": 21,
+      "level": 2
+    },
+    {
+      "word_id": "db3f899a-b013-4c4a-bc51-6835967e51e9",
+      "hanzi": "懂",
+      "pinyin": "dǒng",
+      "english": "to understand; to know",
+      "pos": "v",
+      "frequency": 22,
+      "level": 2
+    },
+    {
+      "word_id": "e7c7ab70-4a46-40ec-9a08-eec6705a44dd",
+      "hanzi": "对",
+      "pinyin": "duì",
+      "english": "correct; right; toward",
+      "pos": "adj/prep",
+      "frequency": 23,
+      "level": 2
+    },
+    {
+      "word_id": "176948ed-ab25-4b3c-9dfe-13a885b71a35",
+      "hanzi": "房间",
+      "pinyin": "fángjiān",
+      "english": "room",
+      "pos": "n",
+      "frequency": 24,
+      "level": 2
+    },
+    {
+      "word_id": "21d66234-5e64-46ab-a69c-b7e6aa58cab3",
+      "hanzi": "非常",
+      "pinyin": "fēicháng",
+      "english": "very; extremely; unusual",
+      "pos": "adv",
+      "frequency": 25,
+      "level": 2
+    },
+    {
+      "word_id": "1940b98a-2c86-44b8-9add-8a99d5a6770c",
+      "hanzi": "服务员",
+      "pinyin": "fúwùyuán",
+      "english": "waiter; service staff",
+      "pos": "n",
+      "frequency": 26,
+      "level": 2
+    },
+    {
+      "word_id": "394dd7f2-8579-4891-a188-0b5ce7ac6555",
+      "hanzi": "高",
+      "pinyin": "gāo",
+      "english": "tall; high",
+      "pos": "adj",
+      "frequency": 27,
+      "level": 2
+    },
+    {
+      "word_id": "1df657ce-e9cf-4b47-ae22-70780cdaf530",
+      "hanzi": "告诉",
+      "pinyin": "gàosu",
+      "english": "to tell; to inform",
+      "pos": "v",
+      "frequency": 28,
+      "level": 2
+    },
+    {
+      "word_id": "4a694bc8-c7b2-4549-ba02-d9faa9b28c87",
+      "hanzi": "哥哥",
+      "pinyin": "gēge",
+      "english": "older brother",
+      "pos": "n",
+      "frequency": 29,
+      "level": 2
+    },
+    {
+      "word_id": "62b17aed-3159-48ac-8ab2-ef5135160224",
+      "hanzi": "给",
+      "pinyin": "gěi",
+      "english": "to give; for",
+      "pos": "v/prep",
+      "frequency": 30,
+      "level": 2
+    },
+    {
+      "word_id": "e42d88cd-140a-45a2-b2df-619554a2ce0d",
+      "hanzi": "公共汽车",
+      "pinyin": "gōnggòng qìchē",
+      "english": "bus",
+      "pos": "n",
+      "frequency": 31,
+      "level": 2
+    },
+    {
+      "word_id": "0297162a-1c2b-4853-92e8-437d5d4598d3",
+      "hanzi": "公司",
+      "pinyin": "gōngsī",
+      "english": "company; firm",
+      "pos": "n",
+      "frequency": 32,
+      "level": 2
+    },
+    {
+      "word_id": "62cb9184-e34c-41fe-8b11-4048c66cf457",
+      "hanzi": "贵",
+      "pinyin": "guì",
+      "english": "expensive; honorable",
+      "pos": "adj",
+      "frequency": 33,
+      "level": 2
+    },
+    {
+      "word_id": "cf6ce321-bcae-4146-9630-4ede588ca49d",
+      "hanzi": "过",
+      "pinyin": "guò",
+      "english": "to pass; (experiential aspect particle)",
+      "pos": "v/part",
+      "frequency": 34,
+      "level": 2
+    },
+    {
+      "word_id": "59e0da43-757e-491f-8c31-bff27fac4088",
+      "hanzi": "还",
+      "pinyin": "hái",
+      "english": "still; also; in addition",
+      "pos": "adv",
+      "frequency": 35,
+      "level": 2
+    },
+    {
+      "word_id": "2ff6ec35-f9fa-478a-afc1-84cf1f19cf17",
+      "hanzi": "孩子",
+      "pinyin": "háizi",
+      "english": "child; children",
+      "pos": "n",
+      "frequency": 36,
+      "level": 2
+    },
+    {
+      "word_id": "86f23b17-9356-43cf-9dce-024e317c152b",
+      "hanzi": "好吃",
+      "pinyin": "hǎochī",
+      "english": "delicious; tasty",
+      "pos": "adj",
+      "frequency": 37,
+      "level": 2
+    },
+    {
+      "word_id": "284665b7-d530-4bda-b15d-80b6e2dbeea9",
+      "hanzi": "黑",
+      "pinyin": "hēi",
+      "english": "black; dark",
+      "pos": "adj",
+      "frequency": 38,
+      "level": 2
+    },
+    {
+      "word_id": "d169e5a0-34b9-40b2-923a-bcb8a387071a",
+      "hanzi": "红",
+      "pinyin": "hóng",
+      "english": "red",
+      "pos": "adj",
+      "frequency": 39,
+      "level": 2
+    },
+    {
+      "word_id": "234aa676-e3f3-41d4-9607-d4276fffe3cd",
+      "hanzi": "火车站",
+      "pinyin": "huǒchē zhàn",
+      "english": "train station",
+      "pos": "n",
+      "frequency": 40,
+      "level": 2
+    },
+    {
+      "word_id": "287f1902-4dfa-4ff4-bec4-c3f1da396405",
+      "hanzi": "机场",
+      "pinyin": "jīchǎng",
+      "english": "airport",
+      "pos": "n",
+      "frequency": 41,
+      "level": 2
+    },
+    {
+      "word_id": "9ed94e4e-c993-4259-aa82-ffced828225b",
+      "hanzi": "鸡蛋",
+      "pinyin": "jīdàn",
+      "english": "egg",
+      "pos": "n",
+      "frequency": 42,
+      "level": 2
+    },
+    {
+      "word_id": "62e63c5c-fd48-40e8-b243-9d24f0033df8",
+      "hanzi": "件",
+      "pinyin": "jiàn",
+      "english": "(measure word for clothes/matters)",
+      "pos": "m",
+      "frequency": 43,
+      "level": 2
+    },
+    {
+      "word_id": "2f8862c3-a81d-4f6e-8b68-623ab9abf4a7",
+      "hanzi": "教室",
+      "pinyin": "jiàoshì",
+      "english": "classroom",
+      "pos": "n",
+      "frequency": 44,
+      "level": 2
+    },
+    {
+      "word_id": "7d4c43c1-fda8-4c6e-a554-39c617afdd14",
+      "hanzi": "姐姐",
+      "pinyin": "jiějie",
+      "english": "older sister",
+      "pos": "n",
+      "frequency": 45,
+      "level": 2
+    },
+    {
+      "word_id": "9cdbc02d-9fee-4078-8cd1-365f347b98e4",
+      "hanzi": "介绍",
+      "pinyin": "jièshào",
+      "english": "to introduce; introduction",
+      "pos": "v/n",
+      "frequency": 46,
+      "level": 2
+    },
+    {
+      "word_id": "eb5d225a-a2d7-4ad6-b7d7-d598ba920965",
+      "hanzi": "进",
+      "pinyin": "jìn",
+      "english": "to enter; to come in",
+      "pos": "v",
+      "frequency": 47,
+      "level": 2
+    },
+    {
+      "word_id": "62d4c310-efb2-423a-8c2b-e564a2b817f3",
+      "hanzi": "近",
+      "pinyin": "jìn",
+      "english": "near; close",
+      "pos": "adj",
+      "frequency": 48,
+      "level": 2
+    },
+    {
+      "word_id": "355cd12f-e45a-49ad-8991-07dc4689c9ca",
+      "hanzi": "就",
+      "pinyin": "jiù",
+      "english": "just; right away; then",
+      "pos": "adv",
+      "frequency": 49,
+      "level": 2
+    },
+    {
+      "word_id": "83372455-e993-455b-86ea-701bf226d1ec",
+      "hanzi": "觉得",
+      "pinyin": "juéde",
+      "english": "to feel; to think",
+      "pos": "v",
+      "frequency": 50,
+      "level": 2
+    },
+    {
+      "word_id": "ecb4396f-0e34-494a-8fa6-9a6f4d6dd9a4",
+      "hanzi": "咖啡",
+      "pinyin": "kāfēi",
+      "english": "coffee",
+      "pos": "n",
+      "frequency": 51,
+      "level": 2
+    },
+    {
+      "word_id": "a94303d9-ada5-496d-a133-768efecf2006",
+      "hanzi": "开始",
+      "pinyin": "kāishǐ",
+      "english": "to begin; to start; beginning",
+      "pos": "v/n",
+      "frequency": 52,
+      "level": 2
+    },
+    {
+      "word_id": "5263699b-644f-49aa-bc3c-c8db552a5316",
+      "hanzi": "考试",
+      "pinyin": "kǎoshì",
+      "english": "exam; to take an exam",
+      "pos": "n/v",
+      "frequency": 53,
+      "level": 2
+    },
+    {
+      "word_id": "a1e4c9cb-fd59-4255-bc0b-2216666b6f80",
+      "hanzi": "可能",
+      "pinyin": "kěnéng",
+      "english": "maybe; possible; possibly",
+      "pos": "adv/adj",
+      "frequency": 54,
+      "level": 2
+    },
+    {
+      "word_id": "69cfa29d-8299-4c35-9206-76fd33da7fdf",
+      "hanzi": "可以",
+      "pinyin": "kěyǐ",
+      "english": "can; may; okay",
+      "pos": "aux",
+      "frequency": 55,
+      "level": 2
+    },
+    {
+      "word_id": "f3216a32-e7f1-421b-b048-9b3c8f6c7b8d",
+      "hanzi": "课",
+      "pinyin": "kè",
+      "english": "class; lesson; course",
+      "pos": "n",
+      "frequency": 56,
+      "level": 2
+    },
+    {
+      "word_id": "2d8e5e3c-46c9-4147-9d5d-67bb30ae1bbd",
+      "hanzi": "快",
+      "pinyin": "kuài",
+      "english": "fast; quick; soon",
+      "pos": "adj/adv",
+      "frequency": 57,
+      "level": 2
+    },
+    {
+      "word_id": "e1c1aa02-0c03-4d3b-808f-a849a695f268",
+      "hanzi": "快乐",
+      "pinyin": "kuàilè",
+      "english": "happy; joyful",
+      "pos": "adj",
+      "frequency": 58,
+      "level": 2
+    },
+    {
+      "word_id": "b9741595-910c-4470-ac35-f60ce47fe20c",
+      "hanzi": "累",
+      "pinyin": "lèi",
+      "english": "tired; exhausted",
+      "pos": "adj",
+      "frequency": 59,
+      "level": 2
+    },
+    {
+      "word_id": "f3e0f491-c969-4c86-8a75-5feff9c75058",
+      "hanzi": "离",
+      "pinyin": "lí",
+      "english": "from; away from",
+      "pos": "prep",
+      "frequency": 60,
+      "level": 2
+    },
+    {
+      "word_id": "62e0eb27-194e-461f-a5c6-f67662281103",
+      "hanzi": "两",
+      "pinyin": "liǎng",
+      "english": "two; both",
+      "pos": "num",
+      "frequency": 61,
+      "level": 2
+    },
+    {
+      "word_id": "1c70334e-e711-4e58-8fb5-cdb80ab063c7",
+      "hanzi": "零",
+      "pinyin": "líng",
+      "english": "zero",
+      "pos": "num",
+      "frequency": 62,
+      "level": 2
+    },
+    {
+      "word_id": "ecd887d2-6735-4441-b2fa-df679691b2e5",
+      "hanzi": "路",
+      "pinyin": "lù",
+      "english": "road; path; route",
+      "pos": "n",
+      "frequency": 63,
+      "level": 2
+    },
+    {
+      "word_id": "b2b28305-df32-4df9-a275-7cdda09f4ec5",
+      "hanzi": "旅游",
+      "pinyin": "lǚyóu",
+      "english": "to travel; tourism",
+      "pos": "v/n",
+      "frequency": 64,
+      "level": 2
+    },
+    {
+      "word_id": "bd6b90c2-d3af-4870-9477-9f608226aa01",
+      "hanzi": "卖",
+      "pinyin": "mài",
+      "english": "to sell",
+      "pos": "v",
+      "frequency": 65,
+      "level": 2
+    },
+    {
+      "word_id": "7fa758d1-44a3-4b19-8f76-33501f6357f0",
+      "hanzi": "慢",
+      "pinyin": "màn",
+      "english": "slow",
+      "pos": "adj",
+      "frequency": 66,
+      "level": 2
+    },
+    {
+      "word_id": "815d9ff5-7efc-49e1-90ba-4eb56c935e0a",
+      "hanzi": "忙",
+      "pinyin": "máng",
+      "english": "busy",
+      "pos": "adj",
+      "frequency": 67,
+      "level": 2
+    },
+    {
+      "word_id": "dc6eb507-1945-4db4-8011-bef3bbca5d51",
+      "hanzi": "每",
+      "pinyin": "měi",
+      "english": "every; each",
+      "pos": "det",
+      "frequency": 68,
+      "level": 2
+    },
+    {
+      "word_id": "bc84a8d0-5275-46ac-8d60-94b14bbf914c",
+      "hanzi": "妹妹",
+      "pinyin": "mèimei",
+      "english": "younger sister",
+      "pos": "n",
+      "frequency": 69,
+      "level": 2
+    },
+    {
+      "word_id": "8b062dcb-db1f-42f7-9023-d04a140547ae",
+      "hanzi": "门",
+      "pinyin": "mén",
+      "english": "door; gate",
+      "pos": "n",
+      "frequency": 70,
+      "level": 2
+    },
+    {
+      "word_id": "7ebe4ed7-19e2-4c86-a3f2-3dc105db0b68",
+      "hanzi": "面条",
+      "pinyin": "miàntiáo",
+      "english": "noodles",
+      "pos": "n",
+      "frequency": 71,
+      "level": 2
+    },
+    {
+      "word_id": "56663816-fc4e-4863-8cf1-3d20efb93fdd",
+      "hanzi": "男",
+      "pinyin": "nán",
+      "english": "male; man",
+      "pos": "n/adj",
+      "frequency": 72,
+      "level": 2
+    },
+    {
+      "word_id": "15b22973-0bab-4812-bd6b-3088b6499619",
+      "hanzi": "您",
+      "pinyin": "nín",
+      "english": "you (polite form)",
+      "pos": "pron",
+      "frequency": 73,
+      "level": 2
+    },
+    {
+      "word_id": "ce64ea38-ca07-49cd-8e66-4c3e72a7a050",
+      "hanzi": "牛奶",
+      "pinyin": "niúnǎi",
+      "english": "milk",
+      "pos": "n",
+      "frequency": 74,
+      "level": 2
+    },
+    {
+      "word_id": "775d4275-6d63-482f-9df7-a43903a6ee28",
+      "hanzi": "女",
+      "pinyin": "nǚ",
+      "english": "female; woman",
+      "pos": "n/adj",
+      "frequency": 75,
+      "level": 2
+    },
+    {
+      "word_id": "924fec85-3bd3-435c-a264-5d65ba2f6288",
+      "hanzi": "旁边",
+      "pinyin": "pángbiān",
+      "english": "beside; next to",
+      "pos": "n",
+      "frequency": 76,
+      "level": 2
+    },
+    {
+      "word_id": "3b96681c-4e24-481a-aebe-6b489963fcfa",
+      "hanzi": "跑步",
+      "pinyin": "pǎobù",
+      "english": "to run; jogging",
+      "pos": "v/n",
+      "frequency": 77,
+      "level": 2
+    },
+    {
+      "word_id": "3402df92-c8a8-4702-9d06-a7066b75da7c",
+      "hanzi": "便宜",
+      "pinyin": "piányí",
+      "english": "cheap; inexpensive",
+      "pos": "adj",
+      "frequency": 78,
+      "level": 2
+    },
+    {
+      "word_id": "53f20d9b-253a-4d32-ab95-802fbacb5c3d",
+      "hanzi": "票",
+      "pinyin": "piào",
+      "english": "ticket",
+      "pos": "n",
+      "frequency": 79,
+      "level": 2
+    },
+    {
+      "word_id": "2639866f-3482-4b26-821b-d0e158226350",
+      "hanzi": "妻子",
+      "pinyin": "qīzi",
+      "english": "wife",
+      "pos": "n",
+      "frequency": 80,
+      "level": 2
+    },
+    {
+      "word_id": "dc61ae7e-f38f-488a-acb1-e05152582e9f",
+      "hanzi": "起床",
+      "pinyin": "qǐchuáng",
+      "english": "to get up; to get out of bed",
+      "pos": "v",
+      "frequency": 81,
+      "level": 2
+    },
+    {
+      "word_id": "4ee90495-ecc5-4561-b237-0ccb3b46f0e0",
+      "hanzi": "千",
+      "pinyin": "qiān",
+      "english": "thousand",
+      "pos": "num",
+      "frequency": 82,
+      "level": 2
+    },
+    {
+      "word_id": "d425d3ef-d9d5-4f4f-9b3a-c32619cb0af1",
+      "hanzi": "晴",
+      "pinyin": "qíng",
+      "english": "sunny; clear (weather)",
+      "pos": "adj",
+      "frequency": 83,
+      "level": 2
+    },
+    {
+      "word_id": "19fa4440-5a4f-42cc-9a73-0309d1947c1e",
+      "hanzi": "去年",
+      "pinyin": "qùnián",
+      "english": "last year",
+      "pos": "n",
+      "frequency": 84,
+      "level": 2
+    },
+    {
+      "word_id": "98ae4542-91bd-4226-977b-16567823ffe5",
+      "hanzi": "让",
+      "pinyin": "ràng",
+      "english": "to let; to allow; to make",
+      "pos": "v",
+      "frequency": 85,
+      "level": 2
+    },
+    {
+      "word_id": "d37b5f4b-0815-4a91-bd02-ceb8c4ac6f2e",
+      "hanzi": "日记",
+      "pinyin": "rìjì",
+      "english": "diary; journal",
+      "pos": "n",
+      "frequency": 86,
+      "level": 2
+    },
+    {
+      "word_id": "ba6e05d6-edef-4c26-a1a0-e2f69010b8ca",
+      "hanzi": "如果",
+      "pinyin": "rúguǒ",
+      "english": "if; in case; in the event that",
+      "pos": "conj",
+      "frequency": 87,
+      "level": 2
+    },
+    {
+      "word_id": "05bd8525-ebca-41be-b1a2-54fea8c6b3c1",
+      "hanzi": "上班",
+      "pinyin": "shàngbān",
+      "english": "to go to work",
+      "pos": "v",
+      "frequency": 88,
+      "level": 2
+    },
+    {
+      "word_id": "a86b19af-37ed-4691-af09-5cdb6efb34f9",
+      "hanzi": "身体",
+      "pinyin": "shēntǐ",
+      "english": "body; health",
+      "pos": "n",
+      "frequency": 89,
+      "level": 2
+    },
+    {
+      "word_id": "e64e2aa4-ed86-4d00-a9d7-58a04381bf14",
+      "hanzi": "生病",
+      "pinyin": "shēngbìng",
+      "english": "to get sick; to fall ill",
+      "pos": "v",
+      "frequency": 90,
+      "level": 2
+    },
+    {
+      "word_id": "150fe534-39da-4418-9ab0-328e83214210",
+      "hanzi": "生日",
+      "pinyin": "shēngrì",
+      "english": "birthday",
+      "pos": "n",
+      "frequency": 91,
+      "level": 2
+    },
+    {
+      "word_id": "a5d07555-3e7e-47ce-82b0-f94a90cffade",
+      "hanzi": "时间",
+      "pinyin": "shíjiān",
+      "english": "time; period",
+      "pos": "n",
+      "frequency": 92,
+      "level": 2
+    },
+    {
+      "word_id": "f2c82055-47b8-4e38-b665-15354d82442c",
+      "hanzi": "事情",
+      "pinyin": "shìqing",
+      "english": "matter; thing; affair",
+      "pos": "n",
+      "frequency": 93,
+      "level": 2
+    },
+    {
+      "word_id": "051d68c7-b02f-462e-a9ad-0ce8caddbca5",
+      "hanzi": "手表",
+      "pinyin": "shǒubiǎo",
+      "english": "watch; wristwatch",
+      "pos": "n",
+      "frequency": 94,
+      "level": 2
+    },
+    {
+      "word_id": "c81a910b-b665-48d1-84c3-0aff93608038",
+      "hanzi": "手机",
+      "pinyin": "shǒujī",
+      "english": "mobile phone",
+      "pos": "n",
+      "frequency": 95,
+      "level": 2
+    },
+    {
+      "word_id": "c14ba43f-15d1-4201-9b92-4c2271c972ea",
+      "hanzi": "说话",
+      "pinyin": "shuōhuà",
+      "english": "to speak; to talk",
+      "pos": "v",
+      "frequency": 96,
+      "level": 2
+    },
+    {
+      "word_id": "0cac0944-6f60-441b-abc3-1ed946c0d45a",
+      "hanzi": "送",
+      "pinyin": "sòng",
+      "english": "to give (as gift); to send; to see off",
+      "pos": "v",
+      "frequency": 97,
+      "level": 2
+    },
+    {
+      "word_id": "8ee37ea8-d840-44bc-9225-724b5da3a334",
+      "hanzi": "虽然",
+      "pinyin": "suīrán",
+      "english": "although; even though",
+      "pos": "conj",
+      "frequency": 98,
+      "level": 2
+    },
+    {
+      "word_id": "0e25a001-8610-4865-817a-d85b20a70e0f",
+      "hanzi": "所以",
+      "pinyin": "suǒyǐ",
+      "english": "so; therefore",
+      "pos": "conj",
+      "frequency": 99,
+      "level": 2
+    },
+    {
+      "word_id": "66341a61-6071-4324-832d-7570159431cf",
+      "hanzi": "它",
+      "pinyin": "tā",
+      "english": "it",
+      "pos": "pron",
+      "frequency": 100,
+      "level": 2
+    },
+    {
+      "word_id": "14b2aeb7-4c06-4e9c-958b-c7e680d8683b",
+      "hanzi": "踢足球",
+      "pinyin": "tī zúqiú",
+      "english": "to play football/soccer",
+      "pos": "v",
+      "frequency": 101,
+      "level": 2
+    },
+    {
+      "word_id": "198dcc77-f8b1-4dc5-a266-7e498d56be65",
+      "hanzi": "题",
+      "pinyin": "tí",
+      "english": "topic; question; problem",
+      "pos": "n",
+      "frequency": 102,
+      "level": 2
+    },
+    {
+      "word_id": "644ea2d3-52d4-4894-b3e9-9f97d35fb823",
+      "hanzi": "跳舞",
+      "pinyin": "tiàowǔ",
+      "english": "to dance",
+      "pos": "v",
+      "frequency": 103,
+      "level": 2
+    },
+    {
+      "word_id": "d816a32b-a785-4210-82f7-86aa6e7c9a14",
+      "hanzi": "外",
+      "pinyin": "wài",
+      "english": "outside; foreign",
+      "pos": "n/adj",
+      "frequency": 104,
+      "level": 2
+    },
+    {
+      "word_id": "cb294888-a2d7-46e8-af59-70941e678423",
+      "hanzi": "完",
+      "pinyin": "wán",
+      "english": "to finish; to complete",
+      "pos": "v",
+      "frequency": 105,
+      "level": 2
+    },
+    {
+      "word_id": "d29cb8f8-b1e7-4a4f-951b-3775988e52f8",
+      "hanzi": "玩",
+      "pinyin": "wán",
+      "english": "to play; to have fun",
+      "pos": "v",
+      "frequency": 106,
+      "level": 2
+    },
+    {
+      "word_id": "89eb626a-515c-466f-b0d8-42dfa0557952",
+      "hanzi": "晚上",
+      "pinyin": "wǎnshang",
+      "english": "evening; night",
+      "pos": "n",
+      "frequency": 107,
+      "level": 2
+    },
+    {
+      "word_id": "c9ddb8a0-38f3-483a-a959-09fea8c84764",
+      "hanzi": "往",
+      "pinyin": "wǎng",
+      "english": "toward; to go",
+      "pos": "prep/v",
+      "frequency": 108,
+      "level": 2
+    },
+    {
+      "word_id": "e898a2e5-e43e-4d85-b3a8-c3214cfad2df",
+      "hanzi": "为什么",
+      "pinyin": "wèishénme",
+      "english": "why; for what reason",
+      "pos": "pron",
+      "frequency": 109,
+      "level": 2
+    },
+    {
+      "word_id": "4fc9a834-23bb-49d7-9e1e-2426fdd9e8b9",
+      "hanzi": "问",
+      "pinyin": "wèn",
+      "english": "to ask; to inquire",
+      "pos": "v",
+      "frequency": 110,
+      "level": 2
+    },
+    {
+      "word_id": "eb77edb6-8d3c-44b9-89d4-e032d40f2cb4",
+      "hanzi": "问题",
+      "pinyin": "wèntí",
+      "english": "question; problem; issue",
+      "pos": "n",
+      "frequency": 111,
+      "level": 2
+    },
+    {
+      "word_id": "072de1f4-da75-4331-806c-83ee678bdb6b",
+      "hanzi": "西瓜",
+      "pinyin": "xīguā",
+      "english": "watermelon",
+      "pos": "n",
+      "frequency": 112,
+      "level": 2
+    },
+    {
+      "word_id": "dc96f3f1-652d-450a-a5fb-7a570beac338",
+      "hanzi": "希望",
+      "pinyin": "xīwàng",
+      "english": "to hope; hope",
+      "pos": "v/n",
+      "frequency": 113,
+      "level": 2
+    },
+    {
+      "word_id": "8e4ed699-a46f-473b-adeb-84d7645f9535",
+      "hanzi": "洗",
+      "pinyin": "xǐ",
+      "english": "to wash",
+      "pos": "v",
+      "frequency": 114,
+      "level": 2
+    },
+    {
+      "word_id": "6c1d4459-7f61-4007-8699-ad174137aa5c",
+      "hanzi": "先",
+      "pinyin": "xiān",
+      "english": "first; before",
+      "pos": "adv",
+      "frequency": 115,
+      "level": 2
+    },
+    {
+      "word_id": "127daaed-e59c-4021-a566-a38c35e331a5",
+      "hanzi": "向",
+      "pinyin": "xiàng",
+      "english": "toward; to face",
+      "pos": "prep/v",
+      "frequency": 116,
+      "level": 2
+    },
+    {
+      "word_id": "90da5aad-3ef0-479d-86a4-d71f56c93a8d",
+      "hanzi": "小时",
+      "pinyin": "xiǎoshí",
+      "english": "hour",
+      "pos": "n",
+      "frequency": 117,
+      "level": 2
+    },
+    {
+      "word_id": "baaa1c28-6b36-48b1-acba-59b8fa60257e",
+      "hanzi": "笑",
+      "pinyin": "xiào",
+      "english": "to laugh; to smile",
+      "pos": "v",
+      "frequency": 118,
+      "level": 2
+    },
+    {
+      "word_id": "42b94898-2721-4a42-a107-36a58a30c2b5",
+      "hanzi": "新",
+      "pinyin": "xīn",
+      "english": "new",
+      "pos": "adj",
+      "frequency": 119,
+      "level": 2
+    },
+    {
+      "word_id": "cf9faf74-f5c7-4e37-8528-9d4c224e25b3",
+      "hanzi": "姓",
+      "pinyin": "xìng",
+      "english": "surname; to be surnamed",
+      "pos": "n/v",
+      "frequency": 120,
+      "level": 2
+    },
+    {
+      "word_id": "3ccb19f5-3ab0-4ee6-9b71-849f2812abaa",
+      "hanzi": "休息",
+      "pinyin": "xiūxi",
+      "english": "to rest; rest",
+      "pos": "v/n",
+      "frequency": 121,
+      "level": 2
+    },
+    {
+      "word_id": "1b9e9422-5871-4c10-a1e0-9b21844ffeb0",
+      "hanzi": "雪",
+      "pinyin": "xuě",
+      "english": "snow",
+      "pos": "n",
+      "frequency": 122,
+      "level": 2
+    },
+    {
+      "word_id": "3de74a60-91a7-4da4-ba93-f5ca41181ace",
+      "hanzi": "颜色",
+      "pinyin": "yánsè",
+      "english": "color",
+      "pos": "n",
+      "frequency": 123,
+      "level": 2
+    },
+    {
+      "word_id": "263a2ae0-d0fb-4b26-88f5-087df6a6e705",
+      "hanzi": "眼睛",
+      "pinyin": "yǎnjing",
+      "english": "eye",
+      "pos": "n",
+      "frequency": 124,
+      "level": 2
+    },
+    {
+      "word_id": "1a9562e9-2428-480e-a37f-50b4dadf52f1",
+      "hanzi": "羊肉",
+      "pinyin": "yángròu",
+      "english": "mutton; lamb",
+      "pos": "n",
+      "frequency": 125,
+      "level": 2
+    },
+    {
+      "word_id": "81ff34e6-edac-4519-95c0-b8c78fa8cba6",
+      "hanzi": "药",
+      "pinyin": "yào",
+      "english": "medicine; drug",
+      "pos": "n",
+      "frequency": 126,
+      "level": 2
+    },
+    {
+      "word_id": "984cdac8-e8d1-4809-8c9a-e0f88f762e92",
+      "hanzi": "要",
+      "pinyin": "yào",
+      "english": "to want; will; must",
+      "pos": "v/aux",
+      "frequency": 127,
+      "level": 2
+    },
+    {
+      "word_id": "b8a04016-b1fe-468f-8669-2cd100efa653",
+      "hanzi": "也",
+      "pinyin": "yě",
+      "english": "also; too",
+      "pos": "adv",
+      "frequency": 128,
+      "level": 2
+    },
+    {
+      "word_id": "8a619f65-7571-49a8-a3c7-f73405e0130c",
+      "hanzi": "一下",
+      "pinyin": "yīxià",
+      "english": "once; a bit (softens request)",
+      "pos": "expr",
+      "frequency": 129,
+      "level": 2
+    },
+    {
+      "word_id": "fe2258fa-1f45-43ce-957f-ee1fc1982023",
+      "hanzi": "一起",
+      "pinyin": "yīqǐ",
+      "english": "together",
+      "pos": "adv",
+      "frequency": 130,
+      "level": 2
+    },
+    {
+      "word_id": "93b77aa0-c96a-4c69-b579-905876f0ffff",
+      "hanzi": "已经",
+      "pinyin": "yǐjīng",
+      "english": "already",
+      "pos": "adv",
+      "frequency": 131,
+      "level": 2
+    },
+    {
+      "word_id": "c10d2e16-56ee-42f4-b8bd-f2c0dc061104",
+      "hanzi": "意思",
+      "pinyin": "yìsi",
+      "english": "meaning; idea",
+      "pos": "n",
+      "frequency": 132,
+      "level": 2
+    },
+    {
+      "word_id": "246bf2a4-6969-47b5-80ef-97fd9d7dc30a",
+      "hanzi": "因为",
+      "pinyin": "yīnwèi",
+      "english": "because; since",
+      "pos": "conj",
+      "frequency": 133,
+      "level": 2
+    },
+    {
+      "word_id": "444123d6-74ad-43a2-85b9-09a873fc5ef0",
+      "hanzi": "阴",
+      "pinyin": "yīn",
+      "english": "cloudy; overcast",
+      "pos": "adj",
+      "frequency": 134,
+      "level": 2
+    },
+    {
+      "word_id": "f8179ee3-76e6-4a22-9468-97ae730864e1",
+      "hanzi": "游泳",
+      "pinyin": "yóuyǒng",
+      "english": "to swim; swimming",
+      "pos": "v/n",
+      "frequency": 135,
+      "level": 2
+    },
+    {
+      "word_id": "0efd94fa-9d18-4409-af55-57e539a5019f",
+      "hanzi": "右边",
+      "pinyin": "yòubiān",
+      "english": "right side",
+      "pos": "n",
+      "frequency": 136,
+      "level": 2
+    },
+    {
+      "word_id": "02a059c1-c175-415e-93ad-81793775b8dd",
+      "hanzi": "鱼",
+      "pinyin": "yú",
+      "english": "fish",
+      "pos": "n",
+      "frequency": 137,
+      "level": 2
+    },
+    {
+      "word_id": "7aa01aad-745f-4411-8cdf-d9a288c95ad0",
+      "hanzi": "远",
+      "pinyin": "yuǎn",
+      "english": "far; distant",
+      "pos": "adj",
+      "frequency": 138,
+      "level": 2
+    },
+    {
+      "word_id": "5d7f4f60-3c70-4328-99d4-d27c51c7ece4",
+      "hanzi": "运动",
+      "pinyin": "yùndòng",
+      "english": "exercise; sport; to exercise",
+      "pos": "n/v",
+      "frequency": 139,
+      "level": 2
+    },
+    {
+      "word_id": "bc8e9bc7-3132-484e-a069-93b9aa837115",
+      "hanzi": "再",
+      "pinyin": "zài",
+      "english": "again; then; more",
+      "pos": "adv",
+      "frequency": 140,
+      "level": 2
+    },
+    {
+      "word_id": "4ee28eee-bb77-4cb2-96f8-fd91ee1102fa",
+      "hanzi": "丈夫",
+      "pinyin": "zhàngfu",
+      "english": "husband",
+      "pos": "n",
+      "frequency": 141,
+      "level": 2
+    },
+    {
+      "word_id": "b93ba68a-58f0-4bdf-8168-6e430eeaf0bd",
+      "hanzi": "找",
+      "pinyin": "zhǎo",
+      "english": "to look for; to seek",
+      "pos": "v",
+      "frequency": 142,
+      "level": 2
+    },
+    {
+      "word_id": "b77f5a64-4721-40d8-abb0-02b2cc69d2e7",
+      "hanzi": "着",
+      "pinyin": "zhe",
+      "english": "aspect particle (continuous)",
+      "pos": "part",
+      "frequency": 143,
+      "level": 2
+    },
+    {
+      "word_id": "c9408c77-b1f1-4ddd-8ca2-55b4964845f8",
+      "hanzi": "真",
+      "pinyin": "zhēn",
+      "english": "real; true; really",
+      "pos": "adj/adv",
+      "frequency": 144,
+      "level": 2
+    },
+    {
+      "word_id": "fc02e328-62f6-45c2-bdcd-f9f1f6fd9220",
+      "hanzi": "正在",
+      "pinyin": "zhèngzài",
+      "english": "in the process of; currently",
+      "pos": "adv",
+      "frequency": 145,
+      "level": 2
+    },
+    {
+      "word_id": "96bb9b2e-1ce2-4720-87c1-a1eb8996af75",
+      "hanzi": "知道",
+      "pinyin": "zhīdào",
+      "english": "to know; to be aware of",
+      "pos": "v",
+      "frequency": 146,
+      "level": 2
+    },
+    {
+      "word_id": "e23bc5c4-98c2-417e-a5df-d28ff3c7e00f",
+      "hanzi": "准备",
+      "pinyin": "zhǔnbèi",
+      "english": "to prepare; preparation",
+      "pos": "v/n",
+      "frequency": 147,
+      "level": 2
+    },
+    {
+      "word_id": "627567df-1018-44d0-ab7d-0840a29ea531",
+      "hanzi": "走",
+      "pinyin": "zǒu",
+      "english": "to walk; to go; to leave",
+      "pos": "v",
+      "frequency": 148,
+      "level": 2
+    },
+    {
+      "word_id": "b56a42b6-2807-44eb-ac5a-c0285e951fd8",
+      "hanzi": "最",
+      "pinyin": "zuì",
+      "english": "most; -est (superlative)",
+      "pos": "adv",
+      "frequency": 149,
+      "level": 2
+    },
+    {
+      "word_id": "250ddb11-b870-499e-af83-801a9cf4dfaa",
+      "hanzi": "左边",
+      "pinyin": "zuǒbiān",
+      "english": "left side",
+      "pos": "n",
+      "frequency": 150,
+      "level": 2
+    }
+  ]
+}
