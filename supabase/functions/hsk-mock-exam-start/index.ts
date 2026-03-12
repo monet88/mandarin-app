@@ -10,14 +10,34 @@ import {
   validateHskLevel,
 } from "../_shared/hsk-events.ts";
 
+type ExamSection = "listening" | "reading" | "writing";
+
+interface PublicQuestionRow {
+  id: string;
+  section: ExamSection;
+  question_type: string;
+  question_data: Record<string, unknown>;
+}
+
 // Section durations in minutes per HSK level (simplified uniform for mock)
-const SECTION_DURATIONS_MIN: Record<string, number> = {
+const SECTION_DURATIONS_MIN: Record<ExamSection, number> = {
   listening: 20,
   reading: 25,
   writing: 15,
 };
 
 const QUESTIONS_PER_SECTION = 5;
+const EXAM_SECTIONS: ExamSection[] = ["listening", "reading", "writing"];
+
+function sanitizeQuestionData(questionData: Record<string, unknown>): Record<string, unknown> {
+  // Never expose answer-bearing fields to the client.
+  const sanitized = { ...questionData };
+  delete sanitized.answer;
+  delete sanitized.answers;
+  delete sanitized.correct_answer;
+  delete sanitized.correct_answers;
+  return sanitized;
+}
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return corsPreflightResponse();
@@ -133,16 +153,18 @@ Deno.serve(async (req) => {
     }
 
     // Select questions from bank: QUESTIONS_PER_SECTION per section
-    const sections = ["listening", "reading", "writing"];
+    const sections: ExamSection[] = EXAM_SECTIONS;
     const questionIds: string[] = [];
+    const publicQuestions: PublicQuestionRow[] = [];
 
     for (const section of sections) {
       const { data: questions, error: qErr } = await serviceClient
         .from("hsk_question_bank")
-        .select("id")
+        .select("id, section, question_type, question_data")
         .eq("hsk_level", hskLevel)
         .eq("section", section)
         .eq("status", "valid")
+        .order("generated_at", { ascending: false })
         .limit(QUESTIONS_PER_SECTION);
 
       if (qErr) throw new Error(`Failed to fetch ${section} questions: ${qErr.message}`);
@@ -150,6 +172,19 @@ Deno.serve(async (req) => {
         return jsonResponse({ error: `No valid ${section} questions available for HSK ${hskLevel}` }, 422);
       }
       questionIds.push(...questions.map((q: { id: string }) => q.id));
+      publicQuestions.push(
+        ...questions.map((q: {
+          id: string;
+          section: ExamSection;
+          question_type: string;
+          question_data: Record<string, unknown>;
+        }) => ({
+          id: q.id,
+          section: q.section,
+          question_type: q.question_type,
+          question_data: sanitizeQuestionData(q.question_data ?? {}),
+        })),
+      );
     }
 
     // Server-authoritative deadline: sum of all section durations
@@ -172,6 +207,8 @@ Deno.serve(async (req) => {
         status: "active",
         question_ids: questionIds,
         answers: {},
+        current_section: "listening",
+        section_deadlines: sectionDeadlines,
         expires_at: expiresAt,
       })
       .select("id, started_at, expires_at")
@@ -194,6 +231,7 @@ Deno.serve(async (req) => {
       expires_at: session.expires_at,
       section_deadlines: sectionDeadlines,
       question_ids: questionIds,
+      questions: publicQuestions,
       audio_manifests: audioManifests ?? [],
     });
   } catch (err) {

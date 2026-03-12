@@ -26,7 +26,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const availableLevels = getAvailableLevels();
 
 export default function HskPrepScreen() {
-  const { session, loading, error, refresh } = useHskSession();
+  const { session, loading, error, stale, refresh } = useHskSession();
   const [paywallVisible, setPaywallVisible] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -67,6 +67,14 @@ export default function HskPrepScreen() {
             />
           }
         >
+          {stale && (
+            <View style={styles.staleBanner}>
+              <Text style={styles.staleText}>
+                Session is stale. Level details will require a successful refresh before gated actions.
+              </Text>
+            </View>
+          )}
+
           <Text style={styles.sectionLabel}>AVAILABLE LEVELS</Text>
 
           {availableLevels.map((lvl) => (
@@ -126,5 +134,16 @@ const styles = StyleSheet.create({
   },
   sectionLabelSpaced: {
     marginTop: 8,
+  },
+  staleBanner: {
+    backgroundColor: "rgba(255,73,0,0.07)",
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 12,
+  },
+  staleText: {
+    color: Colors.primaryAccentColor,
+    fontSize: 12,
+    lineHeight: 18,
   },
 });

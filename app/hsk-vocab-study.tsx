@@ -25,6 +25,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 type Tab = "browse" | "review";
 
+// Metro requires static requires for JSON assets.
+const LEVEL_BUNDLE_MAP: Record<number, HskLevelBundle> = {
+  1: require("@/assets/data/hsk/hsk_level_1.json") as HskLevelBundle,
+  2: require("@/assets/data/hsk/hsk_level_2.json") as HskLevelBundle,
+  3: require("@/assets/data/hsk/hsk_level_3.json") as HskLevelBundle,
+  4: require("@/assets/data/hsk/hsk_level_4.json") as HskLevelBundle,
+  5: require("@/assets/data/hsk/hsk_level_5.json") as HskLevelBundle,
+  6: require("@/assets/data/hsk/hsk_level_6.json") as HskLevelBundle,
+};
+
 export default function HskVocabStudyScreen() {
   const { level: levelParam } = useLocalSearchParams<{ level: string }>();
   const levelNum = parseInt(levelParam ?? "1", 10);
@@ -34,14 +44,18 @@ export default function HskVocabStudyScreen() {
   const [progressMap, setProgressMap] = useState<Record<string, WordReviewState>>({});
   const [loadingWords, setLoadingWords] = useState(true);
 
-  const { dueStates, loading: reviewLoading, submitReview } = useHskReviewQueue(levelNum);
+  const {
+    dueStates,
+    loading: reviewLoading,
+    submitReview,
+    seedReviewWord,
+  } = useHskReviewQueue(levelNum);
 
-  // Load level bundle lazily (bundled JSON, not a network call)
+  // Load level bundle from static map (Metro-safe).
   useEffect(() => {
     void (async () => {
       try {
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const bundle: HskLevelBundle = require(`@/assets/data/hsk/hsk_level_${levelNum}.json`);
+        const bundle = LEVEL_BUNDLE_MAP[levelNum];
         setWords(bundle.words);
       } catch {
         setWords([]);
@@ -66,6 +80,11 @@ export default function HskVocabStudyScreen() {
   };
 
   const levelName = `HSK ${levelNum}`;
+
+  const handleBrowseWordPress = async (word: HskWord) => {
+    await seedReviewWord(word.word_id, levelNum);
+    setTab("review");
+  };
 
   return (
     <SafeAreaView style={styles.safe} edges={["top", "left", "right"]}>
@@ -124,7 +143,7 @@ export default function HskVocabStudyScreen() {
         <HskVocabularyList
           words={words}
           progressMap={progressMap}
-          onWordPress={() => setTab("review")}
+          onWordPress={handleBrowseWordPress}
         />
       ) : (
         <HskReviewQueue

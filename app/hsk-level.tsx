@@ -17,6 +17,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import React, { useState } from "react";
 import {
   ActivityIndicator,
+  Alert,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -32,7 +33,7 @@ export default function HskLevelScreen() {
     (l) => l.level === levelNum,
   );
 
-  const { session, loading } = useHskSession();
+  const { session, loading, error, stale, refresh } = useHskSession();
   const [paywallVisible, setPaywallVisible] = useState(false);
 
   if (!manifest) {
@@ -57,6 +58,14 @@ export default function HskLevelScreen() {
   const pct = Math.min(100, Math.round((learned / manifest.word_count) * 100));
 
   const handleStudyPress = () => {
+    if (stale || !session) {
+      Alert.alert(
+        "Session refresh required",
+        "We couldn't verify your latest entitlement and quota state. Please retry.",
+      );
+      void refresh();
+      return;
+    }
     if (studyLocked) {
       setPaywallVisible(true);
       return;
@@ -68,6 +77,14 @@ export default function HskLevelScreen() {
   };
 
   const handleExamPress = () => {
+    if (stale || !session) {
+      Alert.alert(
+        "Session refresh required",
+        "We couldn't verify your latest entitlement and quota state. Please retry.",
+      );
+      void refresh();
+      return;
+    }
     if (examLocked) {
       setPaywallVisible(true);
       return;
@@ -127,8 +144,30 @@ export default function HskLevelScreen() {
             color={Colors.primaryAccentColor}
             style={styles.loader}
           />
+        ) : !session ? (
+          <View style={styles.sessionErrorCard}>
+            <ThemedText style={styles.sessionErrorTitle}>
+              Session unavailable
+            </ThemedText>
+            <ThemedText style={styles.sessionErrorText}>
+              We could not verify premium and quota state. Retry to continue.
+            </ThemedText>
+            <Pressable style={styles.secondaryButton} onPress={() => void refresh()}>
+              <Ionicons name="refresh-outline" size={20} color={Colors.primaryAccentColor} />
+              <ThemedText style={styles.secondaryButtonText}>Retry Session Check</ThemedText>
+            </Pressable>
+          </View>
         ) : (
           <>
+            {(stale || error) && (
+              <View style={styles.noticeBanner}>
+                <Ionicons name="warning" size={16} color={Colors.primaryAccentColor} />
+                <ThemedText style={styles.noticeText}>
+                  Session is stale. Actions are blocked until refresh succeeds.
+                </ThemedText>
+              </View>
+            )}
+
             {/* Free quota notice */}
             {!isPremium && levelNum === 1 && quotaExhausted && (
               <View style={styles.noticeBanner}>
@@ -140,7 +179,12 @@ export default function HskLevelScreen() {
             )}
 
             {/* Action buttons */}
-            {!studyLocked && !examLocked ? (
+            {stale ? (
+              <Pressable style={styles.secondaryButton} onPress={() => void refresh()}>
+                <Ionicons name="refresh-outline" size={20} color={Colors.primaryAccentColor} />
+                <ThemedText style={styles.secondaryButtonText}>Refresh Session</ThemedText>
+              </Pressable>
+            ) : !studyLocked && !examLocked ? (
               <View style={styles.actions}>
                 <Pressable style={styles.primaryButton} onPress={handleStudyPress}>
                   <Ionicons name="book-outline" size={20} color="#fff" />
@@ -277,6 +321,25 @@ const styles = StyleSheet.create({
   },
   loader: {
     marginTop: 40,
+  },
+  sessionErrorCard: {
+    marginTop: 8,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: Colors.borderColor,
+    padding: 16,
+    gap: 8,
+    backgroundColor: "#fff",
+  },
+  sessionErrorTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+  },
+  sessionErrorText: {
+    fontSize: 13,
+    color: Colors.subduedTextColor,
+    lineHeight: 18,
+    marginBottom: 8,
   },
   noticeBanner: {
     flexDirection: "row",

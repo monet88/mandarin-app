@@ -1,16 +1,17 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import {
+  forbiddenResponse,
   type HskLevel,
   corsPreflightResponse,
   errorResponse,
   jsonResponse,
-  unauthorizedResponse,
   validateHskLevel,
 } from "../_shared/hsk-events.ts";
 
 // Questions generated per section per refresh call
 const QUESTIONS_PER_SECTION = 10;
+const REFRESH_COOLDOWN_SECONDS = 300;
 
 const SECTIONS = ["listening", "reading", "writing"] as const;
 type Section = (typeof SECTIONS)[number];
@@ -27,35 +28,16 @@ Deno.serve(async (req) => {
 
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const openrouterApiKey = Deno.env.get("OPENROUTER_API_KEY")!;
+    const adminRefreshKey = Deno.env.get("HSK_REFRESH_ADMIN_KEY")!;
 
-    const authHeader = req.headers.get("Authorization") ?? "";
-    if (!authHeader) return unauthorizedResponse();
-
-    // Auth validation
-    const userClient = createClient(supabaseUrl, supabaseAnonKey, {
-      global: { headers: { Authorization: authHeader } },
-    });
-    const { data: { user }, error: userError } = await userClient.auth.getUser();
-    if (userError || !user) return unauthorizedResponse();
-
-    // Only service role or premium users may trigger refreshes
-    const adminClient = createClient(supabaseUrl, supabaseServiceKey);
-    const { data: profile } = await adminClient
-      .from("profiles")
-      .select("is_premium, premium_expires_at")
-      .eq("id", user.id)
-      .maybeSingle();
-
-    const premiumActive =
-      !!profile?.is_premium &&
-      (!profile.premium_expires_at || new Date(profile.premium_expires_at) > new Date());
-
-    if (!premiumActive) {
-      return jsonResponse({ error: "Premium required to refresh question bank" }, 403);
+    const callerKey = req.headers.get("x-hsk-admin-key") ?? "";
+    if (!adminRefreshKey || callerKey !== adminRefreshKey) {
+      return forbiddenResponse("Internal admin key required");
     }
+
+    const adminClient = createClient(supabaseUrl, supabaseServiceKey);
 
     const body = await req.json().catch(() => ({}));
     const { hsk_level, section } = body as { hsk_level?: unknown; section?: unknown };
@@ -67,6 +49,21 @@ Deno.serve(async (req) => {
     const targetSections: Section[] = section && SECTIONS.includes(section as Section)
       ? [section as Section]
       : [...SECTIONS];
+
+    for (const sec of targetSections) {
+      const rateLimit = await getRefreshRateLimit(adminClient, hsk_level as HskLevel, sec);
+      if (rateLimit.limited) {
+        return jsonResponse(
+          {
+            error: `Refresh rate limit hit for HSK ${hsk_level} ${sec}`,
+            code: "refresh_rate_limited",
+            section: sec,
+            retry_after_seconds: rateLimit.retryAfterSeconds,
+          },
+          429,
+        );
+      }
+    }
 
     const results: { section: string; generated: number; quarantined: number }[] = [];
 
@@ -91,6 +88,32 @@ Deno.serve(async (req) => {
     return errorResponse(msg);
   }
 });
+
+async function getRefreshRateLimit(
+  // deno-lint-ignore no-explicit-any
+  adminClient: any,
+  hskLevel: HskLevel,
+  section: Section,
+): Promise<{ limited: boolean; retryAfterSeconds: number }> {
+  const { data: latest } = await adminClient
+    .from("hsk_question_bank")
+    .select("generated_at")
+    .eq("hsk_level", hskLevel)
+    .eq("section", section)
+    .order("generated_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (!latest?.generated_at) {
+    return { limited: false, retryAfterSeconds: 0 };
+  }
+
+  const elapsedSeconds = Math.floor(
+    (Date.now() - new Date(latest.generated_at).getTime()) / 1000,
+  );
+  const retryAfterSeconds = Math.max(0, REFRESH_COOLDOWN_SECONDS - elapsedSeconds);
+  return { limited: retryAfterSeconds > 0, retryAfterSeconds };
+}
 
 async function generateQuestionsForSection(
   // deno-lint-ignore no-explicit-any

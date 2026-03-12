@@ -77,19 +77,11 @@ Deno.serve(async (req) => {
 
     const newEvents = inserted ?? [];
 
-    // Recompute aggregates for affected (user, level) pairs from new events only
+    // Apply mastery updates first so progress in the same response is fresh.
     const affectedLevels = new Set<number>();
-    for (const ev of newEvents) {
-      if (ev.hsk_level) affectedLevels.add(ev.hsk_level);
-    }
-
-    for (const level of affectedLevels) {
-      await recomputeProgress(adminClient, user.id, level);
-    }
-
-    // Recompute word mastery for word_reviewed events
     const reviewEvents = newEvents.filter((e) => e.event_type === "word_reviewed");
     for (const ev of reviewEvents) {
+      if (ev.hsk_level) affectedLevels.add(ev.hsk_level);
       const payload = ev.payload as {
         word_simplified?: string;
         mastery_delta?: number;
@@ -104,6 +96,14 @@ Deno.serve(async (req) => {
           payload.mastery_delta ?? 0,
         );
       }
+    }
+
+    // Include non-review events that still touch a level and recompute once at end.
+    for (const ev of newEvents) {
+      if (ev.hsk_level) affectedLevels.add(ev.hsk_level);
+    }
+    for (const level of affectedLevels) {
+      await recomputeProgress(adminClient, user.id, level);
     }
 
     return jsonResponse({

@@ -16,6 +16,7 @@ export interface ExamSession {
   expires_at: string;
   section_deadlines: Record<ExamSection, string>;
   question_ids: string[];
+  questions: QuestionBankRow[];
   audio_manifests: AudioManifest[];
 }
 
@@ -38,6 +39,34 @@ export interface SectionAnswers {
   [questionId: string]: string | string[];
 }
 
+export interface SubmitSectionResponse {
+  status: string;
+  section_submitted?: ExamSection;
+  next_section?: ExamSection | null;
+  scores?: ExamScores;
+  answer_key?: Record<string, string>;
+}
+
+export interface WritingRubric {
+  content_score: number;
+  grammar_score: number;
+  vocabulary_score: number;
+  structure_score: number;
+  total_score: number;
+  feedback: string;
+  corrections: string[];
+}
+
+const FALLBACK_WRITING_RUBRIC: WritingRubric = {
+  content_score: 0,
+  grammar_score: 0,
+  vocabulary_score: 0,
+  structure_score: 0,
+  total_score: 0,
+  feedback: "Evaluation unavailable. Please try again.",
+  corrections: [],
+};
+
 // Start a new exam session via Edge Function
 export async function startExamSession(hskLevel: number): Promise<ExamSession> {
   const { data: { session } } = await supabase.auth.getSession();
@@ -58,25 +87,13 @@ export async function startExamSession(hskLevel: number): Promise<ExamSession> {
   return json as ExamSession;
 }
 
-// Fetch question details for a list of IDs
-export async function fetchQuestions(ids: string[]): Promise<QuestionBankRow[]> {
-  if (ids.length === 0) return [];
-  const { data, error } = await supabase
-    .from("hsk_question_bank")
-    .select("id, section, question_type, question_data")
-    .in("id", ids);
-
-  if (error) throw new Error(error.message);
-  return (data ?? []) as QuestionBankRow[];
-}
-
 // Submit answers for one section
 export async function submitSection(
   sessionId: string,
   section: ExamSection,
   answers: SectionAnswers,
   isInterruption = false,
-): Promise<{ status: string; scores?: ExamScores }> {
+): Promise<SubmitSectionResponse> {
   const { data: { session } } = await supabase.auth.getSession();
   if (!session) throw new Error("Not authenticated");
 
@@ -97,14 +114,12 @@ export async function submitSection(
 
   const json = await res.json();
   if (!res.ok) throw new Error(json.error ?? "Failed to submit section");
-  return json;
+  return json as SubmitSectionResponse;
 }
 
 // Evaluate a writing submission
 export async function evaluateWriting(
-  writingText: string,
-  promptText: string,
-  hskLevel: number,
+  sessionId: string,
 ): Promise<{ rubric: WritingRubric; fallback: boolean }> {
   const { data: { session } } = await supabase.auth.getSession();
   if (!session) throw new Error("Not authenticated");
@@ -116,22 +131,18 @@ export async function evaluateWriting(
       Authorization: `Bearer ${session.access_token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ writing_text: writingText, prompt_text: promptText, hsk_level: hskLevel }),
+    body: JSON.stringify({ session_id: sessionId }),
   });
 
   const json = await res.json();
-  // Never throw — always return (fallback if needed)
-  return json;
-}
-
-export interface WritingRubric {
-  content_score: number;
-  grammar_score: number;
-  vocabulary_score: number;
-  structure_score: number;
-  total_score: number;
-  feedback: string;
-  corrections: string[];
+  if (!res.ok) {
+    return { rubric: FALLBACK_WRITING_RUBRIC, fallback: true };
+  }
+  if (!json?.rubric) {
+    return { rubric: FALLBACK_WRITING_RUBRIC, fallback: true };
+  }
+  // Never throw — always return fallback payload when backend degrades.
+  return json as { rubric: WritingRubric; fallback: boolean };
 }
 
 // Milliseconds remaining until a deadline string

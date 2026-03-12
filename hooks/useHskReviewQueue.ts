@@ -20,6 +20,8 @@ interface UseHskReviewQueueResult {
     quality: ReviewQuality,
     level: number,
   ) => Promise<void>;
+  /** Seed one word into queue (used for first-time Browse -> Review flow). */
+  seedReviewWord: (word_id: string, level: number) => Promise<void>;
   /** Reload due list (e.g. after finishing a session). */
   refresh: (level: number) => Promise<void>;
 }
@@ -79,5 +81,14 @@ export function useHskReviewQueue(level: number): UseHskReviewQueueResult {
     [],
   );
 
-  return { dueStates, loading, submitReview, refresh };
+  const seedReviewWord = useCallback(async (word_id: string, lvl: number) => {
+    const map = await getLevelProgress(lvl);
+    const state = map[word_id] ?? newReviewState(word_id);
+    setDueStates((prev) => {
+      if (prev.some((entry) => entry.word_id === word_id)) return prev;
+      return [state, ...prev];
+    });
+  }, []);
+
+  return { dueStates, loading, submitReview, seedReviewWord, refresh };
 }

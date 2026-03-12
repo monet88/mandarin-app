@@ -15,7 +15,7 @@ export type HskEventType = (typeof HSK_EVENT_TYPES)[number];
 export const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+    "authorization, x-client-info, apikey, content-type, x-hsk-admin-key",
 };
 
 // Raw event shape sent by client in a batch

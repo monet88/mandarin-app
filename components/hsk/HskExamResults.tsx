@@ -1,15 +1,15 @@
 // Structured results screen with score breakdown and review mode toggle
 import { Colors } from "@/constants/theme";
-import { ExamScores, QuestionBankRow, SectionAnswers } from "@/lib/hsk-exam";
+import { ExamScores, QuestionBankRow, SectionAnswers, WritingRubric } from "@/lib/hsk-exam";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import HskWritingFeedback from "./HskWritingFeedback";
-import { WritingRubric } from "@/lib/hsk-exam";
 
 interface Props {
   scores: ExamScores;
   hskLevel: number;
   questions: QuestionBankRow[];
   answers: SectionAnswers;
+  answerKey: Record<string, string>;
   writingRubric: WritingRubric | null;
   writingFallback: boolean;
   writingLoading: boolean;
@@ -28,6 +28,7 @@ export default function HskExamResults({
   hskLevel,
   questions,
   answers,
+  answerKey,
   writingRubric,
   writingFallback,
   writingLoading,
@@ -73,7 +74,7 @@ export default function HskExamResults({
 
       {/* Review section */}
       {questions.length > 0 && (
-        <ReviewSection questions={questions} answers={answers} />
+        <ReviewSection questions={questions} answers={answers} answerKey={answerKey} />
       )}
 
       <TouchableOpacity style={styles.closeBtn} onPress={onClose}>
@@ -84,7 +85,15 @@ export default function HskExamResults({
 }
 
 // --- Review mode: shows submitted answers ---
-function ReviewSection({ questions, answers }: { questions: QuestionBankRow[]; answers: SectionAnswers }) {
+function ReviewSection({
+  questions,
+  answers,
+  answerKey,
+}: {
+  questions: QuestionBankRow[];
+  answers: SectionAnswers;
+  answerKey: Record<string, string>;
+}) {
   return (
     <View style={styles.reviewContainer}>
       <Text style={styles.reviewHeading}>Review Your Answers</Text>
@@ -95,9 +104,14 @@ function ReviewSection({ questions, answers }: { questions: QuestionBankRow[]; a
           <View key={section}>
             <Text style={styles.reviewSectionTitle}>{SECTION_LABELS[section]}</Text>
             {sectionQs.map((q, i) => {
-              const data = q.question_data as { text?: string; prompt?: string; answer?: string };
+              const data = q.question_data as {
+                text?: string;
+                prompt?: string;
+                answer?: string;
+                correct_answer?: string;
+              };
               const submitted = answers[q.id];
-              const correct = data.answer;
+              const correct = answerKey[q.id] ?? data.correct_answer ?? data.answer;
               const isCorrect = submitted !== undefined && correct !== undefined && String(submitted) === String(correct);
               return (
                 <View key={q.id} style={styles.reviewCard}>

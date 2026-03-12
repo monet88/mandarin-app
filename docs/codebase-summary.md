@@ -8,7 +8,7 @@
 | **TypeScript/TSX** | ~70 files (~14,000 LOC) |
 | **JSON/Config** | 10 files |
 | **Assets** | 20+ images, 1 video, HSK JSON data |
-| **Supabase** | 11 Edge Functions, 4 migrations |
+| **Supabase** | 11 Edge Functions, 5 migrations |
 | **Package Dependencies** | 47 production, 8 dev |
 
 **Total LOC (excluding assets & data):** ~14,000 lines
@@ -93,7 +93,7 @@
 │   ├── hsk-event-queue.ts       # AsyncStorage FIFO queue for word events
 │   ├── hsk-review.ts            # SRS scoring, interval calculation
 │   ├── hsk-progress.ts          # Merge local + server progress state
-│   └── hsk-exam.ts              # Exam session management, question fetch, submit
+│   └── hsk-exam.ts              # Exam session management (sanitized start payload, submit, writing eval)
 │
 ├── utils/                   # Utility functions (~1 file)
 │   └── supabase.ts          # Supabase client setup + secure storage
@@ -119,16 +119,17 @@
 │   │   ├── start-trial/             # Grant 7-day premium trial
 │   │   ├── hsk-session-init/        # Initialize HSK session (quota + progress)
 │   │   ├── hsk-sync-events/         # Batch sync local word events to server
-│   │   ├── hsk-refresh-question-bank/ # Regenerate question bank for a level
-│   │   ├── hsk-mock-exam-start/     # Create server-timed exam session
-│   │   ├── hsk-mock-exam-submit-section/ # Score section, advance or finalize
-│   │   ├── hsk-writing-evaluate/    # AI writing rubric (Gemini)
+│   │   ├── hsk-refresh-question-bank/ # Regenerate question bank (internal key + cooldown limit)
+│   │   ├── hsk-mock-exam-start/     # Create session + return sanitized questions (no answer fields)
+│   │   ├── hsk-mock-exam-submit-section/ # Enforce section order/deadline + idempotent finalize
+│   │   ├── hsk-writing-evaluate/    # Session-owned writing rubric (cached in exam result)
 │   │   └── revenuecat-webhook/      # RevenueCat receipt validation + entitlement sync
 │   └── migrations/          # Database schema
 │       ├── 20260116134234_profile_migration.sql
 │       ├── 20260310_hsk_core_tables.sql      # hsk_progress, hsk_word_mastery, hsk_event_ledger, hsk_exam_results
 │       ├── 20260310_hsk_content_tables.sql   # hsk_question_bank, hsk_exam_sessions, hsk_audio_manifests
-│       └── 20260310_subscriptions.sql        # subscriptions billing log synced from RevenueCat
+│       ├── 20260310_subscriptions.sql        # subscriptions billing log synced from RevenueCat
+│       └── 20260312_hsk_exam_security_integrity_fixes.sql # section flow columns, result idempotency, writing rubric persistence
 │
 ├── assets/                  # Images, fonts, videos
 │   ├── data/
@@ -255,8 +256,10 @@
 
 - HSK 1-6 fully supported; HSK 7-9 shows "Coming Soon" metadata
 - Offline-first word events queue (`lib/hsk-event-queue.ts`) flushes through `hsk-sync-events`
-- SRS scoring in `lib/hsk-review.ts`; the server records `hsk_event_ledger` and recomputes `hsk_word_mastery` + `hsk_progress`
-- Mock exam start enforces premium/quota server-side, expires stale active sessions, and returns section deadlines
+- SRS scoring in `lib/hsk-review.ts`; `hsk-sync-events` applies mastery writes before recomputing `hsk_progress` in the same response
+- Mock exam start enforces premium/quota server-side, expires stale active sessions, and returns sanitized questions + section deadlines
+- Section submit enforces server-side section order/deadlines and finalizes with idempotent result upsert (`session_id` unique)
+- Writing evaluation requires owned submitted `session_id`, reuses cached rubric, and persists fallback state
 - Premium gate: HSK 2-6 study/exam requires active RevenueCat subscription
 - Free tier: HSK 1 browse + limited daily exam quota (enforced server-side)
 
@@ -462,3 +465,4 @@ export default function MyComponent() {
 **Document Status:** Current as of repomix generation (March 2026)
 **Last Updated:** March 2026
 **Owner:** Engineering Team
+

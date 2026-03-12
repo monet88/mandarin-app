@@ -28,6 +28,7 @@
   - [x] Server-timed mock exams with AI writing evaluation
   - [x] RevenueCat billing integration (store-backed entitlements)
   - [x] Premium gating for HSK 2-6 (server-enforced quotas)
+  - [x] Security/integrity hardening (answer-key sanitization, section-order enforcement, idempotent finalize, stale-session gating)
 
 ### Known Limitations
 - No server-sync for lesson progress (AsyncStorage only)

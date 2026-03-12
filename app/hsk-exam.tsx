@@ -13,7 +13,6 @@ import {
   SECTIONS,
   WritingRubric,
   evaluateWriting,
-  fetchQuestions,
   questionsForSection,
   startExamSession,
   submitSection,
@@ -50,6 +49,7 @@ export default function HskExamScreen() {
   const [answers, setAnswers] = useState<SectionAnswers>({});
   const [submitting, setSubmitting] = useState(false);
   const [scores, setScores] = useState<ExamScores | null>(null);
+  const [answerKey, setAnswerKey] = useState<Record<string, string>>({});
   const [preloadProgress, setPreloadProgress] = useState(0);
 
   // Writing evaluation state
@@ -62,14 +62,12 @@ export default function HskExamScreen() {
   const appStateRef = useRef<AppStateStatus>(AppState.currentState);
   const screenRef = useRef<ScreenState>("loading");
   const sessionRef = useRef<ExamSession | null>(null);
-  const questionsRef = useRef<QuestionBankRow[]>([]);
   const answersRef = useRef<SectionAnswers>({});
   const sectionIdxRef = useRef(0);
 
   // Keep refs in sync
   useEffect(() => { screenRef.current = screen; }, [screen]);
   useEffect(() => { sessionRef.current = session; }, [session]);
-  useEffect(() => { questionsRef.current = questions; }, [questions]);
   useEffect(() => { answersRef.current = answers; }, [answers]);
   useEffect(() => { sectionIdxRef.current = sectionIdx; }, [sectionIdx]);
 
@@ -92,9 +90,7 @@ export default function HskExamScreen() {
       setScreen("loading");
       const sess = await startExamSession(hskLevel);
       setSession(sess);
-
-      const allQs = await fetchQuestions(sess.question_ids);
-      setQuestions(allQs);
+      setQuestions(sess.questions ?? []);
 
       // Preload listening audio if manifests exist
       if (sess.audio_manifests.length > 0) {
@@ -178,10 +174,15 @@ export default function HskExamScreen() {
 
       const result = await submitSection(sessionId, section, sectionAnswers, isInterruption);
 
-      if (result.status === "submitted" && result.scores) {
-        setScores(result.scores);
-        await triggerWritingEval(currentAnswers);
-        setScreen("results");
+      if (result.status === "submitted") {
+        if (result.scores) {
+          setScores(result.scores);
+          setAnswerKey(result.answer_key ?? {});
+          await triggerWritingEval(sessionId);
+          setScreen("results");
+        } else {
+          toast("Exam submitted, but scores are not available yet. Please retry.");
+        }
       } else {
         // Advance to next section
         const next = sectionIdxRef.current + 1;
@@ -195,29 +196,10 @@ export default function HskExamScreen() {
     }
   }
 
-  async function triggerWritingEval(currentAnswers: SectionAnswers) {
-    const activeSession = sessionRef.current;
-    const activeQuestions = questionsRef.current;
-    if (!activeSession) return;
-
-    const writingQIds = questionsForSection(activeSession.question_ids, "writing");
-    const writingQ = activeQuestions.find(
-      (q) => writingQIds.includes(q.id) && q.section === "writing",
-    );
-    if (!writingQ) return;
-
-    const writingText = writingQIds
-      .map((id) => currentAnswers[id])
-      .filter(Boolean)
-      .join("\n");
-    if (!writingText.trim()) return;
-
-    const promptText = (writingQ.question_data as { text?: string; prompt?: string }).text ??
-      (writingQ.question_data as { text?: string; prompt?: string }).prompt ?? "";
-
+  async function triggerWritingEval(sessionId: string) {
     setWritingLoading(true);
     try {
-      const { rubric, fallback } = await evaluateWriting(writingText, promptText, hskLevel);
+      const { rubric, fallback } = await evaluateWriting(sessionId);
       setWritingRubric(rubric);
       setWritingFallback(fallback);
     } catch {
@@ -282,6 +264,7 @@ export default function HskExamScreen() {
           hskLevel={hskLevel}
           questions={questions}
           answers={answers}
+          answerKey={answerKey}
           writingRubric={writingRubric}
           writingFallback={writingFallback}
           writingLoading={writingLoading}

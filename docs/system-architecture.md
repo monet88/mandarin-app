@@ -555,14 +555,22 @@ hsk_exam_results    -- final scores per session
 
 -- Content tables (20260310_hsk_content_tables.sql)
 hsk_question_bank   -- pre-generated questions (section, question_data, audio_url)
-hsk_exam_sessions   -- server-timed exam sessions (expires_at, status, answers)
+hsk_exam_sessions   -- server-timed exam sessions (status, answers, current_section, section_deadlines)
 hsk_audio_manifests -- listening section audio asset registry
 
 -- Billing tables (20260310_subscriptions.sql)
 subscriptions       -- RevenueCat webhook event log + entitlement lifecycle
+
+-- Hardening migration (20260312_hsk_exam_security_integrity_fixes.sql)
+-- Drops authenticated read policy on hsk_question_bank
+-- Adds hsk_exam_sessions.current_section + section_deadlines
+-- Adds unique(session_id) + writing rubric persistence columns on hsk_exam_results
 ```
 
-All tables use RLS. Quota and premium checks are enforced server-side.
+All tables use RLS. Quota and premium checks are enforced server-side. After
+applying migration `20260312_hsk_exam_security_integrity_fixes.sql`,
+answer-bearing question data is service-role-only (never directly readable by
+authenticated clients).
 
 ### HSK Edge Functions
 
@@ -570,10 +578,10 @@ All tables use RLS. Quota and premium checks are enforced server-side.
 |----------|---------|
 | `hsk-session-init` | Initialize user HSK session (quota check, progress hydration) |
 | `hsk-sync-events` | Batch-sync local word events to server aggregates |
-| `hsk-refresh-question-bank` | Regenerate questions for a level (admin/pipeline) |
-| `hsk-mock-exam-start` | Create server-timed exam session after premium/quota checks and stale-session cleanup |
-| `hsk-mock-exam-submit-section` | Score a section, advance or finalize exam |
-| `hsk-writing-evaluate` | AI writing rubric via Gemini (content, structure, vocab) |
+| `hsk-refresh-question-bank` | Regenerate questions for a level (internal admin key + cooldown rate limit) |
+| `hsk-mock-exam-start` | Create server-timed exam session after premium/quota checks, stale-session cleanup, and sanitized question payload delivery |
+| `hsk-mock-exam-submit-section` | Enforce section order/deadlines, score a section, and finalize idempotently (`session_id` unique result) |
+| `hsk-writing-evaluate` | AI writing rubric via Gemini (requires owned submitted `session_id`; caches persisted rubric) |
 | `revenuecat-webhook` | Validate RevenueCat receipt events, sync entitlements to profiles |
 
 Shared utilities: `supabase/functions/_shared/hsk-events.ts`
@@ -606,7 +614,7 @@ hsk-sync-events Edge Function (batch upsert, returns server aggregates)
 lib/hsk-progress.ts           (merge local + server state)
 ```
 
-Events are idempotent (UUID per event). Offline reviews sync transparently on reconnect through `hsk-sync-events`, which writes `hsk_event_ledger` and recomputes mastery/progress on the server.
+Events are idempotent (UUID per event). Offline reviews sync transparently on reconnect through `hsk-sync-events`, which writes `hsk_event_ledger`, updates `hsk_word_mastery`, and then recomputes `hsk_progress` in the same request.
 
 ### Billing: RevenueCat Integration
 
