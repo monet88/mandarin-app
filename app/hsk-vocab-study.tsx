@@ -72,9 +72,9 @@ export default function HskVocabStudyScreen() {
 
   const handleRate = async (word_id: string, quality: ReviewQuality) => {
     const word = words.find((entry) => entry.word_id === word_id);
-    if (!word) return;
-
-    await submitReview(word.word_id, word.hanzi, quality, levelNum);
+    // Always call submitReview even for orphan words (word_id in queue but not
+    // in bundle) so the queue advances. Fallback hanzi to word_id for orphans.
+    await submitReview(word_id, word?.hanzi ?? word_id, quality, levelNum);
     // Refresh local progress map so badges update
     setProgressMap(await getLevelProgress(levelNum));
   };

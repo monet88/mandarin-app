@@ -44,3 +44,8 @@ app-example
 # generated native folders
 /ios
 /android
+
+# AI tools
+.ck/
+.agent/
+.osgrep

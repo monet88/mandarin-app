@@ -57,9 +57,22 @@ export function HskReviewQueue({
 
   const currentWord = wordMap[currentState.word_id];
 
-  // Guard: word_id in queue but not in bundle (shouldn't happen, but be safe)
+  // Auto-skip orphan words (word_id in queue but missing from word bundle).
+  // Must use useEffect — calling onRate during render violates React rules and
+  // can cause double-fire loops while the async queue update propagates.
+  const skippingRef = React.useRef<string | null>(null);
+  React.useEffect(() => {
+    if (!currentState || currentWord) {
+      skippingRef.current = null;
+      return;
+    }
+    if (skippingRef.current !== currentState.word_id) {
+      skippingRef.current = currentState.word_id;
+      onRate(currentState.word_id, 2);
+    }
+  }, [currentState, currentWord, onRate]);
+
   if (!currentWord) {
-    onRate(currentState.word_id, 2); // treat as "good" to skip
     return null;
   }
 
