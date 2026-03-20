@@ -57,7 +57,8 @@ Deno.serve(async (req) => {
     const adminClient = createClient(supabaseUrl, supabaseServiceKey);
     const serverNow = new Date().toISOString();
 
-    // Upsert into event ledger — conflict on event_id = skip (idempotent)
+    // Upsert into event ledger — conflict on event_id updates processed_at but leaves processed flag unchanged.
+    // This ensures partial failures are replayable: unprocessed ledger rows get retried.
     const ledgerRows = validEvents.map((ev) => ({
       event_id: ev.event_id,
       user_id: user.id,
@@ -66,16 +67,26 @@ Deno.serve(async (req) => {
       hsk_level: ev.hsk_level ?? null,
       occurred_at: ev.occurred_at,
       processed_at: serverNow,
+      processed: false,
     }));
 
-    const { data: inserted, error: ledgerError } = await adminClient
+    const { error: ledgerError } = await adminClient
       .from("hsk_event_ledger")
-      .upsert(ledgerRows, { onConflict: "event_id", ignoreDuplicates: true })
-      .select("event_id, event_type, hsk_level, payload");
+      .upsert(ledgerRows, { onConflict: "event_id" })
+      .select("event_id");
 
     if (ledgerError) throw ledgerError;
 
-    const newEvents = inserted ?? [];
+    // Fetch all unprocessed events for this user (includes retried partial failures)
+    const { data: unprocessedEvents, error: fetchErr } = await adminClient
+      .from("hsk_event_ledger")
+      .select("event_id, event_type, hsk_level, payload")
+      .eq("user_id", user.id)
+      .eq("processed", false);
+
+    if (fetchErr) throw fetchErr;
+
+    const newEvents = unprocessedEvents ?? [];
 
     // Apply mastery updates first so progress in the same response is fresh.
     const affectedLevels = new Set<number>();
@@ -106,13 +117,23 @@ Deno.serve(async (req) => {
       await recomputeProgress(adminClient, user.id, level);
     }
 
+    // Mark processed events
+    const processedIds = newEvents.map((e) => e.event_id);
+    if (processedIds.length > 0) {
+      await adminClient
+        .from("hsk_event_ledger")
+        .update({ processed: true })
+        .eq("user_id", user.id)
+        .in("event_id", processedIds);
+    }
+
     return jsonResponse({
       accepted: newEvents.length,
       skipped: validEvents.length - newEvents.length,
       errors: validationErrors,
       sync_receipt: {
         processed_at: serverNow,
-        event_ids: newEvents.map((e) => e.event_id),
+        event_ids: processedIds,
       },
     });
   } catch (err) {
@@ -152,7 +173,7 @@ async function recomputeProgress(
   );
 }
 
-// Upsert word mastery with bounded score (0–5)
+// Atomic word mastery upsert via Postgres function (eliminates read-then-write race)
 async function upsertWordMastery(
   // deno-lint-ignore no-explicit-any
   adminClient: any,
@@ -161,33 +182,11 @@ async function upsertWordMastery(
   hskLevel: number,
   masteryDelta: number,
 ): Promise<void> {
-  const { data: existing } = await adminClient
-    .from("hsk_word_mastery")
-    .select("id, mastery_score, review_count")
-    .eq("user_id", userId)
-    .eq("word_simplified", wordSimplified)
-    .maybeSingle();
-
-  const currentScore: number = existing?.mastery_score ?? 0;
-  const newScore = Math.min(5, Math.max(0, currentScore + masteryDelta));
-  const reviewCount: number = (existing?.review_count ?? 0) + 1;
-
-  // Simple SRS: next review interval doubles with mastery level (days)
-  const intervalDays = Math.pow(2, newScore);
-  const nextReview = new Date();
-  nextReview.setDate(nextReview.getDate() + intervalDays);
-
-  await adminClient.from("hsk_word_mastery").upsert(
-    {
-      user_id: userId,
-      word_simplified: wordSimplified,
-      hsk_level: hskLevel,
-      mastery_score: newScore,
-      review_count: reviewCount,
-      last_reviewed_at: new Date().toISOString(),
-      next_review_at: nextReview.toISOString(),
-      updated_at: new Date().toISOString(),
-    },
-    { onConflict: "user_id,word_simplified" },
-  );
+  const { error } = await adminClient.rpc("upsert_word_mastery", {
+    p_user_id: userId,
+    p_word_simplified: wordSimplified,
+    p_hsk_level: hskLevel,
+    p_mastery_delta: masteryDelta,
+  });
+  if (error) throw error;
 }

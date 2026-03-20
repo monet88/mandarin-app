@@ -120,6 +120,7 @@ export default function AuthProvider({ children }: PropsWithChildren) {
         isPremium,
         premiumExpiresAt,
         refreshProfile,
+        refreshRcEntitlement,
       }}
     >
       {children}

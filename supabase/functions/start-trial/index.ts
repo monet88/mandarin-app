@@ -75,6 +75,27 @@ Deno.serve(async (req) => {
       );
     }
 
+    // ── Fix #9: Prevent repeatable trial abuse ──────────────────────────────
+    const { data: existingProfile } = await adminClient
+      .from("profiles")
+      .select("trial_started_at")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    if (existingProfile?.trial_started_at) {
+      return new Response(
+        JSON.stringify({
+          ok: false,
+          error: "Trial already used",
+          reason: "You have already used your free trial.",
+        }),
+        {
+          status: 403,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
+
     // ── Legacy trial grant ──────────────────────────────────────────────────
     const expiresAt = new Date(
       Date.now() + 7 * 24 * 60 * 60 * 1000,
@@ -84,6 +105,7 @@ Deno.serve(async (req) => {
       id: user.id,
       is_premium: true,
       premium_expires_at: expiresAt,
+      trial_started_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     });
 

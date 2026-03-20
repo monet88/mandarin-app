@@ -184,6 +184,10 @@ export default function HskExamScreen() {
           toast("Exam submitted, but scores are not available yet. Please retry.");
         }
       } else {
+        // Append next section's questions delivered by server
+        if (result.next_questions && result.next_questions.length > 0) {
+          setQuestions((prev) => [...prev, ...result.next_questions!]);
+        }
         // Advance to next section
         const next = sectionIdxRef.current + 1;
         if (next < SECTIONS.length) {

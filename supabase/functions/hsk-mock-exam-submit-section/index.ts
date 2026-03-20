@@ -14,6 +14,15 @@ interface SectionAnswers {
 type ExamSection = "listening" | "reading" | "writing";
 const SECTION_ORDER: ExamSection[] = ["listening", "reading", "writing"];
 
+function sanitizeQuestionData(questionData: Record<string, unknown>): Record<string, unknown> {
+  const sanitized = { ...questionData };
+  delete sanitized.answer;
+  delete sanitized.answers;
+  delete sanitized.correct_answer;
+  delete sanitized.correct_answers;
+  return sanitized;
+}
+
 function scoreAnswers(
   questionIds: string[],
   answers: SectionAnswers,
@@ -349,10 +358,45 @@ Deno.serve(async (req) => {
       });
     }
 
+    // Deliver next section's sanitized questions so the client never has them in advance
+    let nextQuestions: Array<{
+      id: string;
+      section: string;
+      question_type: string;
+      question_data: Record<string, unknown>;
+    }> = [];
+
+    if (nextSection) {
+      const allIds: string[] = updatedSession.question_ids ?? [];
+      const perSec = Math.floor(allIds.length / 3);
+      const nextIdx = SECTION_ORDER.indexOf(nextSection);
+      const nextQIds = allIds.slice(nextIdx * perSec, (nextIdx + 1) * perSec);
+
+      if (nextQIds.length > 0) {
+        const { data: nextRows } = await serviceClient
+          .from("hsk_question_bank")
+          .select("id, section, question_type, question_data")
+          .in("id", nextQIds);
+
+        nextQuestions = (nextRows ?? []).map((q: {
+          id: string;
+          section: string;
+          question_type: string;
+          question_data: Record<string, unknown>;
+        }) => ({
+          id: q.id,
+          section: q.section,
+          question_type: q.question_type,
+          question_data: sanitizeQuestionData(q.question_data ?? {}),
+        }));
+      }
+    }
+
     return jsonResponse({
       status: newStatus,
       section_submitted: section,
       next_section: nextSection ?? null,
+      next_questions: nextQuestions,
     });
   } catch (err) {
     const msg = err instanceof Error ? err.message : "Unknown error";

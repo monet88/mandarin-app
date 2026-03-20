@@ -88,7 +88,7 @@ export function Paywall({
   const [isRestoring, setIsRestoring] = useState(false);
   const [offerings, setOfferings] = useState<OfferingPackage[]>([]);
 
-  const { refreshProfile } = useAuth();
+  const { refreshProfile, refreshRcEntitlement } = useAuth();
 
   const selectedPkgId = billingCycle === "annual" ? PKG_ANNUAL : PKG_MONTHLY;
 
@@ -116,8 +116,8 @@ export function Paywall({
         return;
       }
 
-      // Webhook will update Supabase; refresh profile for optimistic UI
-      await refreshProfile();
+      // Refresh both RC entitlement (immediate) and Supabase profile (webhook-driven)
+      await Promise.all([refreshProfile(), refreshRcEntitlement()]);
       toast.success("Welcome to Premium!");
       onClose();
     } catch {
@@ -138,7 +138,7 @@ export function Paywall({
       }
 
       if (result.isPremium) {
-        await refreshProfile();
+        await Promise.all([refreshProfile(), refreshRcEntitlement()]);
         toast.success("Purchases restored!");
         onClose();
       } else {

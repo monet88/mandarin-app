@@ -54,6 +54,22 @@ const DEFERRED_REVOKE_EVENT_TYPES = new Set([
 ]);
 
 // ---------------------------------------------------------------------------
+// Constant-time string comparison (prevents timing attacks on webhook secret)
+// ---------------------------------------------------------------------------
+
+function timingSafeEqual(a: string, b: string): boolean {
+  const encoder = new TextEncoder();
+  const bufA = encoder.encode(a);
+  const bufB = encoder.encode(b);
+  if (bufA.byteLength !== bufB.byteLength) return false;
+  let result = 0;
+  for (let i = 0; i < bufA.byteLength; i++) {
+    result |= bufA[i] ^ bufB[i];
+  }
+  return result === 0;
+}
+
+// ---------------------------------------------------------------------------
 // Handler
 // ---------------------------------------------------------------------------
 
@@ -68,7 +84,7 @@ Deno.serve(async (req) => {
 
   const authHeader = req.headers.get("Authorization") ?? "";
   const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : authHeader;
-  if (!token || token !== webhookSecret) {
+  if (!token || !timingSafeEqual(token, webhookSecret)) {
     return jsonResponse({ error: "Unauthorized" }, 401);
   }
 
@@ -101,9 +117,20 @@ Deno.serve(async (req) => {
     .maybeSingle();
 
   if (profileError || !profile) {
-    // User not found — could be a test event or a race; return 200 to stop RC retries
-    console.warn("[revenuecat-webhook] User not found:", userId);
-    return jsonResponse({ ok: true, skipped: "user_not_found" });
+    // User not found — could be a race condition (user being created).
+    // Return 500 to trigger RC retry, unless the event is stale (>7 days).
+    const STALE_EVENT_MS = 7 * 24 * 60 * 60 * 1000;
+    const purchaseAge = event.purchase_date_ms
+      ? Date.now() - event.purchase_date_ms
+      : Infinity;
+
+    if (purchaseAge > STALE_EVENT_MS) {
+      console.warn("[revenuecat-webhook] Stale event for unknown user, dropping:", userId);
+      return jsonResponse({ ok: true, skipped: "user_not_found_stale" });
+    }
+
+    console.warn("[revenuecat-webhook] User not found, requesting retry:", userId);
+    return errorResponse("User not found, will retry", 500);
   }
 
   // ── 4. Idempotency: skip if event already processed ──────────────────────
@@ -163,6 +190,28 @@ Deno.serve(async (req) => {
   }
 
   // ── 7. Mirror to profiles.is_premium (summary field) ─────────────────────
+  // Guard: only update profile if this event's expiration is >= the latest
+  // active subscription's expiration. This prevents out-of-order webhook
+  // deliveries from downgrading premium status.
+  if (expirationDate) {
+    const { data: latestSub } = await adminClient
+      .from("subscriptions")
+      .select("expiration_date")
+      .eq("user_id", userId)
+      .eq("status", "active")
+      .order("expiration_date", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (
+      latestSub?.expiration_date &&
+      new Date(expirationDate) < new Date(latestSub.expiration_date)
+    ) {
+      // This event is stale relative to a newer subscription — skip profile update
+      return jsonResponse({ ok: true, skipped: "stale_event_ordering" });
+    }
+  }
+
   // Precedence: RevenueCat entitlement overrides legacy trial flag.
   // Keep expiration in sync even when the user stays premium.
   const shouldBePremium = entitlementStillActive;

@@ -214,7 +214,17 @@ Deno.serve(async (req) => {
       .select("id, started_at, expires_at")
       .single();
 
-    if (insertErr || !session) throw new Error(`Failed to create session: ${insertErr?.message}`);
+    if (insertErr) {
+      // Unique index violation = concurrent session creation race
+      if (insertErr.code === "23505") {
+        return jsonResponse(
+          { error: "Active exam session already exists" },
+          409,
+        );
+      }
+      throw new Error(`Failed to create session: ${insertErr.message}`);
+    }
+    if (!session) throw new Error("Failed to create session: no data returned");
 
     // Fetch audio manifests for listening questions
     const listeningIds = questionIds.slice(0, QUESTIONS_PER_SECTION);
@@ -224,6 +234,9 @@ Deno.serve(async (req) => {
       .in("question_id", listeningIds)
       .eq("status", "ready");
 
+    // Only return listening section questions initially — reading/writing delivered on section submit.
+    const listeningQuestions = publicQuestions.filter((q) => q.section === "listening");
+
     return jsonResponse({
       session_id: session.id,
       hsk_level: hskLevel,
@@ -231,7 +244,7 @@ Deno.serve(async (req) => {
       expires_at: session.expires_at,
       section_deadlines: sectionDeadlines,
       question_ids: questionIds,
-      questions: publicQuestions,
+      questions: listeningQuestions,
       audio_manifests: audioManifests ?? [],
     });
   } catch (err) {

@@ -43,6 +43,7 @@ export interface SubmitSectionResponse {
   status: string;
   section_submitted?: ExamSection;
   next_section?: ExamSection | null;
+  next_questions?: QuestionBankRow[];
   scores?: ExamScores;
   answer_key?: Record<string, string>;
 }

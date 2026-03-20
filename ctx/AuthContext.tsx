@@ -10,6 +10,7 @@ type AuthContextType = {
   isPremium: boolean;
   premiumExpiresAt: string | null;
   refreshProfile: () => Promise<void>;
+  refreshRcEntitlement: () => Promise<void>;
 };
 
 export const AuthContext = createContext<AuthContextType>({
@@ -21,6 +22,7 @@ export const AuthContext = createContext<AuthContextType>({
   isPremium: false,
   premiumExpiresAt: null,
   refreshProfile: async () => {},
+  refreshRcEntitlement: async () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);

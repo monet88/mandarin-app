@@ -39,23 +39,7 @@ export function HskReviewQueue({
   // Session is driven by dueStates from parent — first item is always current
   const currentState = dueStates[0];
   const remaining = dueStates.length;
-
-  if (remaining === 0) {
-    return (
-      <View style={styles.doneContainer}>
-        <Ionicons name="checkmark-circle" size={64} color="#22c55e" />
-        <ThemedText style={styles.doneTitle}>Session complete!</ThemedText>
-        <ThemedText style={styles.doneSubtitle}>
-          No more words due right now.
-        </ThemedText>
-        <Pressable style={styles.doneButton} onPress={onComplete}>
-          <ThemedText style={styles.doneButtonText}>Back to Level</ThemedText>
-        </Pressable>
-      </View>
-    );
-  }
-
-  const currentWord = wordMap[currentState.word_id];
+  const currentWord = currentState ? wordMap[currentState.word_id] : undefined;
 
   // Auto-skip orphan words (word_id in queue but missing from word bundle).
   // Must use useEffect — calling onRate during render violates React rules and
@@ -71,6 +55,21 @@ export function HskReviewQueue({
       onRate(currentState.word_id, 2);
     }
   }, [currentState, currentWord, onRate]);
+
+  if (remaining === 0) {
+    return (
+      <View style={styles.doneContainer}>
+        <Ionicons name="checkmark-circle" size={64} color="#22c55e" />
+        <ThemedText style={styles.doneTitle}>Session complete!</ThemedText>
+        <ThemedText style={styles.doneSubtitle}>
+          No more words due right now.
+        </ThemedText>
+        <Pressable style={styles.doneButton} onPress={onComplete}>
+          <ThemedText style={styles.doneButtonText}>Back to Level</ThemedText>
+        </Pressable>
+      </View>
+    );
+  }
 
   if (!currentWord) {
     return null;

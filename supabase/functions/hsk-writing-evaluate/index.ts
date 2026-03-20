@@ -3,7 +3,6 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 import {
   FREE_DAILY_EXAM_QUOTA,
   corsPreflightResponse,
-  errorResponse,
   isPremiumActive,
   jsonResponse,
   unauthorizedResponse,
@@ -175,6 +174,7 @@ Deno.serve(async (req) => {
         .from("hsk_exam_results")
         .select("id", { count: "exact", head: true })
         .eq("user_id", user.id)
+        .neq("session_id", session_id)
         .gte("completed_at", todayUtc.toISOString());
       if ((examsToday ?? 0) >= FREE_DAILY_EXAM_QUOTA) {
         return jsonResponse({ error: "Free daily writing evaluation quota exceeded" }, 403);
@@ -193,7 +193,7 @@ Deno.serve(async (req) => {
     }
 
     const cachedRubric = normalizeStoredRubric(resultRow.writing_rubric);
-    if (cachedRubric) {
+    if (cachedRubric && !resultRow.writing_fallback) {
       return jsonResponse({
         rubric: cachedRubric,
         fallback: resultRow.writing_fallback ?? false,
