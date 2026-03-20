@@ -258,6 +258,8 @@ Deno.serve(async (req) => {
 
     if (session.current_section) {
       updateQuery = updateQuery.eq("current_section", currentSection);
+    } else {
+      updateQuery = updateQuery.is("current_section", null);
     }
 
     const { data: updatedSession, error: updateErr } = await updateQuery

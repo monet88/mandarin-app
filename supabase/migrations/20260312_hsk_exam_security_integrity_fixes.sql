@@ -64,9 +64,6 @@ begin
 end
 $$;
 
-create index if not exists idx_hsk_exam_results_session_id
-  on public.hsk_exam_results(session_id);
-
 delete from public.hsk_exam_results r
 where r.session_id is not null
   and not exists (

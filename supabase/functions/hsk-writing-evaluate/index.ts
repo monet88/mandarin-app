@@ -176,7 +176,7 @@ Deno.serve(async (req) => {
         .select("id", { count: "exact", head: true })
         .eq("user_id", user.id)
         .gte("completed_at", todayUtc.toISOString());
-      if ((examsToday ?? 0) > FREE_DAILY_EXAM_QUOTA) {
+      if ((examsToday ?? 0) >= FREE_DAILY_EXAM_QUOTA) {
         return jsonResponse({ error: "Free daily writing evaluation quota exceeded" }, 403);
       }
     }
