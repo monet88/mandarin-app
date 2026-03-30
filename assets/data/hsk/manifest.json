@@ -1,0 +1,64 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2026-03-10T09:40:25.270Z",
+  "levels": [
+    {
+      "level": 1,
+      "level_name": "HSK 1",
+      "word_count": 150,
+      "file": "hsk_level_1.json",
+      "available": true,
+      "status": "available"
+    },
+    {
+      "level": 2,
+      "level_name": "HSK 2",
+      "word_count": 150,
+      "file": "hsk_level_2.json",
+      "available": true,
+      "status": "available"
+    },
+    {
+      "level": 3,
+      "level_name": "HSK 3",
+      "word_count": 218,
+      "file": "hsk_level_3.json",
+      "available": true,
+      "status": "available"
+    },
+    {
+      "level": 4,
+      "level_name": "HSK 4",
+      "word_count": 200,
+      "file": "hsk_level_4.json",
+      "available": true,
+      "status": "available"
+    },
+    {
+      "level": 5,
+      "level_name": "HSK 5",
+      "word_count": 150,
+      "file": "hsk_level_5.json",
+      "available": true,
+      "status": "available"
+    },
+    {
+      "level": 6,
+      "level_name": "HSK 6",
+      "word_count": 160,
+      "file": "hsk_level_6.json",
+      "available": true,
+      "status": "available"
+    }
+  ],
+  "hsk_7_9": {
+    "level_name": "HSK 7-9",
+    "level_range": [
+      7,
+      9
+    ],
+    "word_count_estimate": 11092,
+    "status": "coming_soon",
+    "description": "Advanced HSK levels 7–9 covering ~11,092 words. Full content bundled in a future release."
+  }
+}

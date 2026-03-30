@@ -1,0 +1,1447 @@
+{
+  "level": 6,
+  "level_name": "HSK 6",
+  "word_count": 160,
+  "words": [
+    {
+      "word_id": "fab10d32-8d38-4a54-9d44-c012fe7bf9a9",
+      "hanzi": "哀悼",
+      "pinyin": "āidào",
+      "english": "to mourn; to grieve",
+      "pos": "v",
+      "frequency": 1,
+      "level": 6
+    },
+    {
+      "word_id": "169c5972-f17f-4ef3-9ec1-efddbc685855",
+      "hanzi": "爱戴",
+      "pinyin": "àidài",
+      "english": "to love and respect; to hold in esteem",
+      "pos": "v",
+      "frequency": 2,
+      "level": 6
+    },
+    {
+      "word_id": "efd47356-5ac2-466d-b07a-6128f6153925",
+      "hanzi": "安慰",
+      "pinyin": "ānwèi",
+      "english": "to comfort; consolation",
+      "pos": "v/n",
+      "frequency": 3,
+      "level": 6
+    },
+    {
+      "word_id": "6f6c619b-7ebb-4ad4-8a30-ec414ff0250d",
+      "hanzi": "安装",
+      "pinyin": "ānzhuāng",
+      "english": "to install; to set up",
+      "pos": "v",
+      "frequency": 4,
+      "level": 6
+    },
+    {
+      "word_id": "0ff64c96-3f21-428f-9095-be63f6308f4c",
+      "hanzi": "把握",
+      "pinyin": "bǎwò",
+      "english": "certainty; to grasp",
+      "pos": "n/v",
+      "frequency": 5,
+      "level": 6
+    },
+    {
+      "word_id": "ffee2bb1-1df3-4314-bdb2-01b882e20334",
+      "hanzi": "颁布",
+      "pinyin": "bānbù",
+      "english": "to promulgate; to issue (law/decree)",
+      "pos": "v",
+      "frequency": 6,
+      "level": 6
+    },
+    {
+      "word_id": "ed0ce08e-ae01-48a3-867a-3d410a3f871e",
+      "hanzi": "包含",
+      "pinyin": "bāohán",
+      "english": "to contain; to include",
+      "pos": "v",
+      "frequency": 7,
+      "level": 6
+    },
+    {
+      "word_id": "e7369a02-f798-4294-be53-1470ce5f8742",
+      "hanzi": "保存",
+      "pinyin": "bǎocún",
+      "english": "to preserve; to keep; to save",
+      "pos": "v",
+      "frequency": 8,
+      "level": 6
+    },
+    {
+      "word_id": "b31f6e6f-d6bc-4b29-b416-682ace7581d8",
+      "hanzi": "报复",
+      "pinyin": "bàofù",
+      "english": "to retaliate; revenge",
+      "pos": "v/n",
+      "frequency": 9,
+      "level": 6
+    },
+    {
+      "word_id": "46d514ec-6eb1-4ff0-9130-dfaf92a7d0a3",
+      "hanzi": "悲剧",
+      "pinyin": "bēijù",
+      "english": "tragedy; tragic",
+      "pos": "n/adj",
+      "frequency": 10,
+      "level": 6
+    },
+    {
+      "word_id": "954989c1-2ed2-4cf3-b648-ec1517840516",
+      "hanzi": "本能",
+      "pinyin": "běnnéng",
+      "english": "instinct; instinctive",
+      "pos": "n/adj",
+      "frequency": 11,
+      "level": 6
+    },
+    {
+      "word_id": "2d3d211a-a8c0-49b5-aa64-c3447ac88219",
+      "hanzi": "比例",
+      "pinyin": "bǐlì",
+      "english": "proportion; ratio",
+      "pos": "n",
+      "frequency": 12,
+      "level": 6
+    },
+    {
+      "word_id": "7db99303-d36a-4234-a120-4acde6fb647f",
+      "hanzi": "必要",
+      "pinyin": "bìyào",
+      "english": "necessary; essential; necessity",
+      "pos": "adj/n",
+      "frequency": 13,
+      "level": 6
+    },
+    {
+      "word_id": "3a1d42e7-bcc6-4e14-8c71-a7ff8828576d",
+      "hanzi": "编辑",
+      "pinyin": "biānjí",
+      "english": "to edit; editor",
+      "pos": "v/n",
+      "frequency": 14,
+      "level": 6
+    },
+    {
+      "word_id": "097fe01d-bf52-42c6-80ed-e3ccd6a96756",
+      "hanzi": "辩论",
+      "pinyin": "biànlùn",
+      "english": "to debate; debate",
+      "pos": "v/n",
+      "frequency": 15,
+      "level": 6
+    },
+    {
+      "word_id": "b6e11a4b-3638-40ad-beba-181a58635e23",
+      "hanzi": "标志",
+      "pinyin": "biāozhì",
+      "english": "symbol; sign; to mark",
+      "pos": "n/v",
+      "frequency": 16,
+      "level": 6
+    },
+    {
+      "word_id": "ad56b47b-3a29-451d-b822-766e31cdd32d",
+      "hanzi": "并非",
+      "pinyin": "bìngfēi",
+      "english": "not at all; by no means",
+      "pos": "adv",
+      "frequency": 17,
+      "level": 6
+    },
+    {
+      "word_id": "86eb98bd-df23-47ef-b0a4-3f2e7d515bdb",
+      "hanzi": "博大",
+      "pinyin": "bódà",
+      "english": "broad; extensive; vast",
+      "pos": "adj",
+      "frequency": 18,
+      "level": 6
+    },
+    {
+      "word_id": "678d2790-bbb9-4eed-a825-402537c47a93",
+      "hanzi": "补充",
+      "pinyin": "bǔchōng",
+      "english": "to supplement; to add; supplement",
+      "pos": "v/n",
+      "frequency": 19,
+      "level": 6
+    },
+    {
+      "word_id": "060d3471-bf1d-4041-84dc-af7e18079d73",
+      "hanzi": "不得已",
+      "pinyin": "bùdéyǐ",
+      "english": "have no choice but; compelled",
+      "pos": "adv",
+      "frequency": 20,
+      "level": 6
+    },
+    {
+      "word_id": "fd4fbef4-c2ec-4c34-92c4-327094c5f660",
+      "hanzi": "不足",
+      "pinyin": "bùzú",
+      "english": "insufficient; inadequate; not enough",
+      "pos": "adj/n",
+      "frequency": 21,
+      "level": 6
+    },
+    {
+      "word_id": "872d002e-161f-414e-afb7-ae51b4825d30",
+      "hanzi": "采用",
+      "pinyin": "cǎiyòng",
+      "english": "to adopt; to employ; to use",
+      "pos": "v",
+      "frequency": 22,
+      "level": 6
+    },
+    {
+      "word_id": "80c5f9a3-a5e3-45a8-9d5b-df455f0bde59",
+      "hanzi": "参与",
+      "pinyin": "cānyù",
+      "english": "to participate; to be involved in",
+      "pos": "v",
+      "frequency": 23,
+      "level": 6
+    },
+    {
+      "word_id": "45833c80-0a3b-4974-a0f7-86f3e62ef966",
+      "hanzi": "惭愧",
+      "pinyin": "cánkuì",
+      "english": "ashamed; abashed",
+      "pos": "adj",
+      "frequency": 24,
+      "level": 6
+    },
+    {
+      "word_id": "81a09b3f-4058-4e02-9cdc-d4b254403f70",
+      "hanzi": "策略",
+      "pinyin": "cèlüè",
+      "english": "strategy; tactic",
+      "pos": "n",
+      "frequency": 25,
+      "level": 6
+    },
+    {
+      "word_id": "759cd494-4393-4811-ace6-e8369a004907",
+      "hanzi": "阐述",
+      "pinyin": "chǎnshù",
+      "english": "to elaborate; to expound",
+      "pos": "v",
+      "frequency": 26,
+      "level": 6
+    },
+    {
+      "word_id": "f817c177-58d8-475d-8c32-77576d0068b5",
+      "hanzi": "沉默",
+      "pinyin": "chénmò",
+      "english": "silent; silence; to keep silent",
+      "pos": "adj/n/v",
+      "frequency": 27,
+      "level": 6
+    },
+    {
+      "word_id": "8a9c7f88-d56b-48d0-ba81-5e84743d0287",
+      "hanzi": "成分",
+      "pinyin": "chéngfèn",
+      "english": "ingredient; component; element",
+      "pos": "n",
+      "frequency": 28,
+      "level": 6
+    },
+    {
+      "word_id": "61a56e88-9791-4cf2-83f0-c354985db0da",
+      "hanzi": "充实",
+      "pinyin": "chōngshí",
+      "english": "rich; substantial; to enrich",
+      "pos": "adj/v",
+      "frequency": 29,
+      "level": 6
+    },
+    {
+      "word_id": "94de9cda-c96a-4c27-9901-b665ff0cfd3f",
+      "hanzi": "抽象",
+      "pinyin": "chōuxiàng",
+      "english": "abstract",
+      "pos": "adj",
+      "frequency": 30,
+      "level": 6
+    },
+    {
+      "word_id": "174efb66-4bf1-4d23-a19c-511c0005a13c",
+      "hanzi": "出路",
+      "pinyin": "chūlù",
+      "english": "way out; outlet; prospect",
+      "pos": "n",
+      "frequency": 31,
+      "level": 6
+    },
+    {
+      "word_id": "d25f3c8c-37e9-4da4-ab4e-3092028858d8",
+      "hanzi": "创造",
+      "pinyin": "chuàngzào",
+      "english": "to create; to produce; creation",
+      "pos": "v/n",
+      "frequency": 32,
+      "level": 6
+    },
+    {
+      "word_id": "2236fbed-6e0b-4bf4-82c9-b4d421c1f9f0",
+      "hanzi": "创新",
+      "pinyin": "chuàngxīn",
+      "english": "innovation; to innovate",
+      "pos": "n/v",
+      "frequency": 33,
+      "level": 6
+    },
+    {
+      "word_id": "6f59152d-e7c5-40be-806f-e8540670a6eb",
+      "hanzi": "纯粹",
+      "pinyin": "chúncuì",
+      "english": "pure; purely; simply",
+      "pos": "adj/adv",
+      "frequency": 34,
+      "level": 6
+    },
+    {
+      "word_id": "b18efb97-a537-4b2a-9814-d8b3358cd56d",
+      "hanzi": "从而",
+      "pinyin": "cóng'ér",
+      "english": "thus; thereby; as a result",
+      "pos": "conj",
+      "frequency": 35,
+      "level": 6
+    },
+    {
+      "word_id": "3322388a-7d0c-46fc-9822-e70c5f0def2c",
+      "hanzi": "从事",
+      "pinyin": "cóngshì",
+      "english": "to be engaged in; to work in",
+      "pos": "v",
+      "frequency": 36,
+      "level": 6
+    },
+    {
+      "word_id": "803f4ba7-3f68-44c6-b308-7d92db27437d",
+      "hanzi": "粗糙",
+      "pinyin": "cūcāo",
+      "english": "rough; coarse; crude",
+      "pos": "adj",
+      "frequency": 37,
+      "level": 6
+    },
+    {
+      "word_id": "66b62f93-2e18-4bed-9822-8c0662d823e3",
+      "hanzi": "催促",
+      "pinyin": "cuīcù",
+      "english": "to urge; to hasten; to press",
+      "pos": "v",
+      "frequency": 38,
+      "level": 6
+    },
+    {
+      "word_id": "103ee39a-e643-4e74-b898-e818eb9e13e0",
+      "hanzi": "大幅度",
+      "pinyin": "dà fúdù",
+      "english": "by a large margin; substantially",
+      "pos": "adv",
+      "frequency": 39,
+      "level": 6
+    },
+    {
+      "word_id": "33ad94cb-cdee-488d-af03-c9c06d005d52",
+      "hanzi": "带动",
+      "pinyin": "dàidòng",
+      "english": "to drive; to lead; to bring along",
+      "pos": "v",
+      "frequency": 40,
+      "level": 6
+    },
+    {
+      "word_id": "7eb152e7-d324-40d1-982f-97b5e4593684",
+      "hanzi": "当代",
+      "pinyin": "dāngdài",
+      "english": "contemporary; present-day",
+      "pos": "n/adj",
+      "frequency": 41,
+      "level": 6
+    },
+    {
+      "word_id": "2e49cb1b-056f-49af-bcfa-5cb272d2c379",
+      "hanzi": "当初",
+      "pinyin": "dāngchū",
+      "english": "at the beginning; originally; at that time",
+      "pos": "n",
+      "frequency": 42,
+      "level": 6
+    },
+    {
+      "word_id": "38ea54ff-04de-458b-bcb1-19d12d4127c7",
+      "hanzi": "道德",
+      "pinyin": "dàodé",
+      "english": "morality; moral; ethics",
+      "pos": "n/adj",
+      "frequency": 43,
+      "level": 6
+    },
+    {
+      "word_id": "e930c86c-c898-45e0-b979-b466115a594e",
+      "hanzi": "的确",
+      "pinyin": "díquè",
+      "english": "indeed; really; certainly",
+      "pos": "adv",
+      "frequency": 44,
+      "level": 6
+    },
+    {
+      "word_id": "4f92daee-9722-48b7-9053-611629e40840",
+      "hanzi": "抵制",
+      "pinyin": "dǐzhì",
+      "english": "to resist; to boycott",
+      "pos": "v",
+      "frequency": 45,
+      "level": 6
+    },
+    {
+      "word_id": "901afbf2-fb29-4fc7-9b3f-a4a0a4a97bfd",
+      "hanzi": "典礼",
+      "pinyin": "diǎnlǐ",
+      "english": "ceremony; celebration",
+      "pos": "n",
+      "frequency": 46,
+      "level": 6
+    },
+    {
+      "word_id": "e30b044b-cf37-4803-a9f6-88ce74dc795e",
+      "hanzi": "动机",
+      "pinyin": "dòngjī",
+      "english": "motive; motivation",
+      "pos": "n",
+      "frequency": 47,
+      "level": 6
+    },
+    {
+      "word_id": "4265228c-2715-4e1e-9822-75a9f482fca8",
+      "hanzi": "独立",
+      "pinyin": "dúlì",
+      "english": "independent; independence; to be independent",
+      "pos": "adj/n/v",
+      "frequency": 48,
+      "level": 6
+    },
+    {
+      "word_id": "6e1e51c5-c890-4e15-bdfa-335cc2c5c016",
+      "hanzi": "段落",
+      "pinyin": "duànluò",
+      "english": "paragraph; section",
+      "pos": "n",
+      "frequency": 49,
+      "level": 6
+    },
+    {
+      "word_id": "99f7f20f-b97f-4375-80ad-82a587d49282",
+      "hanzi": "对比",
+      "pinyin": "duìbǐ",
+      "english": "contrast; to contrast; to compare",
+      "pos": "n/v",
+      "frequency": 50,
+      "level": 6
+    },
+    {
+      "word_id": "f716b17d-d550-41a5-a1a7-dfccad50ce62",
+      "hanzi": "对待",
+      "pinyin": "duìdài",
+      "english": "to treat; to handle; to deal with",
+      "pos": "v",
+      "frequency": 51,
+      "level": 6
+    },
+    {
+      "word_id": "ca6cee38-7423-4c07-b935-c8138d96528d",
+      "hanzi": "多元化",
+      "pinyin": "duōyuánhuà",
+      "english": "diversification; pluralistic",
+      "pos": "n/adj",
+      "frequency": 52,
+      "level": 6
+    },
+    {
+      "word_id": "d3571c64-a324-43ff-b3bb-ef39dbf726af",
+      "hanzi": "发言",
+      "pinyin": "fāyán",
+      "english": "to speak; to address; statement",
+      "pos": "v/n",
+      "frequency": 53,
+      "level": 6
+    },
+    {
+      "word_id": "f3143dbd-57e3-4280-9340-1c97b987b91c",
+      "hanzi": "翻译",
+      "pinyin": "fānyì",
+      "english": "to translate; translator; translation",
+      "pos": "v/n",
+      "frequency": 54,
+      "level": 6
+    },
+    {
+      "word_id": "a0e55566-d668-4140-9aee-50a9032cfdf7",
+      "hanzi": "反映",
+      "pinyin": "fǎnyìng",
+      "english": "to reflect; to mirror; to report",
+      "pos": "v",
+      "frequency": 55,
+      "level": 6
+    },
+    {
+      "word_id": "73ff1b67-0077-47da-ae60-35e49892d252",
+      "hanzi": "方式",
+      "pinyin": "fāngshì",
+      "english": "way; manner; mode",
+      "pos": "n",
+      "frequency": 56,
+      "level": 6
+    },
+    {
+      "word_id": "eb454457-51b2-4c7b-a730-70203eb41425",
+      "hanzi": "丰富",
+      "pinyin": "fēngfù",
+      "english": "rich; abundant; to enrich",
+      "pos": "adj/v",
+      "frequency": 57,
+      "level": 6
+    },
+    {
+      "word_id": "1e373066-3b95-4ad4-a52a-15a5a6ab4b61",
+      "hanzi": "风格",
+      "pinyin": "fēnggé",
+      "english": "style; manner",
+      "pos": "n",
+      "frequency": 58,
+      "level": 6
+    },
+    {
+      "word_id": "74e90287-2c80-49f3-8eac-712e0ffeaf5e",
+      "hanzi": "伏",
+      "pinyin": "fú",
+      "english": "to bend over; to lie prostrate; ambush",
+      "pos": "v/n",
+      "frequency": 59,
+      "level": 6
+    },
+    {
+      "word_id": "d70094fc-ba5b-4d54-94d8-aeac9a163c07",
+      "hanzi": "服务",
+      "pinyin": "fúwù",
+      "english": "service; to serve",
+      "pos": "n/v",
+      "frequency": 60,
+      "level": 6
+    },
+    {
+      "word_id": "14d66885-0d3d-4f3d-b835-d4f9421f6237",
+      "hanzi": "根本",
+      "pinyin": "gēnběn",
+      "english": "fundamental; basic; at all; simply",
+      "pos": "adj/adv",
+      "frequency": 61,
+      "level": 6
+    },
+    {
+      "word_id": "fd369460-33e7-4460-869b-0c34becd933b",
+      "hanzi": "功能",
+      "pinyin": "gōngnéng",
+      "english": "function; capability",
+      "pos": "n",
+      "frequency": 62,
+      "level": 6
+    },
+    {
+      "word_id": "ff647538-caae-4e39-bd3c-0be768b71ffd",
+      "hanzi": "攻击",
+      "pinyin": "gōngjī",
+      "english": "to attack; to assault; attack",
+      "pos": "v/n",
+      "frequency": 63,
+      "level": 6
+    },
+    {
+      "word_id": "75ad90c9-0042-43f0-82c1-d806ee46fb16",
+      "hanzi": "贡献",
+      "pinyin": "gòngxiàn",
+      "english": "contribution; to contribute",
+      "pos": "n/v",
+      "frequency": 64,
+      "level": 6
+    },
+    {
+      "word_id": "4027a9dc-5ae3-445c-867e-edbeacb57f9f",
+      "hanzi": "孤独",
+      "pinyin": "gūdú",
+      "english": "lonely; solitary; loneliness",
+      "pos": "adj/n",
+      "frequency": 65,
+      "level": 6
+    },
+    {
+      "word_id": "8fe4d6d4-5e97-423f-b513-71eef521d08a",
+      "hanzi": "固定",
+      "pinyin": "gùdìng",
+      "english": "fixed; regular; to fix",
+      "pos": "adj/v",
+      "frequency": 66,
+      "level": 6
+    },
+    {
+      "word_id": "8acb8b6e-aeda-46f3-b5fb-a2d83f6175f0",
+      "hanzi": "过渡",
+      "pinyin": "guòdù",
+      "english": "transition; to transition",
+      "pos": "n/v",
+      "frequency": 67,
+      "level": 6
+    },
+    {
+      "word_id": "9f579430-7796-4fbc-9727-41ea0d3aa4b9",
+      "hanzi": "海拔",
+      "pinyin": "hǎibá",
+      "english": "altitude above sea level; elevation",
+      "pos": "n",
+      "frequency": 68,
+      "level": 6
+    },
+    {
+      "word_id": "d6ec8d48-1b6a-4fa1-a28f-66ff88a72cbd",
+      "hanzi": "豪华",
+      "pinyin": "háohuá",
+      "english": "luxurious; extravagant",
+      "pos": "adj",
+      "frequency": 69,
+      "level": 6
+    },
+    {
+      "word_id": "65a19716-ba38-4c57-9a4b-650ab923da42",
+      "hanzi": "合理",
+      "pinyin": "hélǐ",
+      "english": "reasonable; rational",
+      "pos": "adj",
+      "frequency": 70,
+      "level": 6
+    },
+    {
+      "word_id": "44e48002-92a0-404a-b7aa-740f974169ac",
+      "hanzi": "核心",
+      "pinyin": "héxīn",
+      "english": "core; nucleus; central",
+      "pos": "n/adj",
+      "frequency": 71,
+      "level": 6
+    },
+    {
+      "word_id": "459f0532-3bd0-48f0-b1bd-9bffc0571fe2",
+      "hanzi": "宏观",
+      "pinyin": "hóngguān",
+      "english": "macro; macroscopic",
+      "pos": "adj",
+      "frequency": 72,
+      "level": 6
+    },
+    {
+      "word_id": "91130f85-2457-4fc4-846d-234cdcbe5793",
+      "hanzi": "华丽",
+      "pinyin": "huálì",
+      "english": "gorgeous; magnificent; splendid",
+      "pos": "adj",
+      "frequency": 73,
+      "level": 6
+    },
+    {
+      "word_id": "548c5de1-eb06-424c-b30a-a59a2d80d7e6",
+      "hanzi": "混合",
+      "pinyin": "hùnhé",
+      "english": "to mix; to blend; mixture",
+      "pos": "v/n",
+      "frequency": 74,
+      "level": 6
+    },
+    {
+      "word_id": "354c05dd-626d-49ae-be14-dca32108e47c",
+      "hanzi": "机制",
+      "pinyin": "jīzhì",
+      "english": "mechanism; system",
+      "pos": "n",
+      "frequency": 75,
+      "level": 6
+    },
+    {
+      "word_id": "a61526d5-1039-42d2-a791-a29714c26ea2",
+      "hanzi": "极端",
+      "pinyin": "jíduān",
+      "english": "extreme; extremity",
+      "pos": "adj/n",
+      "frequency": 76,
+      "level": 6
+    },
+    {
+      "word_id": "d1b1cc51-b4d3-4930-83d4-a47444fe20d9",
+      "hanzi": "即便",
+      "pinyin": "jíbiàn",
+      "english": "even if; even though",
+      "pos": "conj",
+      "frequency": 77,
+      "level": 6
+    },
+    {
+      "word_id": "ac3d70c3-cc77-49f8-96ae-ed3d13a33e8d",
+      "hanzi": "激励",
+      "pinyin": "jīlì",
+      "english": "to inspire; to motivate; incentive",
+      "pos": "v/n",
+      "frequency": 78,
+      "level": 6
+    },
+    {
+      "word_id": "b2dda930-a1dc-4972-8d29-3feacd469642",
+      "hanzi": "加强",
+      "pinyin": "jiāqiáng",
+      "english": "to strengthen; to enhance",
+      "pos": "v",
+      "frequency": 79,
+      "level": 6
+    },
+    {
+      "word_id": "4eaf8efa-fca8-4f6b-a052-45f301c6b5e1",
+      "hanzi": "坚决",
+      "pinyin": "jiānjué",
+      "english": "resolute; determined; firmly",
+      "pos": "adj/adv",
+      "frequency": 80,
+      "level": 6
+    },
+    {
+      "word_id": "b3213727-245e-439f-8573-0d16d851e2e4",
+      "hanzi": "坚韧",
+      "pinyin": "jiānrèn",
+      "english": "tenacious; tough and resilient",
+      "pos": "adj",
+      "frequency": 81,
+      "level": 6
+    },
+    {
+      "word_id": "c1c76cc6-27a2-4798-957a-794e2b929668",
+      "hanzi": "监督",
+      "pinyin": "jiāndū",
+      "english": "to supervise; to oversee; supervision",
+      "pos": "v/n",
+      "frequency": 82,
+      "level": 6
+    },
+    {
+      "word_id": "60551c09-3d4b-47d2-b49a-5f04ffb2d08b",
+      "hanzi": "揭示",
+      "pinyin": "jiēshì",
+      "english": "to reveal; to expose; to display",
+      "pos": "v",
+      "frequency": 83,
+      "level": 6
+    },
+    {
+      "word_id": "3e7f50a4-357b-415d-99ea-365ffe267592",
+      "hanzi": "精华",
+      "pinyin": "jīnghuá",
+      "english": "essence; the best part; quintessence",
+      "pos": "n",
+      "frequency": 84,
+      "level": 6
+    },
+    {
+      "word_id": "b7dcab3b-51b6-4d20-9266-44775e289476",
+      "hanzi": "精确",
+      "pinyin": "jīngquè",
+      "english": "precise; accurate; exact",
+      "pos": "adj",
+      "frequency": 85,
+      "level": 6
+    },
+    {
+      "word_id": "6c6abdfc-10ef-430c-b1af-46e890e3718f",
+      "hanzi": "局部",
+      "pinyin": "júbù",
+      "english": "part; local; partial",
+      "pos": "n/adj",
+      "frequency": 86,
+      "level": 6
+    },
+    {
+      "word_id": "3c514a8a-7d7d-4eb3-a455-44d186250ce5",
+      "hanzi": "均匀",
+      "pinyin": "jūnyún",
+      "english": "even; uniform; well-distributed",
+      "pos": "adj",
+      "frequency": 87,
+      "level": 6
+    },
+    {
+      "word_id": "48de157c-7690-4ffa-a31a-595dc1c6af72",
+      "hanzi": "开展",
+      "pinyin": "kāizhǎn",
+      "english": "to launch; to carry out; to develop",
+      "pos": "v",
+      "frequency": 88,
+      "level": 6
+    },
+    {
+      "word_id": "e1629413-1823-4c1d-8e45-90bc6d0b0d95",
+      "hanzi": "抗议",
+      "pinyin": "kàngyì",
+      "english": "to protest; protest",
+      "pos": "v/n",
+      "frequency": 89,
+      "level": 6
+    },
+    {
+      "word_id": "a63f4d28-73a7-428c-80a1-e5276a142205",
+      "hanzi": "可见",
+      "pinyin": "kějiàn",
+      "english": "it can be seen; obviously",
+      "pos": "conj",
+      "frequency": 90,
+      "level": 6
+    },
+    {
+      "word_id": "40d3a66a-2c84-4b07-bb4d-28b71093cfb0",
+      "hanzi": "克服",
+      "pinyin": "kèfú",
+      "english": "to overcome; to surmount",
+      "pos": "v",
+      "frequency": 91,
+      "level": 6
+    },
+    {
+      "word_id": "03e660b9-7fef-4a3c-9bb7-615f2728cf4d",
+      "hanzi": "客观",
+      "pinyin": "kèguān",
+      "english": "objective; unbiased",
+      "pos": "adj",
+      "frequency": 92,
+      "level": 6
+    },
+    {
+      "word_id": "6c1d8a6d-b6b4-4f25-8d81-9a72ddab8963",
+      "hanzi": "空洞",
+      "pinyin": "kōngdòng",
+      "english": "hollow; empty; void",
+      "pos": "adj/n",
+      "frequency": 93,
+      "level": 6
+    },
+    {
+      "word_id": "0f61b59a-06de-4015-a398-4f6545f8cf6c",
+      "hanzi": "框架",
+      "pinyin": "kuàngjià",
+      "english": "framework; structure",
+      "pos": "n",
+      "frequency": 94,
+      "level": 6
+    },
+    {
+      "word_id": "175d9e5b-42aa-4250-ae89-3679761bccb2",
+      "hanzi": "扩展",
+      "pinyin": "kuòzhǎn",
+      "english": "to expand; to extend; expansion",
+      "pos": "v/n",
+      "frequency": 95,
+      "level": 6
+    },
+    {
+      "word_id": "509e8991-0b2d-4fbe-a3f0-d46efdadb692",
+      "hanzi": "浪潮",
+      "pinyin": "làngcháo",
+      "english": "wave; tide (figurative)",
+      "pos": "n",
+      "frequency": 96,
+      "level": 6
+    },
+    {
+      "word_id": "d21117b8-173e-4672-8cd3-83c6f191842d",
+      "hanzi": "类别",
+      "pinyin": "lèibié",
+      "english": "category; classification; type",
+      "pos": "n",
+      "frequency": 97,
+      "level": 6
+    },
+    {
+      "word_id": "187da153-8af4-4144-a82d-793adfff69fe",
+      "hanzi": "理念",
+      "pinyin": "lǐniàn",
+      "english": "idea; philosophy; concept",
+      "pos": "n",
+      "frequency": 98,
+      "level": 6
+    },
+    {
+      "word_id": "cbe73513-5913-485f-8dd5-7571ef9fcf7c",
+      "hanzi": "立场",
+      "pinyin": "lìchǎng",
+      "english": "standpoint; position; stance",
+      "pos": "n",
+      "frequency": 99,
+      "level": 6
+    },
+    {
+      "word_id": "a7bdd1cf-e08e-4e0c-b2f7-f619901fcd9b",
+      "hanzi": "联合",
+      "pinyin": "liánhé",
+      "english": "to unite; joint; combined",
+      "pos": "v/adj",
+      "frequency": 100,
+      "level": 6
+    },
+    {
+      "word_id": "07f68cf5-0339-423e-8e8e-f6c67f47ea2e",
+      "hanzi": "灵活",
+      "pinyin": "línghuó",
+      "english": "flexible; agile; nimble",
+      "pos": "adj",
+      "frequency": 101,
+      "level": 6
+    },
+    {
+      "word_id": "153117f7-fb1b-46e6-bc0b-d0631ac5cdfc",
+      "hanzi": "逻辑",
+      "pinyin": "luójí",
+      "english": "logic; logical",
+      "pos": "n/adj",
+      "frequency": 102,
+      "level": 6
+    },
+    {
+      "word_id": "9977162c-faf3-4348-b372-3d6282d002a9",
+      "hanzi": "模式",
+      "pinyin": "móshì",
+      "english": "mode; model; pattern",
+      "pos": "n",
+      "frequency": 103,
+      "level": 6
+    },
+    {
+      "word_id": "da7d4140-cfaf-41cf-bc78-9ed7b338b984",
+      "hanzi": "难以",
+      "pinyin": "nányǐ",
+      "english": "difficult to; hard to",
+      "pos": "adv",
+      "frequency": 104,
+      "level": 6
+    },
+    {
+      "word_id": "538d2c70-57b9-4ec8-8d6b-a819e965c960",
+      "hanzi": "内涵",
+      "pinyin": "nèihán",
+      "english": "connotation; inner meaning",
+      "pos": "n",
+      "frequency": 105,
+      "level": 6
+    },
+    {
+      "word_id": "3e803be8-e24e-4092-b34d-ae46d126d821",
+      "hanzi": "凝聚",
+      "pinyin": "níngjù",
+      "english": "to condense; to gather; to coalesce",
+      "pos": "v",
+      "frequency": 106,
+      "level": 6
+    },
+    {
+      "word_id": "f98343a8-1bcf-440c-97a4-f47eefd07cf4",
+      "hanzi": "偶然",
+      "pinyin": "ǒurán",
+      "english": "accidental; by chance; occasional",
+      "pos": "adj/adv",
+      "frequency": 107,
+      "level": 6
+    },
+    {
+      "word_id": "a507e87a-8f7b-4090-bc32-b58e2bac98ef",
+      "hanzi": "批判",
+      "pinyin": "pīpàn",
+      "english": "to criticize; criticism (ideological)",
+      "pos": "v/n",
+      "frequency": 108,
+      "level": 6
+    },
+    {
+      "word_id": "6b1443fb-b90b-43ce-affb-328f2aca5e3c",
+      "hanzi": "品味",
+      "pinyin": "pǐnwèi",
+      "english": "taste; refinement; to taste",
+      "pos": "n/v",
+      "frequency": 109,
+      "level": 6
+    },
+    {
+      "word_id": "6cab70ab-1925-4e8f-b1f6-5a15b9c76088",
+      "hanzi": "平衡",
+      "pinyin": "pínghéng",
+      "english": "balance; equilibrium; to balance",
+      "pos": "n/v/adj",
+      "frequency": 110,
+      "level": 6
+    },
+    {
+      "word_id": "7f094833-f458-41c5-9ae7-9131f9ce38e1",
+      "hanzi": "普遍",
+      "pinyin": "pǔbiàn",
+      "english": "universal; common; widespread",
+      "pos": "adj",
+      "frequency": 111,
+      "level": 6
+    },
+    {
+      "word_id": "4292c2c2-ec3e-4160-855e-e74a4932c915",
+      "hanzi": "期望",
+      "pinyin": "qīwàng",
+      "english": "to expect; expectation; hope",
+      "pos": "v/n",
+      "frequency": 112,
+      "level": 6
+    },
+    {
+      "word_id": "dcc5cd32-14ad-4d6e-95cc-b4002048fb9c",
+      "hanzi": "潜力",
+      "pinyin": "qiánlì",
+      "english": "potential; latent capability",
+      "pos": "n",
+      "frequency": 113,
+      "level": 6
+    },
+    {
+      "word_id": "a87de2eb-ce2c-4d24-8391-9fb561c3b28a",
+      "hanzi": "强调",
+      "pinyin": "qiángdiào",
+      "english": "to emphasize; to stress; emphasis",
+      "pos": "v/n",
+      "frequency": 114,
+      "level": 6
+    },
+    {
+      "word_id": "9604c0a8-67b0-42e3-bd8e-121826ef2219",
+      "hanzi": "强烈",
+      "pinyin": "qiángliè",
+      "english": "strong; intense; fierce",
+      "pos": "adj",
+      "frequency": 115,
+      "level": 6
+    },
+    {
+      "word_id": "dc91d10f-4a52-4417-899d-eced49373ef3",
+      "hanzi": "认可",
+      "pinyin": "rènkě",
+      "english": "to approve; to accept; approval",
+      "pos": "v/n",
+      "frequency": 116,
+      "level": 6
+    },
+    {
+      "word_id": "de116d60-9542-4148-b530-b355f3ff36c9",
+      "hanzi": "融合",
+      "pinyin": "rónghé",
+      "english": "to merge; to blend; fusion",
+      "pos": "v/n",
+      "frequency": 117,
+      "level": 6
+    },
+    {
+      "word_id": "0e578669-d210-436b-a154-f258feb626cf",
+      "hanzi": "色彩",
+      "pinyin": "sècǎi",
+      "english": "color; hue; tint",
+      "pos": "n",
+      "frequency": 118,
+      "level": 6
+    },
+    {
+      "word_id": "f869023f-ac68-4ccc-8d49-5c7cf310f9a0",
+      "hanzi": "设施",
+      "pinyin": "shèshī",
+      "english": "facilities; installation",
+      "pos": "n",
+      "frequency": 119,
+      "level": 6
+    },
+    {
+      "word_id": "570fe213-7caf-44ab-b7fa-24133326d44f",
+      "hanzi": "深刻",
+      "pinyin": "shēnkè",
+      "english": "profound; deep; deeply",
+      "pos": "adj/adv",
+      "frequency": 120,
+      "level": 6
+    },
+    {
+      "word_id": "fa48b30f-a54f-4f16-9d03-aa4bdc91688f",
+      "hanzi": "审查",
+      "pinyin": "shěnchá",
+      "english": "to examine; to review; censorship",
+      "pos": "v/n",
+      "frequency": 121,
+      "level": 6
+    },
+    {
+      "word_id": "99b62212-e3ae-4b46-87c1-0a0eb165628f",
+      "hanzi": "生态",
+      "pinyin": "shēngtài",
+      "english": "ecology; ecosystem",
+      "pos": "n",
+      "frequency": 122,
+      "level": 6
+    },
+    {
+      "word_id": "6d1dfff3-1454-4412-b477-c822c54369a2",
+      "hanzi": "实施",
+      "pinyin": "shíshī",
+      "english": "to implement; to carry out",
+      "pos": "v",
+      "frequency": 123,
+      "level": 6
+    },
+    {
+      "word_id": "cfc5a97f-bb97-4821-a7d9-588af06b0ec8",
+      "hanzi": "是非",
+      "pinyin": "shìfēi",
+      "english": "right and wrong; dispute",
+      "pos": "n",
+      "frequency": 124,
+      "level": 6
+    },
+    {
+      "word_id": "85105599-3576-4c6a-9039-e12a549b607c",
+      "hanzi": "适应",
+      "pinyin": "shìyìng",
+      "english": "to adapt; to adjust to",
+      "pos": "v",
+      "frequency": 125,
+      "level": 6
+    },
+    {
+      "word_id": "33cc3fe2-a32d-476c-b2b6-7ebc83c2cca2",
+      "hanzi": "束缚",
+      "pinyin": "shùfù",
+      "english": "to bind; to restrain; constraint",
+      "pos": "v/n",
+      "frequency": 126,
+      "level": 6
+    },
+    {
+      "word_id": "aa092258-dedb-4b8c-85e9-adf5c89fe679",
+      "hanzi": "探索",
+      "pinyin": "tànsuǒ",
+      "english": "to explore; to probe; exploration",
+      "pos": "v/n",
+      "frequency": 127,
+      "level": 6
+    },
+    {
+      "word_id": "bb90c919-c895-4155-8ae3-837ef40968f5",
+      "hanzi": "体现",
+      "pinyin": "tǐxiàn",
+      "english": "to embody; to reflect; to manifest",
+      "pos": "v",
+      "frequency": 128,
+      "level": 6
+    },
+    {
+      "word_id": "68643bbb-f9da-42de-9e43-c731d659e9f8",
+      "hanzi": "通过",
+      "pinyin": "tōngguò",
+      "english": "to pass through; by means of; through",
+      "pos": "v/prep",
+      "frequency": 129,
+      "level": 6
+    },
+    {
+      "word_id": "76e27449-754f-4c06-a14f-7f6b24bcdb95",
+      "hanzi": "同情",
+      "pinyin": "tóngqíng",
+      "english": "sympathy; to sympathize with",
+      "pos": "n/v",
+      "frequency": 130,
+      "level": 6
+    },
+    {
+      "word_id": "c5a171b6-dbaa-417f-9f4e-bba7d672799b",
+      "hanzi": "透明",
+      "pinyin": "tòumíng",
+      "english": "transparent; open",
+      "pos": "adj",
+      "frequency": 131,
+      "level": 6
+    },
+    {
+      "word_id": "54364e18-b49c-406e-8545-527e6d258814",
+      "hanzi": "突出",
+      "pinyin": "tūchū",
+      "english": "to stand out; outstanding; prominent",
+      "pos": "v/adj",
+      "frequency": 132,
+      "level": 6
+    },
+    {
+      "word_id": "34f87c99-9981-48e4-9bc9-4abe22da0966",
+      "hanzi": "推广",
+      "pinyin": "tuīguǎng",
+      "english": "to promote; to spread; to popularize",
+      "pos": "v",
+      "frequency": 133,
+      "level": 6
+    },
+    {
+      "word_id": "ddb43f9f-fdf3-4ecb-a3eb-dbbe79538817",
+      "hanzi": "完整",
+      "pinyin": "wánzhěng",
+      "english": "complete; intact; whole",
+      "pos": "adj",
+      "frequency": 134,
+      "level": 6
+    },
+    {
+      "word_id": "4de86116-9d35-4477-b7a9-6c6d45fe354c",
+      "hanzi": "微观",
+      "pinyin": "wēiguān",
+      "english": "micro; microscopic",
+      "pos": "adj",
+      "frequency": 135,
+      "level": 6
+    },
+    {
+      "word_id": "ed912d1b-32a5-4f71-993e-2756fc012133",
+      "hanzi": "危机",
+      "pinyin": "wēijī",
+      "english": "crisis",
+      "pos": "n",
+      "frequency": 136,
+      "level": 6
+    },
+    {
+      "word_id": "11ac1bac-cbef-4f6d-809c-ed7960338771",
+      "hanzi": "相关",
+      "pinyin": "xiāngguān",
+      "english": "related; relevant; correlated",
+      "pos": "adj",
+      "frequency": 137,
+      "level": 6
+    },
+    {
+      "word_id": "338f8dc6-749a-4e40-a2af-996c29b419d4",
+      "hanzi": "象征",
+      "pinyin": "xiàngzhēng",
+      "english": "symbol; to symbolize",
+      "pos": "n/v",
+      "frequency": 138,
+      "level": 6
+    },
+    {
+      "word_id": "c7d075f1-4fc2-4e64-b814-2ee27e2d0773",
+      "hanzi": "效果",
+      "pinyin": "xiàoguǒ",
+      "english": "effect; result; effectiveness",
+      "pos": "n",
+      "frequency": 139,
+      "level": 6
+    },
+    {
+      "word_id": "7c3539f5-d46e-41bd-8698-9c53f6b866c0",
+      "hanzi": "形成",
+      "pinyin": "xíngchéng",
+      "english": "to form; to take shape; formation",
+      "pos": "v/n",
+      "frequency": 140,
+      "level": 6
+    },
+    {
+      "word_id": "38d2894c-5552-4843-8634-e1de27293873",
+      "hanzi": "形式",
+      "pinyin": "xíngshì",
+      "english": "form; shape; formality",
+      "pos": "n",
+      "frequency": 141,
+      "level": 6
+    },
+    {
+      "word_id": "8f68e72c-a2c8-4c05-823c-328b52b8b303",
+      "hanzi": "行为",
+      "pinyin": "xíngwéi",
+      "english": "behavior; conduct; action",
+      "pos": "n",
+      "frequency": 142,
+      "level": 6
+    },
+    {
+      "word_id": "42272228-a5e0-438e-ba72-d2c122b2ad41",
+      "hanzi": "修改",
+      "pinyin": "xiūgǎi",
+      "english": "to revise; to modify; to amend",
+      "pos": "v",
+      "frequency": 143,
+      "level": 6
+    },
+    {
+      "word_id": "40aad122-b6a3-4679-ac87-9c66bac7af89",
+      "hanzi": "虚伪",
+      "pinyin": "xūwěi",
+      "english": "hypocritical; false; dishonest",
+      "pos": "adj",
+      "frequency": 144,
+      "level": 6
+    },
+    {
+      "word_id": "67a859da-62a9-42fd-8620-d591b336d08c",
+      "hanzi": "延伸",
+      "pinyin": "yánshēn",
+      "english": "to extend; to stretch; extension",
+      "pos": "v/n",
+      "frequency": 145,
+      "level": 6
+    },
+    {
+      "word_id": "1a516255-1620-4ba2-a00d-92edbf7dbfe5",
+      "hanzi": "严格",
+      "pinyin": "yángé",
+      "english": "strict; rigorous; strictly",
+      "pos": "adj/adv",
+      "frequency": 146,
+      "level": 6
+    },
+    {
+      "word_id": "e6dafedc-ebb8-4211-8997-0e3bc828df96",
+      "hanzi": "要素",
+      "pinyin": "yàosù",
+      "english": "essential factor; key element",
+      "pos": "n",
+      "frequency": 147,
+      "level": 6
+    },
+    {
+      "word_id": "c0f9c21d-eade-43b1-b2bb-752d830d5c4e",
+      "hanzi": "依据",
+      "pinyin": "yījù",
+      "english": "basis; grounds; to be based on",
+      "pos": "n/v",
+      "frequency": 148,
+      "level": 6
+    },
+    {
+      "word_id": "48a428a6-669c-4012-8c8d-8c4a0bac436d",
+      "hanzi": "异常",
+      "pinyin": "yìcháng",
+      "english": "abnormal; unusual; extremely",
+      "pos": "adj/adv",
+      "frequency": 149,
+      "level": 6
+    },
+    {
+      "word_id": "2c7863c9-42dc-4652-8fb6-ae88534d41b0",
+      "hanzi": "意义",
+      "pinyin": "yìyì",
+      "english": "meaning; significance; sense",
+      "pos": "n",
+      "frequency": 150,
+      "level": 6
+    },
+    {
+      "word_id": "318f2d5c-132a-4253-a4e3-3becd64dea5f",
+      "hanzi": "引发",
+      "pinyin": "yǐnfā",
+      "english": "to trigger; to cause; to spark",
+      "pos": "v",
+      "frequency": 151,
+      "level": 6
+    },
+    {
+      "word_id": "b0f52c5a-7e52-4c6c-84e7-7be28fd5bcde",
+      "hanzi": "引起",
+      "pinyin": "yǐnqǐ",
+      "english": "to cause; to give rise to; to lead to",
+      "pos": "v",
+      "frequency": 152,
+      "level": 6
+    },
+    {
+      "word_id": "e3f2ca84-663c-4595-8fb8-a6e500e8f740",
+      "hanzi": "营养",
+      "pinyin": "yíngyǎng",
+      "english": "nutrition; nourishment",
+      "pos": "n",
+      "frequency": 153,
+      "level": 6
+    },
+    {
+      "word_id": "7f028e37-f8eb-48c9-9023-f7446e85e465",
+      "hanzi": "优势",
+      "pinyin": "yōushì",
+      "english": "advantage; superiority",
+      "pos": "n",
+      "frequency": 154,
+      "level": 6
+    },
+    {
+      "word_id": "0459bb41-7669-4dd3-874f-d0a67483e4fe",
+      "hanzi": "有效",
+      "pinyin": "yǒuxiào",
+      "english": "effective; valid; efficient",
+      "pos": "adj",
+      "frequency": 155,
+      "level": 6
+    },
+    {
+      "word_id": "8f95e4cd-5294-4cba-994b-c5bcb322bc75",
+      "hanzi": "预测",
+      "pinyin": "yùcè",
+      "english": "to predict; prediction; forecast",
+      "pos": "v/n",
+      "frequency": 156,
+      "level": 6
+    },
+    {
+      "word_id": "b7cd6b10-bbaf-4534-b428-9c2075c0055b",
+      "hanzi": "原则",
+      "pinyin": "yuánzé",
+      "english": "principle; rule",
+      "pos": "n",
+      "frequency": 157,
+      "level": 6
+    },
+    {
+      "word_id": "e7733fba-5bc9-4bb9-943c-113bb49960e4",
+      "hanzi": "整体",
+      "pinyin": "zhěngtǐ",
+      "english": "whole; overall; entirety",
+      "pos": "n/adj",
+      "frequency": 158,
+      "level": 6
+    },
+    {
+      "word_id": "63787e70-220a-4cfe-8a49-857d65d7a169",
+      "hanzi": "支持",
+      "pinyin": "zhīchí",
+      "english": "to support; support",
+      "pos": "v/n",
+      "frequency": 159,
+      "level": 6
+    },
+    {
+      "word_id": "d28ec491-abe9-4957-8d35-c0eb9822dabf",
+      "hanzi": "执行",
+      "pinyin": "zhíxíng",
+      "english": "to execute; to carry out; to implement",
+      "pos": "v",
+      "frequency": 160,
+      "level": 6
+    }
+  ]
+}

@@ -190,12 +190,12 @@ export default function OnboardingScreen() {
           <TouchableOpacity
             key={l.id}
             style={[
-              styles.optionCard,
-              level === l.id && {
-                borderColor: Colors.primaryAccentColor,
-                backgroundClip: "#fff5f0",
-              },
-            ]}
+                styles.optionCard,
+                level === l.id && {
+                  borderColor: Colors.primaryAccentColor,
+                  backgroundColor: "#fff5f0",
+                },
+              ]}
             onPress={() => setLevel(l.id)}
           >
             <ThemedText
@@ -237,7 +237,7 @@ export default function OnboardingScreen() {
                 styles.motivationCard,
                 isSelected && {
                   borderColor: Colors.primaryAccentColor,
-                  backgroundClip: "#fff5f0",
+                  backgroundColor: "#fff5f0",
                 },
               ]}
               onPress={() => toggleMotivation(m.id)}

@@ -13,5 +13,12 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
+  ],
+  "exclude": [
+    "supabase/**/*",
+    "scripts/**/*",
+    "plans/**/*",
+    "docs/**/*",
+    ".claude/**/*"
   ]
 }
