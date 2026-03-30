@@ -168,7 +168,10 @@ async function generateQuestionsForSection(
       generated++;
     }
 
-    await adminClient.from("hsk_question_bank").insert(row);
+    const { error: insertError } = await adminClient.from("hsk_question_bank").insert(row);
+    if (insertError) {
+      throw new Error(`Failed to insert question into hsk_question_bank: ${insertError.message}`);
+    }
   }
 
   return { generated, quarantined };

@@ -243,7 +243,7 @@ Deno.serve(async (req) => {
       started_at: session.started_at,
       expires_at: session.expires_at,
       section_deadlines: sectionDeadlines,
-      question_ids: questionIds,
+      question_ids: listeningIds,
       questions: listeningQuestions,
       audio_manifests: audioManifests ?? [],
     });

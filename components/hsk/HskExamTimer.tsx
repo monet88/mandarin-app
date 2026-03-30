@@ -19,6 +19,8 @@ function formatMs(ms: number): string {
 export default function HskExamTimer({ deadlineIso, onExpire }: Props) {
   const [remaining, setRemaining] = useState(() => msUntil(deadlineIso));
   const expiredRef = useRef(false);
+  const onExpireRef = useRef(onExpire);
+  onExpireRef.current = onExpire;
 
   useEffect(() => {
     expiredRef.current = false;
@@ -30,7 +32,7 @@ export default function HskExamTimer({ deadlineIso, onExpire }: Props) {
       if (ms === 0 && !expiredRef.current) {
         expiredRef.current = true;
         clearInterval(id);
-        onExpire();
+        onExpireRef.current();
       }
     }, 1000);
 

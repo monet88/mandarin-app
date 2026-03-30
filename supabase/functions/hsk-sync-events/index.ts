@@ -67,7 +67,6 @@ Deno.serve(async (req) => {
       hsk_level: ev.hsk_level ?? null,
       occurred_at: ev.occurred_at,
       processed_at: serverNow,
-      processed: false,
     }));
 
     const { error: ledgerError } = await adminClient
@@ -127,9 +126,12 @@ Deno.serve(async (req) => {
         .in("event_id", processedIds);
     }
 
+    const batchEventIds = new Set(validEvents.map((e) => e.event_id));
+    const currentBatchUnprocessed = newEvents.filter((e) => batchEventIds.has(e.event_id)).length;
+
     return jsonResponse({
       accepted: newEvents.length,
-      skipped: validEvents.length - newEvents.length,
+      skipped: validEvents.length - currentBatchUnprocessed,
       errors: validationErrors,
       sync_receipt: {
         processed_at: serverNow,

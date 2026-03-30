@@ -40,7 +40,7 @@ export default function HskExamSection({
       <TouchableOpacity
         style={[styles.submitBtn, (!allAnswered || submitting) && styles.submitBtnDisabled]}
         onPress={onSubmit}
-        disabled={submitting}
+        disabled={!allAnswered || submitting}
       >
         <Text style={styles.submitBtnText}>
           {submitting ? "Submitting…" : `Submit ${SECTION_LABELS[section]}`}

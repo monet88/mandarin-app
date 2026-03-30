@@ -135,7 +135,12 @@ export async function evaluateWriting(
     body: JSON.stringify({ session_id: sessionId }),
   });
 
-  const json = await res.json();
+  let json: Record<string, unknown> | undefined;
+  try {
+    json = await res.json();
+  } catch {
+    return { rubric: FALLBACK_WRITING_RUBRIC, fallback: true };
+  }
   if (!res.ok) {
     return { rubric: FALLBACK_WRITING_RUBRIC, fallback: true };
   }

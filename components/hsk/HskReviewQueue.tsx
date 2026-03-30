@@ -41,6 +41,13 @@ export function HskReviewQueue({
   const remaining = dueStates.length;
   const currentWord = currentState ? wordMap[currentState.word_id] : undefined;
 
+  // Capture starting queue size so the progress bar can show completion ratio
+  const initialCountRef = React.useRef(remaining);
+  if (remaining > initialCountRef.current) {
+    initialCountRef.current = remaining;
+  }
+  const total = initialCountRef.current;
+
   // Auto-skip orphan words (word_id in queue but missing from word bundle).
   // Must use useEffect — calling onRate during render violates React rules and
   // can cause double-fire loops while the async queue update propagates.
@@ -94,8 +101,8 @@ export function HskReviewQueue({
           style={[
             styles.progressFill,
             {
-              // Fill grows as queue shrinks — assume session started with at least 1
-              width: `${Math.max(5, 100 - (remaining / Math.max(remaining, 1)) * 100)}%`,
+              // Fill grows as queue shrinks
+              width: `${Math.max(5, ((total - remaining) / Math.max(total, 1)) * 100)}%`,
             },
           ]}
         />

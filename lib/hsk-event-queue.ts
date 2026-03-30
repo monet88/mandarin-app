@@ -78,6 +78,15 @@ function qualityToMasteryDelta(quality: ReviewQuality): -1 | 0 | 1 | 2 {
   }
 }
 
+// ── Mutex (serialises read→push→write to prevent race conditions) ────────
+
+let _mutex: Promise<void> = Promise.resolve();
+function withMutex<T>(fn: () => Promise<T>): Promise<T> {
+  const result = _mutex.then(fn);
+  _mutex = result.then(() => {}, () => {});
+  return result;
+}
+
 // ── Public API ────────────────────────────────────────────────────────────
 
 /** Enqueues a review event. Returns immediately — no network call. */
@@ -88,22 +97,24 @@ export async function enqueueReviewEvent(
   quality: ReviewQuality,
   interval: number,
 ): Promise<void> {
-  const queue = await readQueue();
-  queue.push({
-    event_id: uuid(),
-    event_type: "word_reviewed",
-    hsk_level,
-    occurred_at: new Date().toISOString(),
-    payload: {
-      word_id,
-      word_simplified,
-      mastery_delta: qualityToMasteryDelta(quality),
-      quality,
-      interval,
-    },
-    _retries: 0,
+  return withMutex(async () => {
+    const queue = await readQueue();
+    queue.push({
+      event_id: uuid(),
+      event_type: "word_reviewed",
+      hsk_level,
+      occurred_at: new Date().toISOString(),
+      payload: {
+        word_id,
+        word_simplified,
+        mastery_delta: qualityToMasteryDelta(quality),
+        quality,
+        interval,
+      },
+      _retries: 0,
+    });
+    await writeQueue(queue);
   });
-  await writeQueue(queue);
 }
 
 /** Returns count of pending events (for optional sync health display). */

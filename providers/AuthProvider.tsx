@@ -72,8 +72,7 @@ export default function AuthProvider({ children }: PropsWithChildren) {
       await Promise.all([
         loadProfile(initialSession),
         setupRevenueCat(initialSession),
-      ]);
-      setLoading(false);
+      ]).finally(() => setLoading(false));
     };
 
     init();
