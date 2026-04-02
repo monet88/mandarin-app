@@ -36,16 +36,10 @@ export const useDeepLinking = () => {
 
   useEffect(() => {
     if (url) {
-      createSessionFromUrl(url)
-        .then((session) => {
-          if (session) {
-            console.log("Session created from deep link");
-          }
-        })
-        .catch((error) => {
-          console.error("Error creating session from URL:", error);
-          toast.error("Failed to sign in. Please try again.");
-        });
+      createSessionFromUrl(url).catch((error) => {
+        console.error("Error creating session from URL:", error);
+        toast.error("Failed to sign in. Please try again.");
+      });
     }
   }, [url]);
 };
