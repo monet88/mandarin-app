@@ -1,0 +1,552 @@
+# Instincts generated from https://github.com/monet88/madarin-app
+# Generated: 2026-04-04T05:07:56.504Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: madarin-app-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/monet88/madarin-app
+---
+
+# Madarin App Commit Length
+
+## Action
+
+Write moderate-length commit messages (~65 characters)
+
+## Evidence
+
+- Average commit message length: 65 chars
+- Based on 14 commits
+
+---
+id: madarin-app-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/monet88/madarin-app
+---
+
+# Madarin App Naming Files
+
+## Action
+
+Use camelCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: camelCase
+
+---
+id: madarin-app-import-alias
+trigger: "when importing modules"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/monet88/madarin-app
+---
+
+# Madarin App Import Alias
+
+## Action
+
+Use path aliases (@/, ~/) instead of relative imports
+
+## Evidence
+
+- Import analysis shows alias pattern
+- Example: import { x } from '@/lib/x'
+
+---
+id: madarin-app-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/monet88/madarin-app
+---
+
+# Madarin App Export Style
+
+## Action
+
+Prefer default exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: default
+
+---
+id: madarin-app-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/monet88/madarin-app
+---
+
+# Madarin App Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: madarin-app-test-framework
+trigger: "when writing tests"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/monet88/madarin-app
+---
+
+# Madarin App Test Framework
+
+## Action
+
+Use jest as the test framework
+
+## Evidence
+
+- Test framework detected: jest
+- File pattern: *.test.ts
+
+---
+id: madarin-app-test-naming
+trigger: "when creating a test file"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/monet88/madarin-app
+---
+
+# Madarin App Test Naming
+
+## Action
+
+Name test files using the pattern: *.test.ts
+
+## Evidence
+
+- File pattern: *.test.ts
+- Consistent across test files
+
+---
+id: madarin-app-test-mocking
+trigger: "when mocking dependencies in tests"
+confidence: 0.75
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/monet88/madarin-app
+---
+
+# Madarin App Test Mocking
+
+## Action
+
+Use jest.mock for mocking
+
+## Evidence
+
+- Mocking pattern detected: jest.mock
+- Consistent across test files
+
+---
+id: madarin-app-workflow-refactoring
+trigger: "when refactoring code"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/monet88/madarin-app
+---
+
+# Madarin App Workflow Refactoring
+
+## Action
+
+Follow the refactoring workflow:
+1. Ensure tests pass before refactor
+2. Refactor code structure
+3. Verify tests still pass
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~13x per month
+- Files: src/**/*
+
+---
+id: madarin-app-workflow-refactor-or-feature-phase-with-tests-and-docs
+trigger: "when doing refactor or feature phase with tests and docs"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/monet88/madarin-app
+---
+
+# Madarin App Workflow Refactor Or Feature Phase With Tests And Docs
+
+## Action
+
+Follow the refactor-or-feature-phase-with-tests-and-docs workflow:
+1. Update or add implementation files (e.g., hooks, components, edge functions, context providers)
+2. Add or update corresponding regression/unit test files in __tests__/
+3. Update or add planning/phase documentation in plans/
+4. Run and verify tests, typechecks, and lints
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: hooks/*.ts, components/**/*.tsx, supabase/functions/**/*.ts
+
+---
+id: madarin-app-workflow-edge-function-hardening-or-update
+trigger: "when doing edge function hardening or update"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/monet88/madarin-app
+---
+
+# Madarin App Workflow Edge Function Hardening Or Update
+
+## Action
+
+Follow the edge-function-hardening-or-update workflow:
+1. Update or refactor edge function implementation files
+2. Extract or update shared helpers in supabase/functions/_shared/
+3. Update or validate event payloads and error boundaries
+4. Run typechecks and (where possible) test edge functions locally
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: supabase/functions/**/*.ts, supabase/functions/_shared/*.ts, lib/**/*.ts
+
+---
+id: madarin-app-workflow-test-harness-or-regression-test-addition
+trigger: "when doing test harness or regression test addition"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/monet88/madarin-app
+---
+
+# Madarin App Workflow Test Harness Or Regression Test Addition
+
+## Action
+
+Follow the test-harness-or-regression-test-addition workflow:
+1. Create or update test files in __tests__/
+2. Update jest configuration or setup if needed
+3. Run tests and typechecks to verify baseline behavior
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: __tests__/**/*.test.ts*, jest.config.ts, jest.setup.ts
+
+---
+id: madarin-app-workflow-gitignore-or-vcs-artifact-update
+trigger: "when doing gitignore or vcs artifact update"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/monet88/madarin-app
+---
+
+# Madarin App Workflow Gitignore Or Vcs Artifact Update
+
+## Action
+
+Follow the gitignore-or-vcs-artifact-update workflow:
+1. Edit .gitignore to add new ignore patterns
+2. Verify git status to confirm artifacts are ignored
+3. Commit .gitignore changes
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: .gitignore
+
+---
+id: madarin-app-workflow-lint-typecheck-and-test-cleanup
+trigger: "when doing lint typecheck and test cleanup"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/monet88/madarin-app
+---
+
+# Madarin App Workflow Lint Typecheck And Test Cleanup
+
+## Action
+
+Follow the lint-typecheck-and-test-cleanup workflow:
+1. Fix lint warnings and type errors in implementation files
+2. Run and verify linter, typechecker, and tests
+3. Commit only code and config changes (no user-facing behavior changes)
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: app/**/*.tsx, components/**/*.tsx, hooks/**/*.ts
+
+---
+id: madarin-app-instinct-file-naming
+trigger: "When creating a new file or renaming an existing one"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: monet88/madarin-app
+---
+
+# Madarin App Instinct File Naming
+
+## Action
+
+Use camelCase for files, PascalCase for classes, and SCREAMING_SNAKE_CASE for constants
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions
+- Consistent file and class names in components/, hooks/
+
+---
+id: madarin-app-instinct-import-style
+trigger: "When importing modules in TypeScript files"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: monet88/madarin-app
+---
+
+# Madarin App Instinct Import Style
+
+## Action
+
+Use alias-based import paths instead of relative paths
+
+## Evidence
+
+- Pattern in codeStyle.importStyle
+- Imports in hooks/, components/
+
+---
+id: madarin-app-instinct-export-style
+trigger: "When exporting modules or components"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: monet88/madarin-app
+---
+
+# Madarin App Instinct Export Style
+
+## Action
+
+Use default exports for modules and components
+
+## Evidence
+
+- Pattern in codeStyle.exportStyle
+- Consistent default exports in components/
+
+---
+id: madarin-app-instinct-test-file-pattern
+trigger: "When adding or updating test files"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: monet88/madarin-app
+---
+
+# Madarin App Instinct Test File Pattern
+
+## Action
+
+Name test files with the pattern *.test.ts and place them in __tests__/
+
+## Evidence
+
+- Pattern in testing.filePattern
+- Examples in __tests__/**/*.test.ts*
+
+---
+id: madarin-app-instinct-test-framework
+trigger: "When writing or updating tests"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: monet88/madarin-app
+---
+
+# Madarin App Instinct Test Framework
+
+## Action
+
+Use Jest as the testing framework and jest.mock for mocking
+
+## Evidence
+
+- Pattern in testing.framework
+- Pattern in testing.mockingStyle
+
+---
+id: madarin-app-instinct-test-type
+trigger: "When determining what type of test to write"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: monet88/madarin-app
+---
+
+# Madarin App Instinct Test Type
+
+## Action
+
+Write unit tests by default
+
+## Evidence
+
+- Pattern in testing.testTypes
+- Examples in __tests__/
+
+---
+id: madarin-app-instinct-commit-format
+trigger: "When writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: monet88/madarin-app
+---
+
+# Madarin App Instinct Commit Format
+
+## Action
+
+Write a concise, imperative sentence describing the change (no prefix required)
+
+## Evidence
+
+- Pattern in commits.type and commits.examples
+- Average commit message length
+
+---
+id: madarin-app-instinct-phase-workflow
+trigger: "When delivering a new feature, refactor, or hardening phase with planning and regression tests"
+confidence: 0.95
+domain: workflow
+source: repo-analysis
+source_repo: monet88/madarin-app
+---
+
+# Madarin App Instinct Phase Workflow
+
+## Action
+
+Update/add implementation files, add/update tests in __tests__/, update planning docs in plans/, and verify tests/typechecks/lints
+
+## Evidence
+
+- refactor-or-feature-phase-with-tests-and-docs workflow
+- Example commit and file sequences
+
+---
+id: madarin-app-instinct-edge-function-workflow
+trigger: "When improving edge function security, error handling, or shared logic without breaking API contracts"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: monet88/madarin-app
+---
+
+# Madarin App Instinct Edge Function Workflow
+
+## Action
+
+Update/refactor edge function files, update shared helpers, validate payloads/error boundaries, and test/typecheck locally
+
+## Evidence
+
+- edge-function-hardening-or-update workflow
+- Example commit and file sequences
+
+---
+id: madarin-app-instinct-regression-test-workflow
+trigger: "When ensuring stable behavior for a provider, hook, or component before risky changes"
+confidence: 0.85
+domain: workflow
+source: repo-analysis
+source_repo: monet88/madarin-app
+---
+
+# Madarin App Instinct Regression Test Workflow
+
+## Action
+
+Create/update regression test files in __tests__/, update Jest config if needed, and verify tests/typechecks
+
+## Evidence
+
+- test-harness-or-regression-test-addition workflow
+- Example commit and file sequences
+
+---
+id: madarin-app-instinct-gitignore-workflow
+trigger: "When preventing local or generated files from polluting the repository"
+confidence: 0.95
+domain: workflow
+source: repo-analysis
+source_repo: monet88/madarin-app
+---
+
+# Madarin App Instinct Gitignore Workflow
+
+## Action
+
+Edit .gitignore to add ignore patterns, verify git status, and commit .gitignore changes
+
+## Evidence
+
+- gitignore-or-vcs-artifact-update workflow
+- Commits like 'Keep local OMX runtime state out of version control'
+
+---
+id: madarin-app-instinct-lint-cleanup-workflow
+trigger: "When eliminating lint/typecheck noise or preventing regressions after large changes"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: monet88/madarin-app
+---
+
+# Madarin App Instinct Lint Cleanup Workflow
+
+## Action
+
+Fix lint/type errors in implementation files, verify with linter/typechecker/tests, and commit only code/config changes (no user-facing changes)
+
+## Evidence
+
+- lint-typecheck-and-test-cleanup workflow
+- Example commit and file sequences
+
