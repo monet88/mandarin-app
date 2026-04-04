@@ -49,4 +49,7 @@ app-example
 .ck/
 .agent/
 .osgrep
+.omx/
+coverage/
 nul
+.gitnexus
