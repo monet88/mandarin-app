@@ -19,6 +19,10 @@ Adds or updates an ECC bundle for an app or skill, including metadata, skill def
 - `.claude/skills/*/SKILL.md`
 - `.agents/skills/*/SKILL.md`
 - `.agents/skills/*/agents/openai.yaml`
+- `.codex/config.toml`
+- `.codex/AGENTS.md`
+- `.codex/agents/*.toml`
+- `.claude/commands/*.md`
 - `.claude/homunculus/instincts/inherited/*.yaml`
 
 ## Suggested Sequence
@@ -35,6 +39,8 @@ Adds or updates an ECC bundle for an app or skill, including metadata, skill def
 - Add or update .claude/skills/<app-or-skill>/SKILL.md
 - Add or update .agents/skills/<app-or-skill>/SKILL.md
 - Add or update .agents/skills/<app-or-skill>/agents/openai.yaml
+- Add or update .codex/config.toml, .codex/AGENTS.md, or .codex/agents/*.toml when the bundle changes Codex metadata
+- Add or update .claude/commands/*.md when the bundle ships workflow commands
 
 ## Notes
 

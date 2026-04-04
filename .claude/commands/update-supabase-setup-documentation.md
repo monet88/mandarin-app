@@ -15,8 +15,8 @@ Updates Supabase integration/setup documentation and related configuration to ke
 ## Common Files
 
 - `docs/supabase-setup-guide.md`
-- `.codex/config.toml`
 - `README.md`
+- `supabase/functions/`
 
 ## Suggested Sequence
 
@@ -28,8 +28,8 @@ Updates Supabase integration/setup documentation and related configuration to ke
 ## Typical Commit Signals
 
 - Edit docs/supabase-setup-guide.md to add or update setup instructions
-- Edit .codex/config.toml to pin or update package references
 - Edit README.md if deployment guidance changes
+- Update the documented Edge Function or secret list to match `supabase/functions/` and current backend requirements
 
 ## Notes
 
