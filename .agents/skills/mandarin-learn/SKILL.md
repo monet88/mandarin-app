@@ -1,11 +1,10 @@
-```markdown
-# madarin-app Development Patterns
+# mandarin-learn Development Patterns
 
 > Auto-generated skill from repository analysis
 
 ## Overview
 
-This skill teaches the core development patterns, coding conventions, and collaborative workflows used in the `madarin-app` repository—a TypeScript React application. The guide covers file organization, code style, testing practices, and step-by-step instructions for common contribution scenarios, including feature development, edge function hardening, regression test addition, and codebase hygiene.
+This skill teaches the core development patterns, coding conventions, and collaborative workflows used in the `mandarin-learn` repository—a TypeScript React application. The guide covers file organization, code style, testing practices, and step-by-step instructions for common contribution scenarios, including feature development, edge function hardening, regression test addition, and codebase hygiene.
 
 ## Coding Conventions
 
@@ -190,4 +189,3 @@ const foo = (bar: string): string => { return bar }
 | /add-regression-test | Add or extend regression test harness for a provider/hook/component |
 | /ignore-artifact     | Update .gitignore to exclude new artifacts                      |
 | /cleanup-lint        | Clean up lint, typecheck, or test issues                        |
-```

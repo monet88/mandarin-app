@@ -3,7 +3,7 @@
   "schemaVersion": "1.0",
   "generatedBy": "ecc-tools",
   "generatedAt": "2026-04-04T05:07:34.050Z",
-  "repo": "https://github.com/monet88/madarin-app",
+  "repo": "https://github.com/monet88/mandarin-learn",
   "profiles": {
     "requested": "developer",
     "recommended": "developer",
@@ -78,32 +78,32 @@
     "workflow-pack"
   ],
   "managedFiles": [
-    ".claude/skills/madarin-app/SKILL.md",
-    ".agents/skills/madarin-app/SKILL.md",
-    ".agents/skills/madarin-app/agents/openai.yaml",
+    ".claude/skills/mandarin-learn/SKILL.md",
+    ".agents/skills/mandarin-learn/SKILL.md",
+    ".agents/skills/mandarin-learn/agents/openai.yaml",
     ".claude/identity.json",
     ".codex/config.toml",
     ".codex/AGENTS.md",
     ".codex/agents/explorer.toml",
     ".codex/agents/reviewer.toml",
     ".codex/agents/docs-researcher.toml",
-    ".claude/homunculus/instincts/inherited/madarin-app-instincts.yaml",
+    ".claude/homunculus/instincts/inherited/mandarin-learn-instincts.yaml",
     ".claude/commands/refactoring.md",
     ".claude/commands/refactor-or-feature-phase-with-tests-and-docs.md",
     ".claude/commands/edge-function-hardening-or-update.md"
   ],
   "packageFiles": {
     "runtime-core": [
-      ".claude/skills/madarin-app/SKILL.md",
-      ".agents/skills/madarin-app/SKILL.md",
-      ".agents/skills/madarin-app/agents/openai.yaml",
+      ".claude/skills/mandarin-learn/SKILL.md",
+      ".agents/skills/mandarin-learn/SKILL.md",
+      ".agents/skills/mandarin-learn/agents/openai.yaml",
       ".claude/identity.json",
       ".codex/config.toml",
       ".codex/AGENTS.md",
       ".codex/agents/explorer.toml",
       ".codex/agents/reviewer.toml",
       ".codex/agents/docs-researcher.toml",
-      ".claude/homunculus/instincts/inherited/madarin-app-instincts.yaml"
+      ".claude/homunculus/instincts/inherited/mandarin-learn-instincts.yaml"
     ],
     "workflow-pack": [
       ".claude/commands/refactoring.md",
@@ -113,16 +113,16 @@
   },
   "moduleFiles": {
     "runtime-core": [
-      ".claude/skills/madarin-app/SKILL.md",
-      ".agents/skills/madarin-app/SKILL.md",
-      ".agents/skills/madarin-app/agents/openai.yaml",
+      ".claude/skills/mandarin-learn/SKILL.md",
+      ".agents/skills/mandarin-learn/SKILL.md",
+      ".agents/skills/mandarin-learn/agents/openai.yaml",
       ".claude/identity.json",
       ".codex/config.toml",
       ".codex/AGENTS.md",
       ".codex/agents/explorer.toml",
       ".codex/agents/reviewer.toml",
       ".codex/agents/docs-researcher.toml",
-      ".claude/homunculus/instincts/inherited/madarin-app-instincts.yaml"
+      ".claude/homunculus/instincts/inherited/mandarin-learn-instincts.yaml"
     ],
     "workflow-pack": [
       ".claude/commands/refactoring.md",
@@ -133,17 +133,17 @@
   "files": [
     {
       "moduleId": "runtime-core",
-      "path": ".claude/skills/madarin-app/SKILL.md",
+      "path": ".claude/skills/mandarin-learn/SKILL.md",
       "description": "Repository-specific Claude Code skill generated from git history."
     },
     {
       "moduleId": "runtime-core",
-      "path": ".agents/skills/madarin-app/SKILL.md",
+      "path": ".agents/skills/mandarin-learn/SKILL.md",
       "description": "Codex-facing copy of the generated repository skill."
     },
     {
       "moduleId": "runtime-core",
-      "path": ".agents/skills/madarin-app/agents/openai.yaml",
+      "path": ".agents/skills/mandarin-learn/agents/openai.yaml",
       "description": "Codex skill metadata so the repo skill appears cleanly in the skill interface."
     },
     {
@@ -178,7 +178,7 @@
     },
     {
       "moduleId": "runtime-core",
-      "path": ".claude/homunculus/instincts/inherited/madarin-app-instincts.yaml",
+      "path": ".claude/homunculus/instincts/inherited/mandarin-learn-instincts.yaml",
       "description": "Continuous-learning instincts derived from repository patterns."
     },
     {
@@ -213,7 +213,7 @@
   ],
   "adapters": {
     "claudeCode": {
-      "skillPath": ".claude/skills/madarin-app/SKILL.md",
+      "skillPath": ".claude/skills/mandarin-learn/SKILL.md",
       "identityPath": ".claude/identity.json",
       "commandPaths": [
         ".claude/commands/refactoring.md",
@@ -224,7 +224,7 @@
     "codex": {
       "configPath": ".codex/config.toml",
       "agentsGuidePath": ".codex/AGENTS.md",
-      "skillPath": ".agents/skills/madarin-app/SKILL.md"
+      "skillPath": ".agents/skills/mandarin-learn/SKILL.md"
     }
   }
 }

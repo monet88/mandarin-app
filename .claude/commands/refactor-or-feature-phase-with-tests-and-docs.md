@@ -1,12 +1,12 @@
 ---
 name: refactor-or-feature-phase-with-tests-and-docs
-description: Workflow command scaffold for refactor-or-feature-phase-with-tests-and-docs in madarin-app.
+description: Workflow command scaffold for refactor-or-feature-phase-with-tests-and-docs in mandarin-learn.
 allowed_tools: ["Bash", "Read", "Write", "Grep", "Glob"]
 ---
 
 # /refactor-or-feature-phase-with-tests-and-docs
 
-Use this workflow when working on **refactor-or-feature-phase-with-tests-and-docs** in `madarin-app`.
+Use this workflow when working on **refactor-or-feature-phase-with-tests-and-docs** in `mandarin-learn`.
 
 ## Goal
 

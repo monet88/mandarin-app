@@ -1,6 +1,0 @@
-interface:
-  display_name: "Madarin App"
-  short_description: "Repo-specific patterns and workflows for madarin-app"
-  default_prompt: "Use the madarin-app repo skill to follow existing architecture, testing, and workflow conventions."
-policy:
-  allow_implicit_invocation: true

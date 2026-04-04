@@ -4,8 +4,8 @@ This supplements the root `AGENTS.md` with a repo-local ECC baseline.
 
 ## Repo Skill
 
-- Repo-generated Codex skill: `.agents/skills/madarin-app/SKILL.md`
-- Claude-facing companion skill: `.claude/skills/madarin-app/SKILL.md`
+- Repo-generated Codex skill: `.agents/skills/mandarin-learn/SKILL.md`
+- Claude-facing companion skill: `.claude/skills/mandarin-learn/SKILL.md`
 - Keep user-specific credentials and private MCPs in `~/.codex/config.toml`, not in this repo.
 
 ## MCP Baseline

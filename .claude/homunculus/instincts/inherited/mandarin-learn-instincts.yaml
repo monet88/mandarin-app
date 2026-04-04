@@ -1,0 +1,270 @@
+# Instincts generated from https://github.com/monet88/mandarin-learn
+# Generated: 2026-04-04T05:07:56.504Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: mandarin-learn-workflow-refactoring
+trigger: "when refactoring code"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/monet88/mandarin-learn
+---
+
+# Mandarin Learn Workflow Refactoring
+
+## Action
+
+Follow the refactoring workflow:
+1. Ensure tests pass before refactor
+2. Refactor code structure
+3. Verify tests still pass
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~13x per month
+- Files: src/**/*
+
+---
+id: mandarin-learn-instinct-file-naming
+trigger: "When creating a new file or renaming an existing one"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: monet88/mandarin-learn
+---
+
+# Mandarin Learn Instinct File Naming
+
+## Action
+
+Use camelCase for files, PascalCase for classes, and SCREAMING_SNAKE_CASE for constants
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions
+- Consistent file and class names in components/, hooks/
+
+---
+id: mandarin-learn-instinct-import-style
+trigger: "When importing modules in TypeScript files"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: monet88/mandarin-learn
+---
+
+# Mandarin Learn Instinct Import Style
+
+## Action
+
+Use alias-based import paths instead of relative paths
+
+## Evidence
+
+- Pattern in codeStyle.importStyle
+- Imports in hooks/, components/
+
+---
+id: mandarin-learn-instinct-export-style
+trigger: "When exporting modules or components"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: monet88/mandarin-learn
+---
+
+# Mandarin Learn Instinct Export Style
+
+## Action
+
+Use default exports for modules and components
+
+## Evidence
+
+- Pattern in codeStyle.exportStyle
+- Consistent default exports in components/
+
+---
+id: mandarin-learn-instinct-test-file-pattern
+trigger: "When adding or updating test files"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: monet88/mandarin-learn
+---
+
+# Mandarin Learn Instinct Test File Pattern
+
+## Action
+
+Name test files with the pattern *.test.ts and place them in __tests__/
+
+## Evidence
+
+- Pattern in testing.filePattern
+- Examples in __tests__/**/*.test.ts*
+
+---
+id: mandarin-learn-instinct-test-framework
+trigger: "When writing or updating tests"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: monet88/mandarin-learn
+---
+
+# Mandarin Learn Instinct Test Framework
+
+## Action
+
+Use Jest as the testing framework and jest.mock for mocking
+
+## Evidence
+
+- Pattern in testing.framework
+- Pattern in testing.mockingStyle
+
+---
+id: mandarin-learn-instinct-test-type
+trigger: "When determining what type of test to write"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: monet88/mandarin-learn
+---
+
+# Mandarin Learn Instinct Test Type
+
+## Action
+
+Write unit tests by default
+
+## Evidence
+
+- Pattern in testing.testTypes
+- Examples in __tests__/
+
+---
+id: mandarin-learn-instinct-commit-format
+trigger: "When writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: monet88/mandarin-learn
+---
+
+# Mandarin Learn Instinct Commit Format
+
+## Action
+
+Write a concise, imperative sentence describing the change (no prefix required)
+
+## Evidence
+
+- Pattern in commits.type and commits.examples
+- Average commit message length
+
+---
+id: mandarin-learn-instinct-phase-workflow
+trigger: "When delivering a new feature, refactor, or hardening phase with planning and regression tests"
+confidence: 0.95
+domain: workflow
+source: repo-analysis
+source_repo: monet88/mandarin-learn
+---
+
+# Mandarin Learn Instinct Phase Workflow
+
+## Action
+
+Update/add implementation files, add/update tests in __tests__/, update planning docs in plans/, and verify tests/typechecks/lints
+
+## Evidence
+
+- refactor-or-feature-phase-with-tests-and-docs workflow
+- Example commit and file sequences
+
+---
+id: mandarin-learn-instinct-edge-function-workflow
+trigger: "When improving edge function security, error handling, or shared logic without breaking API contracts"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: monet88/mandarin-learn
+---
+
+# Mandarin Learn Instinct Edge Function Workflow
+
+## Action
+
+Update/refactor edge function files, update shared helpers, validate payloads/error boundaries, and test/typecheck locally
+
+## Evidence
+
+- edge-function-hardening-or-update workflow
+- Example commit and file sequences
+
+---
+id: mandarin-learn-instinct-regression-test-workflow
+trigger: "When ensuring stable behavior for a provider, hook, or component before risky changes"
+confidence: 0.85
+domain: workflow
+source: repo-analysis
+source_repo: monet88/mandarin-learn
+---
+
+# Mandarin Learn Instinct Regression Test Workflow
+
+## Action
+
+Create/update regression test files in __tests__/, update Jest config if needed, and verify tests/typechecks
+
+## Evidence
+
+- test-harness-or-regression-test-addition workflow
+- Example commit and file sequences
+
+---
+id: mandarin-learn-instinct-gitignore-workflow
+trigger: "When preventing local or generated files from polluting the repository"
+confidence: 0.95
+domain: workflow
+source: repo-analysis
+source_repo: monet88/mandarin-learn
+---
+
+# Mandarin Learn Instinct Gitignore Workflow
+
+## Action
+
+Edit .gitignore to add ignore patterns, verify git status, and commit .gitignore changes
+
+## Evidence
+
+- gitignore-or-vcs-artifact-update workflow
+- Commits like 'Keep local OMX runtime state out of version control'
+
+---
+id: mandarin-learn-instinct-lint-cleanup-workflow
+trigger: "When eliminating lint/typecheck noise or preventing regressions after large changes"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: monet88/mandarin-learn
+---
+
+# Mandarin Learn Instinct Lint Cleanup Workflow
+
+## Action
+
+Fix lint/type errors in implementation files, verify with linter/typechecker/tests, and commit only code/config changes (no user-facing changes)
+
+## Evidence
+
+- lint-typecheck-and-test-cleanup workflow
+- Example commit and file sequences
+

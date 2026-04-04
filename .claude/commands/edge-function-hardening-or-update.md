@@ -1,12 +1,12 @@
 ---
 name: edge-function-hardening-or-update
-description: Workflow command scaffold for edge-function-hardening-or-update in madarin-app.
+description: Workflow command scaffold for edge-function-hardening-or-update in mandarin-learn.
 allowed_tools: ["Bash", "Read", "Write", "Grep", "Glob"]
 ---
 
 # /edge-function-hardening-or-update
 
-Use this workflow when working on **edge-function-hardening-or-update** in `madarin-app`.
+Use this workflow when working on **edge-function-hardening-or-update** in `mandarin-learn`.
 
 ## Goal
 

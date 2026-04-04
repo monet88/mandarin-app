@@ -1,12 +1,12 @@
 ---
 name: refactoring
-description: Workflow command scaffold for refactoring in madarin-app.
+description: Workflow command scaffold for refactoring in mandarin-learn.
 allowed_tools: ["Bash", "Read", "Write", "Grep", "Glob"]
 ---
 
 # /refactoring
 
-Use this workflow when working on **refactoring** in `madarin-app`.
+Use this workflow when working on **refactoring** in `mandarin-learn`.
 
 ## Goal
 
