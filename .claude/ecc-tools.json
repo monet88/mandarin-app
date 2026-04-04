@@ -2,24 +2,28 @@
   "version": "1.3",
   "schemaVersion": "1.0",
   "generatedBy": "ecc-tools",
-  "generatedAt": "2026-04-04T05:07:34.050Z",
+  "generatedAt": "2026-04-04T06:20:21.208Z",
   "repo": "https://github.com/monet88/mandarin-learn",
   "profiles": {
-    "requested": "developer",
-    "recommended": "developer",
+    "requested": "full",
+    "recommended": "full",
     "effective": "developer",
-    "requestedAlias": "developer",
-    "recommendedAlias": "developer",
+    "requestedAlias": "full",
+    "recommendedAlias": "full",
     "effectiveAlias": "developer"
   },
-  "requestedProfile": "developer",
+  "requestedProfile": "full",
   "profile": "developer",
-  "recommendedProfile": "developer",
+  "recommendedProfile": "full",
   "effectiveProfile": "developer",
   "tier": "free",
   "requestedComponents": [
     "repo-baseline",
-    "workflow-automation"
+    "workflow-automation",
+    "security-audits",
+    "research-tooling",
+    "team-rollout",
+    "governance-controls"
   ],
   "selectedComponents": [
     "repo-baseline",
@@ -28,10 +32,19 @@
   "requestedAddComponents": [],
   "requestedRemoveComponents": [],
   "blockedRemovalComponents": [],
-  "tierFilteredComponents": [],
+  "tierFilteredComponents": [
+    "security-audits",
+    "research-tooling",
+    "team-rollout",
+    "governance-controls"
+  ],
   "requestedRootPackages": [
     "runtime-core",
-    "workflow-pack"
+    "workflow-pack",
+    "agentshield-pack",
+    "research-pack",
+    "team-config-sync",
+    "enterprise-controls"
   ],
   "selectedRootPackages": [
     "runtime-core",
@@ -39,7 +52,11 @@
   ],
   "requestedPackages": [
     "runtime-core",
-    "workflow-pack"
+    "workflow-pack",
+    "agentshield-pack",
+    "research-pack",
+    "team-config-sync",
+    "enterprise-controls"
   ],
   "requestedAddPackages": [],
   "requestedRemovePackages": [],
@@ -52,8 +69,18 @@
     "workflow-pack"
   ],
   "blockedRemovalPackages": [],
-  "tierFilteredRootPackages": [],
-  "tierFilteredPackages": [],
+  "tierFilteredRootPackages": [
+    "agentshield-pack",
+    "research-pack",
+    "team-config-sync",
+    "enterprise-controls"
+  ],
+  "tierFilteredPackages": [
+    "agentshield-pack",
+    "research-pack",
+    "team-config-sync",
+    "enterprise-controls"
+  ],
   "conflictingPackages": [],
   "dependencyGraph": {
     "runtime-core": [],
@@ -67,7 +94,11 @@
   ],
   "requestedModules": [
     "runtime-core",
-    "workflow-pack"
+    "workflow-pack",
+    "agentshield-pack",
+    "research-pack",
+    "team-config-sync",
+    "enterprise-controls"
   ],
   "selectedModules": [
     "runtime-core",
@@ -88,9 +119,9 @@
     ".codex/agents/reviewer.toml",
     ".codex/agents/docs-researcher.toml",
     ".claude/homunculus/instincts/inherited/mandarin-learn-instincts.yaml",
-    ".claude/commands/refactoring.md",
-    ".claude/commands/refactor-or-feature-phase-with-tests-and-docs.md",
-    ".claude/commands/edge-function-hardening-or-update.md"
+    ".claude/commands/feature-development.md",
+    ".claude/commands/add-or-update-ecc-bundle.md",
+    ".claude/commands/update-supabase-setup-documentation.md"
   ],
   "packageFiles": {
     "runtime-core": [
@@ -106,9 +137,9 @@
       ".claude/homunculus/instincts/inherited/mandarin-learn-instincts.yaml"
     ],
     "workflow-pack": [
-      ".claude/commands/refactoring.md",
-      ".claude/commands/refactor-or-feature-phase-with-tests-and-docs.md",
-      ".claude/commands/edge-function-hardening-or-update.md"
+      ".claude/commands/feature-development.md",
+      ".claude/commands/add-or-update-ecc-bundle.md",
+      ".claude/commands/update-supabase-setup-documentation.md"
     ]
   },
   "moduleFiles": {
@@ -125,9 +156,9 @@
       ".claude/homunculus/instincts/inherited/mandarin-learn-instincts.yaml"
     ],
     "workflow-pack": [
-      ".claude/commands/refactoring.md",
-      ".claude/commands/refactor-or-feature-phase-with-tests-and-docs.md",
-      ".claude/commands/edge-function-hardening-or-update.md"
+      ".claude/commands/feature-development.md",
+      ".claude/commands/add-or-update-ecc-bundle.md",
+      ".claude/commands/update-supabase-setup-documentation.md"
     ]
   },
   "files": [
@@ -183,32 +214,32 @@
     },
     {
       "moduleId": "workflow-pack",
-      "path": ".claude/commands/refactoring.md",
-      "description": "Workflow command scaffold for refactoring."
+      "path": ".claude/commands/feature-development.md",
+      "description": "Workflow command scaffold for feature-development."
     },
     {
       "moduleId": "workflow-pack",
-      "path": ".claude/commands/refactor-or-feature-phase-with-tests-and-docs.md",
-      "description": "Workflow command scaffold for refactor-or-feature-phase-with-tests-and-docs."
+      "path": ".claude/commands/add-or-update-ecc-bundle.md",
+      "description": "Workflow command scaffold for add-or-update-ecc-bundle."
     },
     {
       "moduleId": "workflow-pack",
-      "path": ".claude/commands/edge-function-hardening-or-update.md",
-      "description": "Workflow command scaffold for edge-function-hardening-or-update."
+      "path": ".claude/commands/update-supabase-setup-documentation.md",
+      "description": "Workflow command scaffold for update-supabase-setup-documentation."
     }
   ],
   "workflows": [
     {
-      "command": "refactoring",
-      "path": ".claude/commands/refactoring.md"
+      "command": "feature-development",
+      "path": ".claude/commands/feature-development.md"
     },
     {
-      "command": "refactor-or-feature-phase-with-tests-and-docs",
-      "path": ".claude/commands/refactor-or-feature-phase-with-tests-and-docs.md"
+      "command": "add-or-update-ecc-bundle",
+      "path": ".claude/commands/add-or-update-ecc-bundle.md"
     },
     {
-      "command": "edge-function-hardening-or-update",
-      "path": ".claude/commands/edge-function-hardening-or-update.md"
+      "command": "update-supabase-setup-documentation",
+      "path": ".claude/commands/update-supabase-setup-documentation.md"
     }
   ],
   "adapters": {
@@ -216,9 +247,9 @@
       "skillPath": ".claude/skills/mandarin-learn/SKILL.md",
       "identityPath": ".claude/identity.json",
       "commandPaths": [
-        ".claude/commands/refactoring.md",
-        ".claude/commands/refactor-or-feature-phase-with-tests-and-docs.md",
-        ".claude/commands/edge-function-hardening-or-update.md"
+        ".claude/commands/feature-development.md",
+        ".claude/commands/add-or-update-ecc-bundle.md",
+        ".claude/commands/update-supabase-setup-documentation.md"
       ]
     },
     "codex": {
