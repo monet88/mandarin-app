@@ -70,6 +70,13 @@ supabase functions deploy chat-completion
 supabase functions deploy transcribe-audio
 supabase functions deploy scenario-generate
 supabase functions deploy start-trial
+supabase functions deploy hsk-session-init
+supabase functions deploy hsk-sync-events
+supabase functions deploy hsk-mock-exam-start
+supabase functions deploy hsk-mock-exam-submit-section
+supabase functions deploy hsk-writing-evaluate
+supabase functions deploy hsk-refresh-question-bank
+supabase functions deploy revenuecat-webhook
 ```
 
 Set secrets:
@@ -77,6 +84,13 @@ Set secrets:
 ```bash
 supabase secrets set OPENROUTER_API_KEY=your_key
 supabase secrets set SUPABASE_SERVICE_ROLE_KEY=your_key
+```
+
+Optional but required for the related backend flows:
+
+```bash
+supabase secrets set REVENUECAT_WEBHOOK_SECRET=your_key
+supabase secrets set HSK_REFRESH_ADMIN_KEY=your_key
 ```
 
 #### 4. Auth Redirect (Supabase Dashboard)
