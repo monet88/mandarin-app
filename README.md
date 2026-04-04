@@ -77,6 +77,7 @@ Set secrets:
 ```bash
 supabase secrets set OPENROUTER_API_KEY=your_key
 supabase secrets set SUPABASE_SERVICE_ROLE_KEY=your_key
+supabase secrets set ALLOWED_ORIGIN=https://your-app.example.com
 ```
 
 #### 4. Auth Redirect (Supabase Dashboard)

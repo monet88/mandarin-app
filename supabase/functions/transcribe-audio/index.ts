@@ -1,13 +1,22 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { buildCorsHeaders, requireAllowedOrigin } from "../_shared/cors.ts";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": Deno.env.get("ALLOWED_ORIGIN") ?? "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-};
+const allowedOrigin = requireAllowedOrigin();
 
 Deno.serve(async (req) => {
+  const corsHeaders = buildCorsHeaders(req.headers.get("Origin"), allowedOrigin);
+
+  if (!corsHeaders) {
+    return new Response(JSON.stringify({ error: "Origin not allowed" }), {
+      status: 403,
+      headers: {
+        "Content-Type": "application/json",
+        Vary: "Origin",
+      },
+    });
+  }
+
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
