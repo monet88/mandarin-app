@@ -1,3 +1,8 @@
+---
+name: mandarin-learn
+description: Use when working on the mandarin-learn Expo Router and Supabase app and you need repository-specific development patterns, file conventions, or maintenance workflows.
+---
+
 # mandarin-learn Development Patterns
 
 > Auto-generated skill from repository analysis

@@ -87,7 +87,7 @@ Chỉ lựa chọn cách này nếu bạn muốn phát triển hoàn toàn offli
 Bạn bắt buộc phải cài đặt xong phần mềm **Docker Desktop** (và đảm bảo Docker engine đang chạy).
 
 ### 2. Khởi chạy Local Supabase
-Mở cửa sổ Terminal tại thư mục gốc của `mandarin-learn` và gõ:
+Mở cửa sổ Terminal tại thư mục gốc của `mandarin-app` và gõ:
 
 ```bash
 npx supabase start
