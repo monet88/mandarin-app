@@ -6,7 +6,6 @@ import {
   restorePurchases,
   OfferingPackage,
 } from "@/lib/billing";
-import { supabase } from "@/utils/supabase";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect, useState } from "react";
@@ -148,23 +147,6 @@ export function Paywall({
       toast.error("Restore failed. Please try again.");
     } finally {
       setIsRestoring(false);
-    }
-  };
-
-  // Legacy fallback: start trial via Edge Function (non-RC path)
-  const handleStartTrial = async () => {
-    try {
-      setIsPurchasing(true);
-      const { error } = await supabase.functions.invoke("start-trial", {
-        body: { planId: selectedPkgId },
-      });
-      if (error) throw error;
-      await refreshProfile();
-      onClose();
-    } catch {
-      toast.error("Could not start trial. Please try again.");
-    } finally {
-      setIsPurchasing(false);
     }
   };
 
