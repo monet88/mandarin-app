@@ -13,7 +13,7 @@ export const HSK_EVENT_TYPES = [
 export type HskEventType = (typeof HSK_EVENT_TYPES)[number];
 
 export const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": Deno.env.get("ALLOWED_ORIGIN") ?? "*",
   "Access-Control-Allow-Headers":
     "authorization, x-client-info, apikey, content-type, x-hsk-admin-key",
 };
