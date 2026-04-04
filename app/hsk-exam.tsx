@@ -106,44 +106,6 @@ export default function HskExamScreen() {
     }
   }, [hskLevel, preloadAudio]);
 
-  function handleAppStateChange(nextState: AppStateStatus) {
-    const prev = appStateRef.current;
-    appStateRef.current = nextState;
-
-    if (prev === "active" && nextState !== "active") {
-      backgroundedAt.current = Date.now();
-    } else if (nextState === "active" && backgroundedAt.current !== null) {
-      const elapsed = Date.now() - backgroundedAt.current;
-      backgroundedAt.current = null;
-      if (
-        elapsed > BACKGROUND_INTERRUPT_MS &&
-        sessionRef.current &&
-        screenRef.current === "exam"
-      ) {
-        handleAutoSubmit();
-      }
-    }
-  }
-
-  // Start exam on mount
-  useEffect(() => {
-    void initExam();
-  }, [initExam]);
-
-  // AppState listener for background interruption
-  useEffect(() => {
-    const sub = AppState.addEventListener("change", handleAppStateChange);
-    return () => sub.remove();
-  }, []);
-
-  async function handleAutoSubmit() {
-    const sess = sessionRef.current;
-    if (!sess) return;
-    const currentSection = SECTIONS[sectionIdxRef.current];
-    toast("Auto-submitting due to background interruption");
-    await doSubmitSection(sess.session_id, currentSection, answersRef.current, true);
-  }
-
   function handleAnswer(questionId: string, answer: string) {
     setAnswers((prev) => ({ ...prev, [questionId]: answer }));
   }
@@ -156,12 +118,25 @@ export default function HskExamScreen() {
     setSubmitting(false);
   }
 
-  async function doSubmitSection(
+  const triggerWritingEval = useCallback(async (sessionId: string) => {
+    setWritingLoading(true);
+    try {
+      const { rubric, fallback } = await evaluateWriting(sessionId);
+      setWritingRubric(rubric);
+      setWritingFallback(fallback);
+    } catch {
+      setWritingFallback(true);
+    } finally {
+      setWritingLoading(false);
+    }
+  }, []);
+
+  const doSubmitSection = useCallback(async (
     sessionId: string,
     section: ExamSection,
     currentAnswers: SectionAnswers,
     isInterruption: boolean,
-  ) {
+  ) => {
     try {
       const activeSession = sessionRef.current;
       const sectionAnswers: SectionAnswers = {};
@@ -198,23 +173,48 @@ export default function HskExamScreen() {
       const msg = err instanceof Error ? err.message : "Submission failed";
       toast(msg);
     }
-  }
+  }, [triggerWritingEval]);
 
-  async function triggerWritingEval(sessionId: string) {
-    setWritingLoading(true);
-    try {
-      const { rubric, fallback } = await evaluateWriting(sessionId);
-      setWritingRubric(rubric);
-      setWritingFallback(fallback);
-    } catch {
-      setWritingFallback(true);
-    } finally {
-      setWritingLoading(false);
-    }
-  }
+  // Start exam on mount
+  useEffect(() => {
+    void initExam();
+  }, [initExam]);
+
+  // AppState listener for background interruption
+  useEffect(() => {
+    const sub = AppState.addEventListener("change", (nextState) => {
+      const prev = appStateRef.current;
+      appStateRef.current = nextState;
+
+      if (prev === "active" && nextState !== "active") {
+        backgroundedAt.current = Date.now();
+      } else if (nextState === "active" && backgroundedAt.current !== null) {
+        const elapsed = Date.now() - backgroundedAt.current;
+        backgroundedAt.current = null;
+        if (
+          elapsed > BACKGROUND_INTERRUPT_MS &&
+          sessionRef.current &&
+          screenRef.current === "exam"
+        ) {
+          const currentSection = SECTIONS[sectionIdxRef.current];
+          toast("Auto-submitting due to background interruption");
+          void doSubmitSection(
+            sessionRef.current.session_id,
+            currentSection,
+            answersRef.current,
+            true,
+          );
+        }
+      }
+    });
+    return () => sub.remove();
+  }, [doSubmitSection]);
 
   function handleTimerExpire() {
-    if (session) handleAutoSubmit();
+    if (!session) return;
+    const currentSection = SECTIONS[sectionIdxRef.current];
+    toast("Auto-submitting due to background interruption");
+    void doSubmitSection(session.session_id, currentSection, answersRef.current, true);
   }
 
   const currentSection = SECTIONS[sectionIdx] as ExamSection;

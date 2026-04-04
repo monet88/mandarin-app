@@ -131,12 +131,7 @@ export default function LessonContent({
   useEffect(() => {
     if (showResult) {
       if (isCorrect) {
-        if (
-          attemptCount === 0 ||
-          (attemptCount > 0 && wrongQuestions.has(currentQuestion.id))
-        ) {
-          setCorrectAnswersCount((prev) => prev + 1);
-        }
+        setCorrectAnswersCount((prev) => prev + 1);
       } else {
         setQuestionAttempts((prev) => ({
           ...prev,
@@ -178,7 +173,14 @@ export default function LessonContent({
         ]),
       ]).start();
     }
-  }, [isSpeechPlaying, hasStartedFirstPlay, hasListenedToAudio]);
+  }, [
+    hasListenedToAudio,
+    hasStartedFirstPlay,
+    instructionOpacity,
+    isSpeechPlaying,
+    listeningOpacity,
+    listeningScale,
+  ]);
 
   useEffect(() => {
     if (
@@ -193,7 +195,7 @@ export default function LessonContent({
         useNativeDriver: true,
       }).start();
     }
-  }, [currentQuestion, hasListenedToAudio]);
+  }, [currentQuestion, hasListenedToAudio, optionSelectionAnim]);
 
   const finishListening = () => {
     if (hasListenedToAudio) return;

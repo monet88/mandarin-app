@@ -40,7 +40,7 @@ export default function EmailAuth({
       } else {
         toast.success("Check your email for the login link");
       }
-    } catch (err) {
+    } catch {
       toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);

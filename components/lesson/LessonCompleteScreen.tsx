@@ -45,7 +45,7 @@ export default function LessonCompleteScreen({
         useNativeDriver: true,
       }),
     ]).start();
-  }, []);
+  }, [fadeAnim, scaleAnim]);
 
   const getPerformanceMessage = () => {
     if (lessonStats.accuracy >= 90) return "Outstanding! 🌟";

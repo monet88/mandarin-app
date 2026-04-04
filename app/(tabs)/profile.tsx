@@ -14,7 +14,7 @@ import { toast } from "sonner-native";
 export default function ProfileContent() {
   const { isPremium, premiumExpiresAt, profile, user } = useAuth();
   const [paywallVisible, setPaywallVisible] = useState(false);
-  const { stats, loading } = useSpeakingListningStats();
+  const { stats } = useSpeakingListningStats();
 
   const handleSignOut = async () => {
     try {
@@ -26,7 +26,7 @@ export default function ProfileContent() {
       } else {
         toast.success("Signed out successfully");
       }
-    } catch (error) {
+    } catch {
       try {
         await supabase.auth.signOut({ scope: "local" });
         toast.success("Signed out successfully");

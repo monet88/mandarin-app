@@ -30,7 +30,7 @@ export default function HskWritingFeedback({ rubric, isFallback, loading }: Prop
     );
   }
 
-  const dimensions: Array<{ label: string; score: number; key: keyof WritingRubric }> = [
+  const dimensions: { label: string; score: number; key: keyof WritingRubric }[] = [
     { label: "Content", score: rubric.content_score, key: "content_score" },
     { label: "Grammar", score: rubric.grammar_score, key: "grammar_score" },
     { label: "Vocabulary", score: rubric.vocabulary_score, key: "vocabulary_score" },

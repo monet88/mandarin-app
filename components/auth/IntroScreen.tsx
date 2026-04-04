@@ -6,7 +6,7 @@ import {
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import { useVideoPlayer, VideoView } from "expo-video";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Dimensions,
   Image,
@@ -131,18 +131,18 @@ export default function IntroScreen() {
     }
   });
 
-  const animateTextIn = () => {
+  const animateTextIn = useCallback(() => {
     mainTextOpacity.value = withTiming(1, { duration: 1200 });
     scriptTextOpacity.value = withDelay(800, withTiming(1, { duration: 800 }));
-  };
+  }, [mainTextOpacity, scriptTextOpacity]);
 
-  const animateScriptOut = () => {
+  const animateScriptOut = useCallback(() => {
     scriptTextOpacity.value = withTiming(0, { duration: 500 });
-  };
+  }, [scriptTextOpacity]);
 
-  const animateScriptIn = () => {
+  const animateScriptIn = useCallback(() => {
     scriptTextOpacity.value = withTiming(1, { duration: 600 });
-  };
+  }, [scriptTextOpacity]);
 
   const animateMenu = (open: boolean) => {
     menuTranslateY.value = withSpring(open ? 0 : CLOSED_POSITION, {
@@ -199,7 +199,13 @@ export default function IntroScreen() {
       clearTimeout(timeout);
       clearInterval(cycleInterval);
     };
-  }, []);
+  }, [
+    animateScriptIn,
+    animateScriptOut,
+    animateTextIn,
+    player,
+    scriptPhrases.length,
+  ]);
 
   useEffect(() => {
     if (currentPhraseIndex > 0) {
@@ -211,7 +217,7 @@ export default function IntroScreen() {
         clearTimeout(timeout);
       };
     }
-  }, [currentPhraseIndex]);
+  }, [animateScriptIn, currentPhraseIndex]);
 
   useEffect(() => {
     const keyboardWillShowListener = Keyboard.addListener(
@@ -223,7 +229,7 @@ export default function IntroScreen() {
 
     const keyboardWillHideListener = Keyboard.addListener(
       Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide",
-      (event) => {
+      () => {
         setKeyboardHeight(0);
       },
     );
