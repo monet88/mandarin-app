@@ -1,191 +1,105 @@
+```markdown
 # mandarin-learn Development Patterns
 
 > Auto-generated skill from repository analysis
 
 ## Overview
 
-This skill teaches the core development patterns, coding conventions, and collaborative workflows used in the `mandarin-learn` repository—a TypeScript React application. The guide covers file organization, code style, testing practices, and step-by-step instructions for common contribution scenarios, including feature development, edge function hardening, regression test addition, and codebase hygiene.
+This skill documents the development patterns and workflows for the `mandarin-learn` repository, a TypeScript codebase focused on Mandarin language learning. The repository is framework-agnostic and emphasizes clear, maintainable code with strong documentation practices. It features conventional commit messages, modular code organization, and a set of well-defined workflows for managing ECC bundles, Supabase setup, and project metadata.
 
 ## Coding Conventions
 
-### File Naming
-
-- **Files:** Use `camelCase` for file names.
-  - Example: `userProfile.tsx`, `useAuth.ts`
-- **Test Files:** Suffix with `.test.ts` or `.test.tsx`.
-  - Example: `useAuth.test.ts`
-
-### Imports
-
-- **Style:** Use import aliases for modules.
+- **File Naming:** Use `camelCase` for files and folders.
+  - Example: `userProfile.ts`, `lessonManager.ts`
+- **Imports:** Use relative import paths.
   - Example:
     ```typescript
-    import { fetchUser } from 'lib/api'
-    import { useAuth } from 'hooks/useAuth'
+    import { getLesson } from './lessonManager';
     ```
-
-### Exports
-
-- **Style:** Default exports are preferred.
+- **Exports:** Prefer named exports.
   - Example:
     ```typescript
-    // In hooks/useAuth.ts
-    const useAuth = () => { /* ... */ }
-    export default useAuth
+    // lessonManager.ts
+    export function getLesson(id: string) { /* ... */ }
+    export const LESSON_LIMIT = 10;
     ```
-
-### Component & Hook Structure
-
-- **Components:** Placed in `components/`, named with PascalCase.
-- **Hooks:** Placed in `hooks/`, named with `use` prefix.
+- **Commit Messages:** Follow [Conventional Commits](https://www.conventionalcommits.org/) with prefixes like `feat` and `docs`.
+  - Example: `feat: add spaced repetition scheduling to lessons`
 
 ## Workflows
 
-### Refactor or Feature Phase with Tests and Docs
+### Add or Update ECC Bundle
+**Trigger:** When introducing or updating an ECC bundle for a new or existing app/skill (e.g., `mandarin-app` or `mandarin-learn`).
+**Command:** `/add-ecc-bundle`
 
-**Trigger:** When delivering a new feature, refactor, or hardening phase with traceable planning and locked-in regression tests.  
-**Command:** `/phase-commit`
-
-1. Update or add implementation files (e.g., hooks, components, edge functions, context providers).
-2. Add or update corresponding regression/unit test files in `__tests__/`.
-3. Update or add planning/phase documentation in `plans/`.
-4. Run and verify tests, typechecks, and lints.
-
-**Files Involved:**
-- `hooks/*.ts`
-- `components/**/*.tsx`
-- `supabase/functions/**/*.ts`
-- `ctx/*.ts`
-- `__tests__/**/*.test.ts*`
-- `plans/202*/**/*.md`
+1. Add or update `.claude/ecc-tools.json` with ECC tool definitions.
+2. Add or update `.claude/identity.json` to reflect the app/skill identity.
+3. Add or update `.claude/skills/<app-or-skill>/SKILL.md` with skill documentation.
+4. Add or update `.agents/skills/<app-or-skill>/SKILL.md` for agent-specific skill docs.
+5. Add or update `.agents/skills/<app-or-skill>/agents/openai.yaml` for agent configuration.
+6. Add or update `.claude/homunculus/instincts/inherited/<app-or-skill>-instincts.yaml` for instinct definitions.
+7. Add or update `.codex/config.toml` for configuration.
+8. Add or update `.codex/AGENTS.md` and `.codex/agents/*.toml` for agent metadata.
+9. Add or update `.claude/commands/*.md` for command documentation.
 
 **Example:**
-```typescript
-// hooks/useFeatureFlag.ts
-const useFeatureFlag = () => { /* ... */ }
-export default useFeatureFlag
-```
-```typescript
-// __tests__/useFeatureFlag.test.ts
-import useFeatureFlag from 'hooks/useFeatureFlag'
-test('returns correct flag', () => { /* ... */ })
+```bash
+/add-ecc-bundle
+# Then follow the checklist above to update all relevant files.
 ```
 
 ---
 
-### Edge Function Hardening or Update
+### Update Supabase Setup Documentation
+**Trigger:** When updating Supabase integration/setup documentation or pinning local tool dependencies.
+**Command:** `/update-supabase-docs`
 
-**Trigger:** When improving edge function security, error handling, or shared logic without breaking existing API contracts.  
-**Command:** `/edge-harden`
-
-1. Update or refactor edge function implementation files.
-2. Extract or update shared helpers in `supabase/functions/_shared/`.
-3. Update or validate event payloads and error boundaries.
-4. Run typechecks and (where possible) test edge functions locally.
-
-**Files Involved:**
-- `supabase/functions/**/*.ts`
-- `supabase/functions/_shared/*.ts`
-- `lib/**/*.ts`
+1. Edit `docs/supabase-setup-guide.md` to update setup instructions.
+2. Edit `.codex/config.toml` to pin or update package references.
+3. Edit `README.md` if deployment guidance changes.
 
 **Example:**
-```typescript
-// supabase/functions/_shared/validatePayload.ts
-export default function validatePayload(payload: any) { /* ... */ }
+```bash
+/update-supabase-docs
+# Then update the relevant documentation and configuration files.
 ```
 
 ---
 
-### Test Harness or Regression Test Addition
+### Update Metadata or Docs File
+**Trigger:** When updating or replacing documentation or metadata files (e.g., `AGENTS.md`, `CLAUDE.md`) to reflect project changes, statistics, or rebranding.
+**Command:** `/update-metadata-docs`
 
-**Trigger:** When ensuring stable behavior for a provider, hook, or component before making risky or broad changes.  
-**Command:** `/add-regression-test`
-
-1. Create or update test files in `__tests__/`.
-2. Update jest configuration or setup if needed.
-3. Run tests and typechecks to verify baseline behavior.
-
-**Files Involved:**
-- `__tests__/**/*.test.ts*`
-- `jest.config.ts`
-- `jest.setup.ts`
-- `package.json`
+1. Edit or replace `AGENTS.md` or `CLAUDE.md` as needed.
+2. Update `.gitignore` if new files/folders should be ignored.
+3. Edit related metadata files as necessary.
 
 **Example:**
-```typescript
-// __tests__/userProfile.test.tsx
-import UserProfile from 'components/UserProfile'
-test('renders user profile', () => { /* ... */ })
-```
-
----
-
-### .gitignore or VCS Artifact Update
-
-**Trigger:** When preventing local or generated files (logs, coverage, runtime state) from polluting the repository.  
-**Command:** `/ignore-artifact`
-
-1. Edit `.gitignore` to add new ignore patterns.
-2. Verify `git status` to confirm artifacts are ignored.
-3. Commit `.gitignore` changes.
-
-**Files Involved:**
-- `.gitignore`
-
-**Example:**
-```
-# .gitignore
-coverage/
-*.log
-```
-
----
-
-### Lint, Typecheck, and Test Cleanup
-
-**Trigger:** When eliminating lint/typecheck noise or preventing regressions from obscuring real issues.  
-**Command:** `/cleanup-lint`
-
-1. Fix lint warnings and type errors in implementation files.
-2. Run and verify linter, typechecker, and tests.
-3. Commit only code and config changes (no user-facing behavior changes).
-
-**Files Involved:**
-- `app/**/*.tsx`
-- `components/**/*.tsx`
-- `hooks/**/*.ts`
-- `lib/**/*.ts`
-- `supabase/functions/**/*.ts`
-
-**Example:**
-```typescript
-// Before
-const foo = (bar) => { return bar }
-// After
-const foo = (bar: string): string => { return bar }
+```bash
+/update-metadata-docs
+# Then update documentation and metadata files as required.
 ```
 
 ## Testing Patterns
 
-- **Framework:** Jest
-- **Test Files:** Named with `.test.ts` or `.test.tsx` suffix, located in `__tests__/`.
+- **Test File Naming:** Test files use the pattern `*.test.*`.
+  - Example: `lessonManager.test.ts`
+- **Testing Framework:** Not explicitly detected; follow standard TypeScript testing practices.
 - **Test Example:**
-    ```typescript
-    // __tests__/useAuth.test.ts
-    import useAuth from 'hooks/useAuth'
-    test('should return user', () => {
-      const user = useAuth()
-      expect(user).toBeDefined()
-    })
-    ```
-- **Configuration:** Managed via `jest.config.ts` and `jest.setup.ts`.
+  ```typescript
+  // lessonManager.test.ts
+  import { getLesson } from './lessonManager';
+
+  test('returns lesson by id', () => {
+    expect(getLesson('abc123')).toBeDefined();
+  });
+  ```
 
 ## Commands
 
-| Command              | Purpose                                                         |
-|----------------------|-----------------------------------------------------------------|
-| /phase-commit        | Start a feature/refactor phase with tests and documentation     |
-| /edge-harden         | Harden or update edge/serverless functions                      |
-| /add-regression-test | Add or extend regression test harness for a provider/hook/component |
-| /ignore-artifact     | Update .gitignore to exclude new artifacts                      |
-| /cleanup-lint        | Clean up lint, typecheck, or test issues                        |
+| Command                | Purpose                                                         |
+|------------------------|-----------------------------------------------------------------|
+| /add-ecc-bundle        | Add or update an ECC bundle for an app or skill                 |
+| /update-supabase-docs  | Update Supabase setup documentation and configuration           |
+| /update-metadata-docs  | Update or replace project documentation or metadata files       |
+```
