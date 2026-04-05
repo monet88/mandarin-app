@@ -15,12 +15,9 @@ This skill documents the development patterns and workflows for the `mandarin-le
 
 - **File Naming:** Match the surrounding area instead of forcing one global style.
   - Examples: `components/hsk/HskWordCard.tsx`, `hooks/useHskSession.ts`, `app/hsk-vocab-study.tsx`
-- **Imports:** Prefer `@/` aliases in app/runtime code and relative imports for colocated Supabase Deno helpers/tests.
-  - Example:
-    ```typescript
-    import { Fonts } from "@/constants/theme";
-    import { buildCorsHeaders } from "./cors.ts";
-    ```
+- **Imports:** Prefer path aliases (`@/...`) in app/runtime code and relative imports for colocated Supabase Deno helpers/tests.
+  - App code: `@/constants/theme`, `@/hooks/useHskSession`
+  - Deno helpers: `./cors.ts`, `../shared/auth.ts`
 - **Exports:** Follow nearby module style. The repo uses both default exports for screens/providers/components and named exports for hooks, utils, and helpers.
   - Example:
     ```typescript

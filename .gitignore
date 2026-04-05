@@ -53,3 +53,5 @@ app-example
 .omx/
 coverage/
 nul
+.codex/
+.claude/
